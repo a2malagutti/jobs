@@ -1,0 +1,490 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open> <!-- Traz aberto por padrão -->
+                                <summary>Region:  (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEGLWHBZmzzcA/company-logo_100_100/B56ZYzlx2LHEAY-/0/1744622264274/crossinghurdles_logo?e=1779321600&v=beta&t=lY154YJPIVZGbou4cZA0E6DOq9A2XWvpIucdlnKChwM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager | $70/hr Remote</strong><br><small>Crossing Hurdles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4407996925/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1779321600&v=beta&t=O_Zuk1gEUGegfKwQRcDWBt1Ax0Z2hNCRo6O3BLAT3Ok" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://refer.micro1.ai/referral/jobs/?referralCode=e91c9585-63ad-45aa-9820-d63708190a83&linkId=38770c2e-6f20-4234-9660-8f131eb5676e&utm_source=referral&utm_medium=share&utm_campaign=job_referral" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open> <!-- Traz aberto por padrão -->
+                                <summary>Region:  (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1779321600&v=beta&t=5q8Z5Sff-33y-k0po5uHJkuuM06PTmbQJnrikC1UuW4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4409599929/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQERA_lImGq6Pg/company-logo_100_100/B56Z13MdyVKkAQ-/0/1775821250353/joblet_ai_logo?e=1779321600&v=beta&t=GP0XJGTdi90fzofZM_ITSW9YOzYc3Zj70yCl37hNA0Y" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Product Manager</strong><br><small>Joblet-AI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4409598033/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1779321600&v=beta&t=O_Zuk1gEUGegfKwQRcDWBt1Ax0Z2hNCRo6O3BLAT3Ok" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Product Manager (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4409586533/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQH8llcPyq22gw/company-logo_100_100/B56Z0owiw9HkAQ-/0/1774505307486/rex_zone_logo?e=1779321600&v=beta&t=1FyldI4iu5hMoM9zJf4fObqvAo9Uq2zLWs1fyNwD7tk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Product Manager Jobs Brazil</strong><br><small>Rex.zone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.rex.zone/jobs/ai-product-manager-jobs-brazil?src=LinkedIn" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGuwANNml02DA/company-logo_100_100/company-logo_100_100/0/1630650735642/vtex_logo?e=1779321600&v=beta&t=kY5E0Zm4nFdz9VFnrZOu7fBdHkhvpqzT8x2Qr_thd2E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Technical Product Manager, Sre/cloud</strong><br><small>VTEX</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://job-boards.greenhouse.io/vtex/jobs/5614482004?source=LinkedIn_cpc" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details open> <!-- Traz aberto por padrão -->
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraíba</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;">João Pessoa</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFQs2kkbTSCyQ/company-logo_100_100/company-logo_100_100/0/1706135790856/marinas_resort_logo?e=1779321600&v=beta&t=A1CIEWOcR8VQLt-brpCHlloNMTy1hDtViCUzMed8PkM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Produtos Digitais</strong><br><small>Grupo Viver Infinity</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4407706758/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details open> <!-- Traz aberto por padrão -->
+                                <summary>Region: Região Sudeste (10 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDLy4STCnHbg/company-logo_100_100/B56ZnZxDipI0AQ-/0/1760295142304/amazon_logo?e=1779321600&v=beta&t=7jukWAflI_mcl3yXRyOpXm42YboI6iAOGCpZ9aAh4wU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr. Product Manager, Seller Experience, Latam Marketplace</strong><br><small>Amazon</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.amazon.jobs/en/jobs/3167675/sr-product-manager-seller-experience-latam-marketplace?cmpid=SPLICX0248M&utm_source=linkedin.com&utm_campaign=cxro&utm_medium=social_media&utm_content=job_posting&ss=paid" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFqdm1TZ-RZKQ/company-logo_100_100/B4EZgOay6gHEAY-/0/1752588562343/amazon_web_services_logo?e=1779321600&v=beta&t=TC1AZkpDFhkrRLjhC41m8oFkESfbM_PBDY41_OshXb4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Customer Solutions Manager, Ags Brazil</strong><br><small>Amazon Web Services (AWS)</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.amazon.jobs/en/jobs/10371553/customer-solutions-manager-ags-brazil?cmpid=SPLICX0248M&utm_source=linkedin.com&utm_campaign=cxro&utm_medium=social_media&utm_content=job_posting&ss=paid" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGXPkcsGk7KYA/company-logo_100_100/company-logo_100_100/0/1678379975390/beesb2b_logo?e=1779321600&v=beta&t=Ij_ReZsvUy4VEnnHZ_PeOtyKTu9_uKMSBwqybmgmwVw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager - Cart & Checkout</strong><br><small>BEES</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://job-boards.greenhouse.io/bees/jobs/8372958002" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;">Jundiaí</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQFFDMQBWu1C6A/company-logo_100_100/company-logo_100_100/0/1635772802035/fagronbrasil_logo?e=1779321600&v=beta&t=e7RO5H96Hu-J4gQSVWuTe8qAwooSmeHvrRtgzfKWkMQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Requisitos (foco em Produto)</strong><br><small>Fagron Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://fagron.jobsmarket.site/pages/en-gb/details/analista-de-requisitos-foco-em-produto--15170?sType=LinkedIn" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;">Sorocaba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQF2APFUYamUMQ/company-logo_100_100/B4EZs37njPHoAQ-/0/1766169934337?e=1779321600&v=beta&t=1JXmDJeF3ZF8_V9zxb8WYiEioUGpaecG-dwsR82UZkY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Technical Product Manager, Drive Systems</strong><br><small>Nextpower</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://nextracker.wd5.myworkdayjobs.com/nextpower_careers/job/Sorocaba-Sao-Paulo---BRA/Technical-Product-Manager--Drive-Systems_NX-3360?source=LinkedIn" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGXPkcsGk7KYA/company-logo_100_100/company-logo_100_100/0/1678379975390/beesb2b_logo?e=1779321600&v=beta&t=Ij_ReZsvUy4VEnnHZ_PeOtyKTu9_uKMSBwqybmgmwVw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Product Manager | Computer Vision & Machine Learning</strong><br><small>BEES</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://job-boards.greenhouse.io/bees/jobs/8374695002" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQH0ETI-qQiKLw/company-logo_100_100/company-logo_100_100/0/1630642426577/gm_financial_logo?e=1779321600&v=beta&t=VOyhb6IvR5a2xEX2C4DNNCGe-z-XarLhXNn1XYgLUiY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Product Manager - Servicing</strong><br><small>GM Financial</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://fa-exvu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1003/job/1736?utm_medium=jobboard&utm_source=linkedin" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGW4EB1A1aUYQ/company-logo_100_100/B4DZyL2uQ_IUAY-/0/1771872904949/serasaexperian_logo?e=1779321600&v=beta&t=xHVNJjBwzuUfnERtBIBEH9_VTaRViwaQ1sPFc7NdBeg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Senior</strong><br><small>Serasa Experian</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://jobs.smartrecruiters.com/Experian/744000120040277-product-manager-senior?trid=2d92f286-613b-4daf-9dfa-6340ffbecf73" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQE0iX_dgdH7nA/company-logo_100_100/company-logo_100_100/0/1672279162763/shopee_logo?e=1779321600&v=beta&t=n0zvrVrxoWULqHecpML0V9XCY6sIT4SBbR6qE8mFc0s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Associate Product Manager - Ops</strong><br><small>Shopee</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://careers.shopee.sg/job-detail/J01990210/1?channel=10001" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGi4FxUQN6fqw/company-logo_100_100/company-logo_100_100/0/1677655590999/wiseaccount_logo?e=1779321600&v=beta&t=66FSC0WRxN67VVPD5hyKqsbGxCr1uAWvAu8d7O1thmQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Latam Product Compliance and Risk Manager</strong><br><small>Wise</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://wise.jobs/job/latam-product-compliance-and-risk-manager-in-sao-paulo-jid-2014?_atxsrc=linkedin_via_wise_jobs&utm_source=linkedin_via_wise_jobs" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
