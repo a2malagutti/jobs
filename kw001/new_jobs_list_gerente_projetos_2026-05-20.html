@@ -5,8 +5,10 @@
                             <title>'gerente_projetos' - Novas Vagas</title>                                
                             
                     <style>
+                        /* Importa a fonte Google Sans Flex */
+                        @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap');                    
                         body { 
-                            font-family: 'Diodrum', 'Arial', Google Sans, sans-serif; 
+                            font-family: 'Google Sans Flex', 'Diodrum', 'Arial', Google Sans, sans-serif; 
                             margin: 0; 
                             padding: 0; 
                             background-color: #f4f7f9; /* Um fundo leve ajuda a destacar o conteúdo centralizado */
@@ -55,7 +57,7 @@
                             text-decoration: underline;
                         }                    
                         
-                        body { font-family: 'Diodrum', 'Arial', Google Sans, 'Verdana', sans-serif; margin: 0px; font-size: 12px; }
+                        body { font-family: 'Google Sans Flex', 'Diodrum', 'Arial', Google Sans, sans-serif; margin: 0px; font-size: 12px; }
 
                         /* --- NOVO: Estilo Base para as Tags --- */
                         .tag-badge {
@@ -144,10 +146,17 @@
                             <div class="container">
                                 <h2>🚀 91 Novas Vagas Encontradas para 'GERENTE_PROJETOS'</h2>
                                 <div class="info">
-                                    Gerado em: 20/05/2026 às 16:25. Curadoria por agentes de IA. Ativo desde 15/02/2026.
+                                    Gerado em: 20/05/2026 às 21:45. Curadoria por agentes de IA. Ativo desde 15/02/2026.
                                 </div>
                                 
-                                <h2 style='color: #0f766e; margin-top: 30px; border-bottom: 2px solid #0f766e; padding-bottom: 5px; page-break-after: avoid;'>🎓 Nível: Nível Sênior</h2><h3 style='color: #0284c7; margin-top: 15px; margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid #bae6fd; padding-bottom: 5px;'>📍 Work Mode: Hybrid (4 vagas)</h3><table class="dataframe">
+                                
+                        <div class="filter-container" style="margin: 20px 0; padding: 15px; background-color: #e0f2fe; border: 1px solid #bae6fd; border-radius: 8px; font-family: sans-serif;">
+                            <label for="locationFilter" style="font-weight: bold; color: #03488a; margin-right: 10px; font-size: 14px;">Filtrar por Localidade:</label>
+                            <select id="locationFilter" style="padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14px; background-color: white; max-width: 300px;">
+                                <option value="all">Todas as localidades</option>
+                            </select>
+                        </div>
+                    <h2 style='color: #0f766e; margin-top: 30px; border-bottom: 2px solid #0f766e; padding-bottom: 5px; page-break-after: avoid;'>🎓 Nível: Nível Sênior</h2><h3 style='color: #0284c7; margin-top: 15px; margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid #bae6fd; padding-bottom: 5px;'>📍 Work Mode: Hybrid (4 vagas)</h3><table class="dataframe">
   <thead>
     <tr style="text-align: left;">
       <th class='bg-senior'>Id</th>
@@ -1445,6 +1454,69 @@
   </tbody>
 </table>         
                             </div> 
+
+                            <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const filterSelect = document.getElementById("locationFilter");
+                                // Seleciona todas as linhas de dados (td) que estão na 5ª coluna (Location)
+                                const locationCells = document.querySelectorAll("table.dataframe tbody tr td:nth-child(5)");
+                                
+                                // 1. Mapeia e armazena as localidades únicas para popular o Combobox
+                                const locations = new Set();
+                                locationCells.forEach(cell => {
+                                    const locText = cell.textContent.trim();
+                                    if (locText && locText !== "-") {
+                                        locations.add(locText);
+                                    }
+                                });
+
+                                // 2. Popula o select com as localidades ordenadas alfabeticamente
+                                Array.from(locations).sort().forEach(loc => {
+                                    const option = document.createElement("option");
+                                    option.value = loc;
+                                    option.textContent = loc;
+                                    filterSelect.appendChild(option);
+                                });
+
+                                // 3. Lógica do Filtro ao mudar a seleção
+                                filterSelect.addEventListener("change", function() {
+                                    const selectedLocation = this.value;
+                                    const tables = document.querySelectorAll("table.dataframe");
+
+                                    tables.forEach(table => {
+                                        const rows = table.querySelectorAll("tbody tr");
+                                        let visibleRowsInTable = 0;
+
+                                        rows.forEach(row => {
+                                            const locationCell = row.querySelector("td:nth-child(5)");
+                                            const rowLocation = locationCell ? locationCell.textContent.trim() : "";
+
+                                            if (selectedLocation === "all" || rowLocation === selectedLocation) {
+                                                row.style.display = ""; // Exibe a linha
+                                                visibleRowsInTable++;
+                                            } else {
+                                                row.style.display = "none"; // Oculta a linha
+                                            }
+                                        });
+
+                                        // Opcional: Oculta a tabela inteira se não houver vagas correspondentes nela
+                                        if (visibleRowsInTable === 0 && selectedLocation !== "all") {
+                                            table.style.display = "none";
+                                            // Oculta também o título h3 (Work Mode) imediatamente anterior à tabela
+                                            if (table.previousElementSibling && table.previousElementSibling.tagName === "H3") {
+                                                table.previousElementSibling.style.display = "none";
+                                            }
+                                        } else {
+                                            table.style.display = "";
+                                            if (table.previousElementSibling && table.previousElementSibling.tagName === "H3") {
+                                                table.previousElementSibling.style.display = "";
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+                            </script>                            
+
                         </body>
                         </html>
                         
