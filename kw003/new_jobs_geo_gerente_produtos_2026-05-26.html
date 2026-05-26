@@ -1,0 +1,970 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (8 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHm1ULYG7xpsw/company-logo_100_100/company-logo_100_100/0/1630576352748/beesbrasil_logo?e=1781136000&v=beta&t=UqVK4fYzYlbRhb3Ug34vJpVH-b4LsQFZOnEIeRVQ31E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager | Frontline</strong><br><small>Bees Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4417888135/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHm1ULYG7xpsw/company-logo_100_100/company-logo_100_100/0/1630576352748/beesbrasil_logo?e=1781136000&v=beta&t=UqVK4fYzYlbRhb3Ug34vJpVH-b4LsQFZOnEIeRVQ31E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager | Professional Services</strong><br><small>Bees Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4417899083/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFIobDmaNDEGg/company-logo_100_100/company-logo_100_100/0/1660682467689/contabilizei_logo?e=1781136000&v=beta&t=LC4oGVKaBUDaKepjWf4GluJeu46ad8jZmcIumtUoa78" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>[tecnologia] Especialista de Produto Sênior</strong><br><small>Contabilizei</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419107275/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFa9JVeWTehZA/company-logo_100_100/company-logo_100_100/0/1630562335264/hostgator_latam_logo?e=1781136000&v=beta&t=w2K6Hnw7DeUtAowAd3eFD6pkv1Wa8z4MEFeHJKN8A6k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Senior (hosting)</strong><br><small>HostGator América Latina</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4414952400/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEqt5Ncvu87pQ/company-logo_100_100/B4DZuyY6kJJgAU-/0/1768224434842/inmetrics_logo?e=1781136000&v=beta&t=q0SzSMuVaCWM8sieOJaiynNrfcUrZTOxXMH6U4vaDQk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Sr - Remoto</strong><br><small>Inmetrics</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418243769/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFBudSGoYdD9g/company-logo_100_100/company-logo_100_100/0/1736441557682/revolut_logo?e=1781136000&v=beta&t=a8NFEFyTIhCTx9cXQ3CETHBuWJeGtA033MPnQVL1Iok" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Operations Manager (product)</strong><br><small>Revolut</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4174216101/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQH8llcPyq22gw/company-logo_100_100/B56Z0owiw9HkAQ-/0/1774505307486/rex_zone_logo?e=1781136000&v=beta&t=ZjKCztSNuoqqW0JDeWT9BHqSNH6h8ktxjoD_WN5c7kw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Product Manager Jobs Brazil</strong><br><small>Rex.zone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4388399328/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGpcnwrn0lk2w/company-logo_100_100/B4DZ5QA0TmJ4AM-/0/1779458852352/vonbz_logo?e=1781136000&v=beta&t=z6u_gpXoY8vnbV-1EhAOlobZd3IYprSETmeFFgxof8g" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager | Travel Tech | Remoto</strong><br><small>VONBZ</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416827568/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (35 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQG5TXvsxrpPog/company-logo_100_100/company-logo_100_100/0/1630605751901?e=1781136000&v=beta&t=7bOskbIqVjptebRwjpbRrakjUGfHA4Ll8NAQwIA0PL8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estágio de Produtos</strong><br><small>Hikvision Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416852186/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1781136000&v=beta&t=zJmJ4_6xIKMnj98Gv85dL5m0Wbg5eVY6e8XZ7WIg6dI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager - Funding (fidcs e Renda Fixa)</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418256799/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHuoq0NSYVt-g/company-logo_100_100/company-logo_100_100/0/1658520019837/picpay_logo?e=1781136000&v=beta&t=2Hsv064s37V6FFbdXhF9D7ysEXlmu4GlCIgCVIE50AQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista de Produtos | Cartões Pj</strong><br><small>PicPay</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418260063/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQG54mLnaWUpsg/company-logo_100_100/company-logo_100_100/0/1632257278932/digiobrasil_logo?e=1781136000&v=beta&t=07gO-s5O4eR7grx83j08KLxOQaKhWnhXMIAn2d1K63w" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produto Consignado Pl</strong><br><small>Digio</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415239630/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQG54mLnaWUpsg/company-logo_100_100/company-logo_100_100/0/1632257278932/digiobrasil_logo?e=1781136000&v=beta&t=07gO-s5O4eR7grx83j08KLxOQaKhWnhXMIAn2d1K63w" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produtos Sênior - Seguros</strong><br><small>Digio</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415231611/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQG54mLnaWUpsg/company-logo_100_100/company-logo_100_100/0/1632257278932/digiobrasil_logo?e=1781136000&v=beta&t=07gO-s5O4eR7grx83j08KLxOQaKhWnhXMIAn2d1K63w" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador de Produtos</strong><br><small>Digio</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415245611/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Marketing e Produto</strong><br><small>Jeff & Tracey Schween - Pacific Union Real Estate</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415282674/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEZRSga0FreWA/company-logo_100_100/company-logo_100_100/0/1656631574816/ab_inbev_logo?e=1781136000&v=beta&t=tx5piSLn9U_B2_T1EdwtETOoOMtMv82ksmHjaJJUGS4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Associate Product Manager</strong><br><small>AB InBev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4408100340/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEjCCKGMhA9Yw/company-logo_100_100/company-logo_100_100/0/1630377372677/agibank_logo?e=1781136000&v=beta&t=caba07WDBK5QzAMpJvmxXg6liaDjBUOOa_TD8MnGe5E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Produtos - Meios de Pagamentos - Campinas/sp</strong><br><small>Agibank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4411667483/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEIvRk_5ZdQ8Q/company-logo_100_100/B56ZXZjiSHHEAU-/0/1743111726635/ut_tech_global_logo?e=1781136000&v=beta&t=GkObgS98GFjRvpFn4AoDX4eWDhAcQSJmoYOIC3ozbI0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Operations Manager (upstream)</strong><br><small>UT-TECH</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415212799/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;">Hortolândia</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1781136000&v=beta&t=6LffQ9q47OIPyIyWxq1ERhOT6rFTLo8DO3zqBxcbnTA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produto - Junior</strong><br><small>IBM</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416821428/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;">Osasco</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQEXB9xussWsHQ/company-logo_100_100/company-logo_100_100/0/1680038081185/bradesco_logo?e=1781136000&v=beta&t=oC304y6mbqGtB77PIgSZO6cqioGgDeaC69L9OA5IkFk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Produtos Sr</strong><br><small>Banco Bradesco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419462380/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">Santo André</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGbLNDiWMkmeg/company-logo_100_100/company-logo_100_100/0/1732902798960/cvc_logo?e=1781136000&v=beta&t=3zq6U7QJW_DXc8LeZrjyGckmivvlb-YZD2U-4yQiYpc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Produto Sênior</strong><br><small>CVC CORP</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415255080/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFG8_5Sdw0Qdw/company-logo_100_100/B4DZeEVzqTHMAY-/0/1750272000159/alice_logo?e=1781136000&v=beta&t=lB0xFu4bNiL9cFZy_9LOvCpKxHWvhkTkDyww2s-PQt8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estagiário(a) de Produto — Squad Shield</strong><br><small>Alice</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4417890773/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFwjalAJyUKkA/company-logo_100_100/company-logo_100_100/0/1706894807435/bmp_money_plus_logo?e=1781136000&v=beta&t=xhjzG5goOBZJwBUGp0lqpoHeN5PJ1Rx_yfeOf8-VVok" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Ops Manager – Monitoramento e Qualidade Regulatória</strong><br><small>BMP</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419119246/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE0wyub1rswiA/company-logo_100_100/company-logo_100_100/0/1654720569889/btgpactual_logo?e=1781136000&v=beta&t=vk7FbMtLU4vHdf56K5e8eUEQwXriP2aHkIxv8x6wsFU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista Btg Empresas | Produtos Btg Pay Adquirência</strong><br><small>BTG Pactual</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4401371142/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE93aYPQXXQZg/company-logo_100_100/B4DZuPREumKAAQ-/0/1767635176857/banco_sofisa_sa_logo?e=1781136000&v=beta&t=uhLPhtG4E6_WQop__MbhnK9j95DAYHgXhfHKqMx3k9c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador de Produtos (product Owner)</strong><br><small>Banco Sofisa S/A</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419471034/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHm1ULYG7xpsw/company-logo_100_100/company-logo_100_100/0/1630576352748/beesbrasil_logo?e=1781136000&v=beta&t=UqVK4fYzYlbRhb3Ug34vJpVH-b4LsQFZOnEIeRVQ31E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Product Manager | Computer Vision & Machine Learning</strong><br><small>Bees Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4417885289/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG2nBh6U09Mow/company-logo_100_100/company-logo_100_100/0/1730494921805/betmgm_brazil_logo?e=1781136000&v=beta&t=AejCq044kiNV8Z02D68d0rtd1vj9mQwR-DawAyDBsuc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cassino Manager</strong><br><small>BetMGM Brazil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4413051960/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQG15kmCJuJKzA/company-logo_100_100/B4EZ1vGNtgJMAQ-/0/1775685393543/biogen__logo?e=1781136000&v=beta&t=-gmhocn0eQD1KcvxkfjSrt6hCNg4Xt3JxY_hO2KZPZM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr. Product Manager - Pipeline Products</strong><br><small>Biogen</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416320109/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFlpZXl0AOsLw/company-logo_100_100/B4EZfCycGvHYAY-/0/1751319692172/csl_logo?e=1781136000&v=beta&t=E1cxlXWc6WniL9AjYRAtoOS6PcKdkeCo4Iv5IVMOAuY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager</strong><br><small>CSL</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416843404/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQH2gEZpU9Oy5Q/company-logo_100_100/company-logo_100_100/0/1630559270452/clarobrasil_logo?e=1781136000&v=beta&t=6SxWHfNiMtLB7gM00TZsBqZ2uAI67fAnfGioXM9TYwI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Cloud</strong><br><small>Claro Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418999572/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFm2VYPkA3hjg/company-logo_100_100/company-logo_100_100/0/1689120052565/classpass_logo?e=1781136000&v=beta&t=yhx853hUO5m2AfKkeuo5JQM8FxUsJqbJIWa_ThBgT0k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager</strong><br><small>ClassPass</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4407783463/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE5LKe2moMnHg/company-logo_100_100/company-logo_100_100/0/1736630274411/empresa_confidencial_logo?e=1781136000&v=beta&t=3D76wjY_GLsJmjPYwkhQgiG-yFYThEg8m7ONBiWkOD8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Produtos</strong><br><small>Empresa Confidencial</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416836645/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEwb_-PXunScQ/company-logo_100_100/B4DZv6TiQIHEAQ-/0/1769430984198/gol_logo?e=1781136000&v=beta&t=7ebpVURCbjR_JA_eRqfkQCEcyobzNX29fVTjBKlQJFI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Projetos de Ti I</strong><br><small>GOL Linhas Aéreas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416837308/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEDBLZB1GEvjQ/company-logo_100_100/company-logo_100_100/0/1712666662598/gertec_logo?e=1781136000&v=beta&t=pazsH4sVdBWjxtSyKsfLWcxR_tXwOVh72lfUzXpeDCw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista de Produtos</strong><br><small>Gertec</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415246564/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG9AjmUNc5lgg/company-logo_100_100/B4DZY515wsGwAY-/0/1744727154307/hotmart_logo?e=1781136000&v=beta&t=I0xFikkHMvCeBSCIul2lD3vM4CiWxwI3AqTaferYoM8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Associate Product Manager</strong><br><small>Hotmart</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419430055/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1781136000&v=beta&t=6LffQ9q47OIPyIyWxq1ERhOT6rFTLo8DO3zqBxcbnTA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produto - Junior</strong><br><small>IBM</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416830010/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGmyPiGIU-69w/company-logo_100_100/B4DZZFc2k4GgAQ-/0/1744921914031/itau_logo?e=1781136000&v=beta&t=9YEt4CP1KPpEB5fqIzRiVvaIgnBcd6PgAHvWT9pxaYo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produtos Digitais Sênior Pj</strong><br><small>Itaú Unibanco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418996431/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHr6HDhtgWR-Q/company-logo_100_100/company-logo_100_100/0/1670865559521/tryjeeves_logo?e=1781136000&v=beta&t=6ymYP4yezQCGy80kc7C2AF6cACizv3VXmaTR9EyBrbg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager, Stablecoin & Digital Assets (copy)</strong><br><small>Jeeves</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416322466/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQH1l0leqQU13g/company-logo_100_100/company-logo_100_100/0/1630585500285/magazine_luiza_logo?e=1781136000&v=beta&t=Md3bJflFvAz6KuC2Levw415RNB06ZiiaOaitygUiUHk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Produtos Pl- Portáteis</strong><br><small>Magalu</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419485688/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQECpiovp4LEiw/company-logo_100_100/company-logo_100_100/0/1738269649242/minerva_sa_logo?e=1781136000&v=beta&t=dwfH3Ly7DOA2ym_s5DLp27wvkUZZpyry9wmM0ARMxV0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Negócio Sênior (senior Product Manager)</strong><br><small>Minerva Foods</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4408891137/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQECpiovp4LEiw/company-logo_100_100/company-logo_100_100/0/1738269649242/minerva_sa_logo?e=1781136000&v=beta&t=dwfH3Ly7DOA2ym_s5DLp27wvkUZZpyry9wmM0ARMxV0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Negócio Sênior (senior Product Manager)</strong><br><small>Minerva Foods</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4408861819/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNGiz9pu4KZw/company-logo_100_100/company-logo_100_100/0/1735922822407/xpinc_logo?e=1781136000&v=beta&t=Ub6nGfnVzLEVecQVgVr2jfUWz43R3u0fnVpzyfj3b_c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Ii | Portabilidade</strong><br><small>XP Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4410076284/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGE-TS-axJsYg/company-logo_100_100/B56Z5G6A1tKsAI-/0/1779306073662/bancobv_logo?e=1781136000&v=beta&t=_K4D_sN6XuctsN8BLBy1e2f-7M87uBDPUo-cnBWR7SY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Product Manager (pm) – Aquisição de Cartões de Crédito</strong><br><small>banco BV</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419437410/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (7 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">44</td>
+                                                    
+                                                    <td style="text-align: center;">Curitiba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH8XkWMGXihsQ/company-logo_100_100/B4DZb9l5CyG0AU-/0/1748011292087/bemonest_logo?e=1781136000&v=beta&t=sNxLhrrsc4SDgfTYQHO9wMAEWLfOaxIgOr59NJRd7vs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Principal Ai Product Manager</strong><br><small>Monest</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415231355/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">45</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGnL3LzxJa-xg/company-logo_100_100/company-logo_100_100/0/1630600609502/sicredi_logo?e=1781136000&v=beta&t=Hvu93X0f0v7wYu7Uwx6rQZpvAnqDLJS8YhgT3w4kmjI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cas | Product Manager - Foco em Crédito Consignado</strong><br><small>Sicredi</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419129011/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">46</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGzDHnwFceGSw/company-logo_100_100/company-logo_100_100/0/1673648352907/unimedportoalegre_logo?e=1781136000&v=beta&t=ppi425JxfzgE7RJqzIpsQtmpdYwc2QCDasKlatIAdJ4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produtos Iii</strong><br><small>Unimed Porto Alegre</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416850007/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">47</td>
+                                                    
+                                                    <td style="text-align: center;">Montenegro</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHag218ZcBdPQ/company-logo_100_100/B4DZYalhpnGkBE-/0/1744202767362/rlabs_company_logo?e=1781136000&v=beta&t=1Ln2bhPQteF-6WnDBvY41HYP_2SpDYlEHybiQDsO0Z0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ux Lead (product & Growth)</strong><br><small>Ruby Labs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419431102/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">48</td>
+                                                    
+                                                    <td style="text-align: center;">Florianópolis</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFuFR3WmHXFHQ/company-logo_100_100/B4DZd7RgByGsAQ-/0/1750119875130/rd_station_logo?e=1781136000&v=beta&t=MZ4uTaKbOucxnKVUR72jYjfqDIdLCbvZjuItktjPrWM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Júnior | Rd Station (remoto) (remoto, Brasil)</strong><br><small>RD Station</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418201714/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">49</td>
+                                                    
+                                                    <td style="text-align: center;">Florianópolis</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFuFR3WmHXFHQ/company-logo_100_100/B4DZd7RgByGsAQ-/0/1750119875130/rd_station_logo?e=1781136000&v=beta&t=MZ4uTaKbOucxnKVUR72jYjfqDIdLCbvZjuItktjPrWM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Operation Manager Júnior | Rd Station (remoto)</strong><br><small>RD Station</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418200169/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">50</td>
+                                                    
+                                                    <td style="text-align: center;">Xanxerê</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHWt2R-yxZxdQ/company-logo_100_100/B4EZ30WGckJQAQ-/0/1777920928300/lazascienceforlife_logo?e=1781136000&v=beta&t=IoQezAEkW5wqSpN1xwj4nz90P_Wovzu-EBlmbdBtnRA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pdi</strong><br><small>Laza Science for Life</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415217578/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
