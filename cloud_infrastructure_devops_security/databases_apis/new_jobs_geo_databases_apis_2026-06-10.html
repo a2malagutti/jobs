@@ -1,0 +1,784 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1782950400&v=beta&t=mwOeFBWaJPHGpposBEw1gM2BkJhKVKCgiJYrcge4Nms" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ingeniero Sql - Trabajo Remoto</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425892686/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEZfFd1T-yB5g/company-logo_100_100/B4DZXua2uCHsAQ-/0/1743461772458/coderoad_inc_logo?e=1782950400&v=beta&t=hYO8vcEEh6KzAurSd3KuSTW4Hd5yc2KXnOLk7HxDK34" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Sql Server Dba</strong><br><small>CodeRoad Inc</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4426796747/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (15 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFMqpfEio73BQ/company-logo_100_100/B4DZb0jJQMG8AU-/0/1747859576571/3am_it_services_logo?e=1782950400&v=beta&t=OW9Gyh5n3CfhJ5t8hjE155HOtUJNOIa6xxT73vOzLFo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Oracle Pl/sql Pleno/sênior</strong><br><small>3AM IT Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4426585437/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEJpAnzKI9J0Q/company-logo_100_100/B4DZiq5tb7HYAQ-/0/1755213912214/cast_group_logo?e=1782950400&v=beta&t=X59tKn1YE0QnFh8eXCgxjIHcmyLxaTH7OPnXFiXrV6o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Pl/sql Pleno</strong><br><small>CAST</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4427035051/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEJpAnzKI9J0Q/company-logo_100_100/B4DZiq5tb7HYAQ-/0/1755213912214/cast_group_logo?e=1782950400&v=beta&t=X59tKn1YE0QnFh8eXCgxjIHcmyLxaTH7OPnXFiXrV6o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Pl/sql Sênior</strong><br><small>CAST</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4427016217/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFOg3ALDaK1TA/company-logo_100_100/B56Z50JQRqHAAQ-/0/1780065044119/ciandt_logo?e=1782950400&v=beta&t=Vrp4cE2cFTRQyoflIQNoZ1b_QVIeV-QNhueYJ96co0s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Dados Senior (databricks, Pyspark e Mongodb)</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4424900842/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1782950400&v=beta&t=TwfBkuwj9Ml0MjY5nCViglilU8wyg3J7xxsC59Tb9Vo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fbs Sql Developer</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4421919859/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEGLWHBZmzzcA/company-logo_100_100/B56ZYzlx2LHEAY-/0/1744622264274/crossinghurdles_logo?e=1782950400&v=beta&t=oy_KQQpXoGqzTeSrSwzyfnbJcBg8d5Ksz3Xx0-49KfY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst (sql / Python) | $15/hr Remote</strong><br><small>Crossing Hurdles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4417535862/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFyYBZhERAHMw/company-logo_100_100/B4DZpI3bI.JUAQ-/0/1762159080456/exadel_logo?e=1782950400&v=beta&t=DW2EUiAK-w1Nf0cUKFwYWumFEVYihXjK3ymPcdy_PSc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer (databricks, Sql)</strong><br><small>Exadel</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4409336373/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHwFAOUomXy6w/company-logo_100_100/B4DZ6sozepIYAI-/0/1781012838716/extractta_logo?e=1782950400&v=beta&t=27tE2m5VPjxI6T2KmrevldMMDvatBTIt5gWOTg-fFIQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Pl/sql Pleno</strong><br><small>Extractta</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4422213640/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Oracle Pl/sql Senior</strong><br><small>FFMatos Informática</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4423229404/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFS2nOc7k3WRA/company-logo_100_100/company-logo_100_100/0/1645584193004/georgiatek_systems_inc_logo?e=1782950400&v=beta&t=5U7Ui2ypxybkRgsZ0s2QgKIUoisH0aFJ4M19KQQqvRc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sql Architect</strong><br><small>GeorgiaTEK Systems Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425247983/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEYEZMCYUJ1JQ/company-logo_100_100/company-logo_100_100/0/1696347755131/jump_label_solutions_logo?e=1782950400&v=beta&t=CYydTnYcjqHWyYOcTnSPxcAobsjHoYnaZ_gdHqoVc_E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Oracle Pl/sql</strong><br><small>Jump</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4424608226/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHUGeBgmfpmfw/company-logo_100_100/company-logo_100_100/0/1631364345630?e=1782950400&v=beta&t=XrQ0Iwo7NTaoAVxoHio5LEiM9EUQ9D6Xwyn34WMJ5q4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Oracle Pl/sql</strong><br><small>Thera Consulting</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4424941623/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHG3WnGgvpS4g/company-logo_100_100/company-logo_100_100/0/1630577417798/vettadigital_logo?e=1782950400&v=beta&t=Z035hrCdIEZu72amV42ixSuyGFsw5qSqReCqMR-7fcg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Sql Pleno</strong><br><small>Vetta</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4420146755/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHG3WnGgvpS4g/company-logo_100_100/company-logo_100_100/0/1630577417798/vettadigital_logo?e=1782950400&v=beta&t=Z035hrCdIEZu72amV42ixSuyGFsw5qSqReCqMR-7fcg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Sql Sênior</strong><br><small>Vetta</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4420148696/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQH_zbw_Q5FAGw/company-logo_100_100/company-logo_100_100/0/1719176170890/wizdaa_logo?e=1782950400&v=beta&t=RP4IxrKP7_DqBhlH8Ucfw0oRjFltw1rAka8IL_q4TLo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer Latam (python/pyspark/aws Glue/amazon Athena/sql/apache Airflow)</strong><br><small>Wizdaa</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425995984/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (15 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGxw8ejZKpVTA/company-logo_100_100/company-logo_100_100/0/1689014804966/stefanini_logo?e=1782950400&v=beta&t=NdOniQhWcPd_3kSe9oyR46SYz1iwDtFPy-cy7MmGO54" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Dba Sql Server Sr</strong><br><small>Stefanini Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425636663/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGHvVPa3-nQUg/company-logo_100_100/company-logo_100_100/0/1738874065999/so_net_m3_logo?e=1782950400&v=beta&t=6MR46Nmp3C-Qpdrsj8w7bJx3XJP0L2aOvP50BGH8Csc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer (sql Dba)</strong><br><small>M3 USA</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4397315028/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1782950400&v=beta&t=T21-HDE60-DpyMDsUyx44LHotFWwdV-BHDDDoLn04oM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Desenvolvedor Pl/sql /vb Siebel</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4420188201/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1782950400&v=beta&t=F8jfOuvH2MEYvl2N6o8eOfwvqXaXoYckUeH1NhyZmmg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Sql Pleno</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425811389/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHq08nXvnOD9w/company-logo_100_100/company-logo_100_100/0/1687439302955/talent_four_consulting_logo?e=1782950400&v=beta&t=ZBGqKgSSkK5Lqts1bRz0mkhz4inUrkrg8pEYxBDzN8A" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista .net | Sql Sênior</strong><br><small>Talent Four Consulting</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4422725227/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQF5KYiecLOBww/company-logo_100_100/company-logo_100_100/0/1630503544924/verx_tecnologia_logo?e=1782950400&v=beta&t=Wr5wqYG1LzxvRaiyLMd99sVGcs4nPVxREdoXy3ct0wg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor de Sql</strong><br><small>Verx Tecnologia e Inovação</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4422277912/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1782950400&v=beta&t=T21-HDE60-DpyMDsUyx44LHotFWwdV-BHDDDoLn04oM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Java + Oracle Sql</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4420180174/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">Ribeirão Preto</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQFlbJMLQgUBbQ/company-logo_100_100/company-logo_100_100/0/1631330968616?e=1782950400&v=beta&t=gsjhPrWVy0-__rxSe2gbqvYujgVirk6hU8oT4kGx6z4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Developer Pl-sql/java (wms) - 11408</strong><br><small>Senior Sistemas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4421158373/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFxYk90aqWMqA/company-logo_100_100/company-logo_100_100/0/1727873248436/accenturebrasil_logo?e=1782950400&v=beta&t=EjywgodxCosJtahx_fdtIUjoRFLwm2R7vIkwXNsv_mc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Dados Sênior (sql e Pyspark)</strong><br><small>Accenture Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4377607523/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQGpRhkpxp5A9A/company-logo_100_100/company-logo_100_100/0/1630570672166/ernstandyoung_logo?e=1782950400&v=beta&t=iXJNrvV3vDDi6sZcXKIgI1DmTwSQ5vm9_B5yIFmskk8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Tech Business Analyst (etl / Sql)</strong><br><small>EY</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4411539007/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE7vzovhFdSTg/company-logo_100_100/company-logo_100_100/0/1733151371141/fusion_consultoria_logo?e=1782950400&v=beta&t=LdtyUZeMQd5a1ZcnKIFa1ZwEQv2Fsh7dHR9M4zTHKUg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Full Stack Sênior (.net | Javascript | Sql Server)</strong><br><small>FUSION CONSULTORIA</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4426020281/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEG8qandFQNjw/company-logo_100_100/company-logo_100_100/0/1630550349648/impacta_tecnologia_logo?e=1782950400&v=beta&t=Y0WrvI_90Jw5KLggb8UMkpJwdVumgQrRGvf-i-OWN9Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Instrutor(a) de Powerpoint, Microsoft Project e Sql - Inicio Imediato</strong><br><small>Impacta Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4421186666/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEDAtdQCFZzkQ/company-logo_100_100/company-logo_100_100/0/1699034152534/ireconcavo_logo?e=1782950400&v=beta&t=hEJy1_soPCMu26EmdyZzQWknE2_ot_RYFtqt6cLfOKo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Dados / Bi (sql Server) – Júnior/pleno</strong><br><small>Instituto Recôncavo de Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4426385625/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGvQSqSdpRBfg/company-logo_100_100/B4DZ6DK.6OIMAI-/0/1780317155238?e=1782950400&v=beta&t=WkF6INw4ci7dKUDAFjRQSAyKyCX3Kt5THCH2vkMfXZI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Dba Sql Server Pleno – Noturno (12x36)</strong><br><small>Rox Partner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4425554025/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFlVJC_v0Qf2Q/company-logo_100_100/B4DZz7w3zSGYAQ-/0/1773750419079/ecomexnsi_logo?e=1782950400&v=beta&t=SZlnBCKHg17mq9c01kne_C5dv26N2RQT76iw-yoyIcg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor Técnico – Desenvolvedor Pl/sql</strong><br><small>eCOMEX</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4421168495/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">Curitiba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFOPyOhO4wTTg/company-logo_100_100/company-logo_100_100/0/1719784126380/stefanini_brasil_logo?e=1782950400&v=beta&t=-MG_s92U0dWB5UjrXVecHVrD9hjQkvChI0liddOXhUo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Administrador de Banco de Dados (dba) – Postgresql / Alloydb</strong><br><small>Stefanini Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4406829206/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Leopoldo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG_wUx8UraA3w/company-logo_100_100/company-logo_100_100/0/1695756096991/lydians_sistemas_de_informacao_logo?e=1782950400&v=beta&t=b-hh7uahEDOczgiA5YNmiKiGdBQF6p5rZQGKps4yMxc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Dba Pleno – Sql Server e Oracle</strong><br><small>Lydians Sistemas de Informação</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4426357061/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
