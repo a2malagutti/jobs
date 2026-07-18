@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f3d756120be65742086266c7cf22419f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f3d756120be65742086266c7cf22419f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f3d756120be65742086266c7cf22419f = L.map(
+                "map_f3d756120be65742086266c7cf22419f",
+                {
+                    center: [-15.7213681, -48.0197588],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_da4af6a90ea45bb7ca8c2bbdf0d2d74f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_da4af6a90ea45bb7ca8c2bbdf0d2d74f.addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var circle_eb9a1261bfe89006e466bbbe11dc0911 = L.circle(
+                [-15.7213681, -48.0197588],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": "5, 5", "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 1000000, "stroke": true, "weight": 2}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var marker_4b058a64ffbecff484621b26fe0b755c = L.marker(
+                [-22.925025756419192, -47.02366914862784],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_cf44ef4f7b879a9014fb5fb2b619ad0d = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_925df7db6356f97a4a20d519f6cfdab4 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_e34a8bfcd1b6b8e6690a88e3f175dd82 = $(`<div id="html_e34a8bfcd1b6b8e6690a88e3f175dd82" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Agibank</b><br>                             Product Owner Pleno - Boletos, Convênios e TED - Campinas/SP<br>                             <i>Campinas (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4434008030/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_925df7db6356f97a4a20d519f6cfdab4.setContent(html_e34a8bfcd1b6b8e6690a88e3f175dd82);
+            
+        
+
+        marker_4b058a64ffbecff484621b26fe0b755c.bindPopup(popup_925df7db6356f97a4a20d519f6cfdab4)
+        ;
+
+        
+    
+    
+                marker_4b058a64ffbecff484621b26fe0b755c.setIcon(div_icon_cf44ef4f7b879a9014fb5fb2b619ad0d);
+            
+    
+            var marker_5a0fd09f0717d63adda4e769b3debd76 = L.marker(
+                [-23.52977276476606, -46.663074182344175],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_0d7b0692c06bc1782be931ad73f4d2bc = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAACtUlEQVR4nO2VP0g6YRjHn/d8UUPpMsrgwCiXhCPEzXBrSMghGsqGluZccgyEpoYW56bAtVAQDEIhapC2Ji+NoC2MwCz0ztPL5ze8dEimv85+2+8+093zfp/n+7x/7j0AExMTE5P/FULIXwSDcmw2G8/zsiw3m01ERMTRjA0kspy1tbVarZZIJACA4zhDrv32/QysKMuyy+Wy2+0A0O12jVoKgjA3Nzesp++jhPA8f3Nz8/r6mk6nEfH+/r5QKMiyzCaBiKIoBoPBTCZTq9WmpqbC4bDH46lUKvl8vtFobG1tUUrPzs5ardZPmyWEsOp+v//29hY/ubq68ng8TBOLxRRFQcT5+XlRFEulki4rFoter1cQBK/Xa2yPCCEcx01MTPj9flEUV1dXd3Z29vf3VVU9PT0FgFAopKpqMpnc3Nycnp4uFosvLy97e3tM1mq1zs/PLRYL/OBsfzUGgI2NDUQ8OjrS44VCQVEUt9t9eHiIiMvLywCwtLSEiMfHx7rs4uJC0zSfzzfc5ZulYB+ApmlfWlZV1Wq1OhyOyclJALBarQDA8zwb6u3bYrGw+JAZ00EDpVJJUZRAICAIgizLbrfb5/OVy+Wnpye2c6yoJEnv7++Li4tM9vHxkclkHh4eqtWqsXXuJZFIIOLb29vz87OiKO12e319HQBOTk4QMRKJMFk8HkfEer1erVYfHx9TqdTs7Cx8npVRjAkh29vbl5eX5XI5l8utrKyw+MHBgSRJoVBIn3c0Gs3n83d3d5Iktdvt6+trm82mfx3GLPUcSqnT6eyN2+12p9NJKe2VcRzncDjGxsay2Wyn01lYWIDR9hgRWZqmaY1Gg1Vh5+7LnaBfKc1mk71SSsfHx43N9ZcQQsLh8O7u7szMzChL/Rtj/ZnjuCHG/7ijfiej/1MTExMTkz7+ABiwNFa7ASRqAAAAAElFTkSuQmCC\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_b9043e41b839e6d8d228d1966a0ae7d2 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_08df2f3881c632c3bf397b4d1bbb0a63 = $(`<div id="html_08df2f3881c632c3bf397b4d1bbb0a63" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>BRQ Digital Solutions</b><br>                             Agile Coach<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4434050751/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_b9043e41b839e6d8d228d1966a0ae7d2.setContent(html_08df2f3881c632c3bf397b4d1bbb0a63);
+            
+        
+
+        marker_5a0fd09f0717d63adda4e769b3debd76.bindPopup(popup_b9043e41b839e6d8d228d1966a0ae7d2)
+        ;
+
+        
+    
+    
+                marker_5a0fd09f0717d63adda4e769b3debd76.setIcon(div_icon_0d7b0692c06bc1782be931ad73f4d2bc);
+            
+    
+            var marker_215ad65b7cf28f6115b04c416801f162 = L.marker(
+                [-23.524703890949237, -46.67837815616139],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_1bdf8a724f400782f42f77b9e525c8ae = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAE00lEQVR4nO2WXUhUWxTH99lnn3NmRh0/wNExZQTRFKJICkEQBUMLfEik0PwACUr8qodIIqIHfRBEGQWRQggERaiHHgMh6MGCwikSRQM1A+lBxhkO6Mw5++s+rJjbdca53YdLF+6st3POOvu39tr/tdZWfD4f+h2Gfws1BU6BU+D/A1hKqSjKvwEmSb4piiKlpJQKIYQQiqJgjAkhSUKRUkopY78n8UwGtiyLEFJcXOzz+bKzs23b3tvb297eDofDmqZhfDxbQgiHwwHvFUURQkSj0ZPYicFSSsZYdXV1d3f3hQsXsrKyIHzLsr5+/frixYuFhYWjoyNN02L7syyrtrb24cOHQMUYDw8Pv3nzRtf1hAglfjpJKTnnt27dunv3rsvlglT/8FYUQoiqqktLS0NDQ8FgkBCCEOKcp6Wlzc3NXbx40bZtwzCWlpZ6enoYY/9gx7Ztd3R0DA0NSSkty0IIYYxVVYU0UEoppY2NjZTSO3fuwNKU0o6OjsrKyqOjI4zx/v7+2NhYJBLRNC0hFcWrmnNeVFTU39+PEGKMIYQIIYeHh58/f97d3Y0pKxKJXL58+cqVK5RSxlh5efnNmzfBX1XV2dnZQCAAkvxVMOymsLAwRv3y5UtXV1dLS8vVq1enp6cJIbquE0I0Tbt+/Trsqbe31+PxcM5BBzU1NU+ePLl9+7bH44Gc/X2qCSGVlZU/gsIYIeT3+9+/f5+enm6a5tTUlNfrPXPmDKUUY2xZlsvl8vl8DQ0Ntm0jhKSUhJCqqiqMcXNzc2tr6/379wOBQHzO/wIWQhiGkZOTAylSFCUcDm9ubjocDohJSnnv3r2YXuB0BwcH3W53JBIBH1A7IYRzXlZWNjo62tbWFg6Hj5Xfn2AoGCkl9ApoBaBhqBn4dP78+fz8fPChlH78+PHcuXOQZFVVX758+fTpU6/X+/jx46Kiomg0evr06bq6uufPnxuGkRgM3TEajX7//j0WhNvtrq2tXVtbQwhxzr1e78TERElJCeecELK7u9vZ2ZmbmyuEwBibpun3+7e3twOBQEVFxYMHDyKRCMa4tLQ0Vu4nnrGUcnl5+dq1a/DIGOvr67Ms6+3btzk5OQMDA8XFxaAXVVVXVlb29/djPxJCMjIy4PjdbjecF3QFFGfHwZqmvX79enV19ezZs5ZlCSEyMzNHRkZM0zQMwzAMEBHG+PDwcHFx0TTNnZ2dkpKSaDTqcrmGh4fn5+cLCgpaW1sppaCbjY2N+P6aoHPZtl1dXT0zM5OVlQUYUACED1Rd16empsbHxznnTU1N09PTnHPOuaZpqqrCIlJKwzDW19dv3LhhmuYxdoKxqOv68vLywMDA1taWw+HQdR1jDGBVVZ1OJ6XU7/dPTk5CBK9evZqcnEQIOZ1OKaVt24wx8Pz27dujR49CodAv7RhUZllWQUFBc3PzpUuXTp065XQ6OeehUOjTp0+Li4sfPnxQVRWWE0JIKevr69vb20tLS9PT04UQwWDw3bt3z54929raSjgnEoBjxjlnjDkcDo/H43K5GGMHBwehUAiycswZZmheXl5GRgZjLBgMhsNhRVFOatfJwLFq/vkiEKu0+LEDnjEdxKf3Z0t2EYAloDOAZH6OKWGgx9yS2H/1spcCp8ApcAp8sv0B4W+HziY8F7oAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_c3738192e72ae2ba13a5acb043e3e35b = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_264d26248eb173e6ba4261aa1406072f = $(`<div id="html_264d26248eb173e6ba4261aa1406072f" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>C6 Bank</b><br>                             Product Owner Sênior | Produtos Atacado<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4430618557/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_c3738192e72ae2ba13a5acb043e3e35b.setContent(html_264d26248eb173e6ba4261aa1406072f);
+            
+        
+
+        marker_215ad65b7cf28f6115b04c416801f162.bindPopup(popup_c3738192e72ae2ba13a5acb043e3e35b)
+        ;
+
+        
+    
+    
+                marker_215ad65b7cf28f6115b04c416801f162.setIcon(div_icon_1bdf8a724f400782f42f77b9e525c8ae);
+            
+    
+            var marker_9841c58710cb854cd548f0535d76a010 = L.marker(
+                [-23.586532474535534, -46.616722514973624],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_c63d3e7cf86c99c2e3b2071652bc2b7d = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_397ecc05b13800f33534620f8c688a0c = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_d14e60cc618a470f4b95161d72cbe301 = $(`<div id="html_d14e60cc618a470f4b95161d72cbe301" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>CHS América do Sul</b><br>                             Product Owner Especialista<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442457968/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_397ecc05b13800f33534620f8c688a0c.setContent(html_d14e60cc618a470f4b95161d72cbe301);
+            
+        
+
+        marker_9841c58710cb854cd548f0535d76a010.bindPopup(popup_397ecc05b13800f33534620f8c688a0c)
+        ;
+
+        
+    
+    
+                marker_9841c58710cb854cd548f0535d76a010.setIcon(div_icon_c63d3e7cf86c99c2e3b2071652bc2b7d);
+            
+    
+            var marker_0b90f34ab4e0a11e0c0c8c7ebbc25781 = L.marker(
+                [-23.573699999379045, -46.60173021775347],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_e3a30fcef0d214f4b3a87b1676489268 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_741d8e71a9a8a5b3924c507955be7385 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_f609a6022af2bfc6a2245762fea2a345 = $(`<div id="html_f609a6022af2bfc6a2245762fea2a345" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>CHS Inc.</b><br>                             Product Owner Especialista<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442476340/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_741d8e71a9a8a5b3924c507955be7385.setContent(html_f609a6022af2bfc6a2245762fea2a345);
+            
+        
+
+        marker_0b90f34ab4e0a11e0c0c8c7ebbc25781.bindPopup(popup_741d8e71a9a8a5b3924c507955be7385)
+        ;
+
+        
+    
+    
+                marker_0b90f34ab4e0a11e0c0c8c7ebbc25781.setIcon(div_icon_e3a30fcef0d214f4b3a87b1676489268);
+            
+    
+            var marker_ac944d28bf179cf781f128991a770e9a = L.marker(
+                [-8.084040113739348, -34.88468462370661],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_f36d78668f162e21aaa323eea5670edc = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADi0lEQVR4nO2Yz08bRxTHv2/GyzoOsmNZXkUWoqGtUKRKmB+qKnGpeuCAVJWKXED8B1WL4IL6l/RQKnGoxIVL5IQLtxwipKioxpeCUoHATikmAVupqdndmdfDBHeh2NjQOIrEO6xGs7vzmffmve/MLoXDYc/zABAR2mLMLKVEKBRqDy9oUkphHG2bu8aISLSTVzNmfjdgADfgG3BzRkStFuQl6tHV1TU7OyvE+fm5rntwcLCxsbG+vp7P55nZsJm5WbJlWagvIAMDA9zQ9vf3FxcXh4aGAPx3fvVMSnkJOJ1Ou64bJGmttdamUessl8szMzPN+toMuK+v7xw4aEqp2jyYeXp62vh96Xq3DFZK5XK51dXVXC5XqVRMjzFmPjo66u/vbzDa1cHHx8dmaNu2BwcHM5mMiblxnZkXFhbeFjidTtfuxmKxbDYbDH6hUHAcpzHVgK9Yx6Z4yuXy/Px8sD+VSvX29jYzwnUFZG1tzXXd4IR6enraAS4Wi9VqNdgTj8YAECTQaKWvDjYi5ft+QK00AAgLAJMGmfEvxl/X42g0atITgGEclUunbQIxcLGIXh1sCqG7uzscDgfBhcIWAGKLWFJ95b6ux6Ojo0GJPnz5auv3LQAMn2Gi/T+FWikFwFTt8PDw1NRU8O6zX57l83sA7Ds6npLoEPVC3dqhmoiSyWQymXQcZ2RkZG5uLh6Pm+Qye+L8Tz9r9j/7KvHF13dvRf0X2yrz4x9/Pj8GJKBOr62DbdteWlpSSkUikc7OTtNpNmMAy48fPso8/HDozoNv7iLs+prvO/btyEc/fL9x8lqDAJYAm+RvLdRElEgkHMcxVBNwsx1ls9lvv5vxvL8/+TRiReD6CtrzTl53fWw5H0QBRQCgakve8hobWG0eb3xdXh4bG9vZ2QVQPSGGrQW00CzI8+G5HoEEA1AgxmmBNzIpZaBMz8AAlEqllZWVycnJ8fHx3d1dCSLQr08OD194tzo6QiHbsiO5p9Xizl/CcAFAm3Qjy7I8z6t3XHIcZ2Ji4tyZRilVqVT29vY2Nze3t7fNi0IIsCCQYj91P/L5l/diidvPfys+fZQ/KZEgrTUzyCzwJdtikwdHEwMhBAkiAUGCzuSsJcmWAkQCCBkJlVI2yuomj4zmsdrDDE1g+rd+ffVGNzXA+vStt/JxzGdE4+L2e/4lcQNuBnwuJ9tmIcuy2vznBYCU8h86NxKRFDrrMQAAAABJRU5ErkJggg==\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_f345c19e05c9eda02c585ec113556b71 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_727f0e181026f09040293e9539d9cdbd = $(`<div id="html_727f0e181026f09040293e9539d9cdbd" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Deloitte</b><br>                             Analista de Negócios | Agile Master | Recife<br>                             <i>Recife (PE)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442134822/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_f345c19e05c9eda02c585ec113556b71.setContent(html_727f0e181026f09040293e9539d9cdbd);
+            
+        
+
+        marker_ac944d28bf179cf781f128991a770e9a.bindPopup(popup_f345c19e05c9eda02c585ec113556b71)
+        ;
+
+        
+    
+    
+                marker_ac944d28bf179cf781f128991a770e9a.setIcon(div_icon_f36d78668f162e21aaa323eea5670edc);
+            
+    
+            var marker_ee1e0acf9204e5302c4d2e17e977960b = L.marker(
+                [-22.915992971754772, -47.082430193563866],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_887f4ab167e7a57f4057979686d6452c = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAJjElEQVR4nLVYa48dx3E9p7pn5t67d++++FguyeVDMmk4jpTEcgwrcYwYBpIACfwznY8GAuTxLQmiOIljW1ZIiTJpUZaXy9cu93kfM9NdJx/m7lrUrpPAQPrLfWCmT1V11alTTUn4whJAaP5N7D5kJoBwQoAJdHgAAHM4QYAC7Iub/abFs8Ddb75uhEM2/5OAktzlDVmQlQKIBJhk5P8ROJ5nCwCIEECCAokAHeTmRX14MDk4mo3HuWk8J6K0MAjlQm94fbB2tb90avBv5bEAiKLoIlvo5fTgF/vbvzze3cvjljmZkmGQmQyZChnBuea9P7/9znpv+bf3OFMEgkRipzn86YvHj8bPJ2qNhkCSPbFsUTia4E6JaIswbvLU/TUH/kf3zwEOThIz84/2tz54/nAnH6uwKDOgoUdh45Xf2K6HjRscpv2+vRiVw9Hq1f7ia8H8XzzuDBMEOGEOOiaW//3lz/9r99MUspVRgAOCgywTb23Xv//JNDpAQQIxLupm0Pjz/0hfeSNeWW62Xujjbcl541J1e1NVARE8qRUQAOV6DViYKv9w+/69g61UIXh34ARgchFVsq8/GL/zaAwC/Fz1SMnVDHrF2lLe2auOW7jqCu3X7g7/+B3EAgThADtgm0eEIBCEGf3fdn5+//CztoI4zzsRADPhQDLtjSzFM9VPhmD9aRu3XvbqzIroWUnL9z/Jnz0nQbgAae626SQRAIB6ePDk3u7jtgTohDrGcCBTbUQ2ZGmvx3HBs4dIiXAEyRxdHA3DacudvQ5Bp0CAzaMMiNhpjt9/9igFBSFmmtMJEQZVCUVCL9vN/oWv3LwbBgs447MMOc43714MGZn0fqUuJl1gCQDWuUWhhd5/+ekrP6YJImCCze0WKJgjwN66/OZXN74cl1bhX0SesyaMool0k5Aur4SbGxlwkCJPnLbTl3bqo0+OnnlhDrjB2QWHQWZCimoix0rP9l6CgZtXj8s4JVpJWfNASuZghmROg+BisbZqi33J2WXgib1RMEogHh5uH6OGSNoJNAHzjoQFGAIwaWcZKt+6Y5dX1NQ6PKo/fRY+exbbBsYcuhowt2zJaZYfb/n2TnF1FQggzF00EJEAiKk3W4c7MCMEkQpgZyQJZcKNJhatlteWHGBl2Lwcuxx5+8v50Vbz3gfFzgGMMoWmYcwINORqUs/uPX08Wrr/4ujSQnz30mIEeEIgfF4f7bXHCjBBcMIyzKnKUXqYCi3QS7g1uHhnZSO6CDhJARmIIdy9YUuj6d/9y+DlAc0Rsqu/XyzsluFnK0sPcu+XP365LxvZeGOhuLPY/zVzvZgdzpg7JiGdEhCFvF4tvn35S9sHe9O2vdxfenP5yihU3SEYQUCx4zu39eXyW78z/dv3+rWT4Wlv7W+urH+4FPfKxZkNFxr0kSZefXxUz4FFENivx4IHGIBsmdmAEFq8sXzlTm/jjd4GkQ3WNctsEBCUQXb1kYwBKm5ttNcv5188icCDxd4PVy+0sSi87eWmLnOV20ZxZ9yc1jEkn3pNwtRRQClUlJfhsKo/Trv/zOkDc4fPaRVAkAAKFBiEKFKGUFXr15hNzD3lQgjuVBQCFERSxaSBnwI3lHKiZIJJUMjGKDewOr6P5z8YP/lBTr9y6xIRQAtk0QBS3lFqR2NaXkhlBq3n6nvjpCOIKrJlVQbVKWXMCQRd23djE9AEGHJUI2bAImgBSMeaHQIQG8oNAQwmEA4KPEVmrgZJxpplSkE1kJ0KyqJ3bchPdIcBMFjFGDKCIzqjMqWWxdTKw9BzxV6eWH0gICFDZOc7MqATduu6JuLGMn/vjfHFxf1BObHCUXQU6GSXIlURQkcgThisZyVh3UMJBRCoVOaJWTIImqTpw8L/sLWek+ZyZNKITnlmuIvRQPSKwXfexSztPtw53EX0kmzU1YpI5FGct9Io92A2XFhMR8wBlBcpL+bZku1ct4NN7cOtLgdePwrjj+LwD5xuNIEn7RSUtxZ2Wv/R04MnB83CgF9dX/2wcbMAHAMhG4IA5EJpfWG5C3U0EsL6YGUFVT2bLVf9i3FrEztrnA44KTRzllQI3ubn/xirBZZfAhFknZ6gIMSXbf7++9s/PUQKBXYn//Rs0qgsVJBTB5Ox36CN3le+tlh1aiyChHSpXPyLm1/z3Kz2hnH377n7E5iFHMwpOpmDyOaz2dY/VJc8LFwDh106CaD44639Dw6UqoXCHRjMMoQYFJwFCHZWOi4Oio1hOQfu+LgEr54oUw1/9/jwZ1Xahwon3LLlwpnNWNSf1lt/reGNsHg9hjWGnpWb4vDhOE+KOPCUTyQ/kWSpi0jhas2Q8PZqNQrs9Nd5gr53NfSvpPErqhNHCYoJpdgam5J76fjAjz/MHoAeL3yjuPRnwzLKWhdxRh6YAtA0Fi7H+pvrK6eq5ZxZJ0+2Nd4NqrpByWFgCmghunrwfpl7gxRLeaHDNH1ATN65NFpCdvmZzUghWaHcfONi79qwT59LlHM8TpMPivyk8BGsTjShFJsgzzSHOSVmIGeU9CK10/c+efyvry4m4DfMTfLMzSL/6a1L3QxI6nV9+rkHQe+km0DIBDnmfEmZUCSUspb0MrXvP/3VexNrWFFndqOcaZSm37u1crVXnBjG80Md+5st1pLJBROpLLfcKQTBoCAFybJlxErjq4NpD6iSATa39XNOMDd/cnP0R1cW6TLkU7zzgEdvhtE3Wx9BLvdUXNHorcwFywlUNkERcEPbxAKWN+PRKB00FjKTuj4JUDIptO13Lwz+8vZKVAbVqZ85ylngzLXyyrfz6Eo7e2o2qBbvWFz18Va799GryaMRXpYBYoRQaka1CgEhw+roziwxNRbdw7CdfPvG8l/dXlmiIydYcSJyhXPH1AxhPoYLCN5JIeDh8ez7P/nRRji8WNWDKg1RZxZ1tv+cXL/XbgJmAMWGIXneiM33bo++tTEqIeQEEFbOLw7mzHVmhdP2SkFz2eHgh89m9/Ldhy5LDSYzEwkL7lMbKpTRUyPSm1U2X79QfvfW+vWFEt1gZsV8Cuo6Cng+8AkPdkofRKZyQLHawyImtYqUe7IiBRXyIE9OU9PPk2v9cHet/+768q2lQQDdYYBoAvBrX3UyLZ69fEEGTpOTACSXJ8E+Omo/Pmh2jzVup3WupaoXq6Uirw3ijeXezYVqVAaDqCyyk42w+SZEBuSIXUqfC4z5PIz5Mw4kYD7kAgBqKLmcjGT/C+/RwXwyjobP3Qw4AIdxzgfnA/+/r/8G1DqsctBWgUkAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_2f38d8579fca334beb06f67a53b6c87c = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_8ff2a2882f5537ea26aa1b6927256972 = $(`<div id="html_8ff2a2882f5537ea26aa1b6927256972" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Grupo Conduzir</b><br>                             Pessoa Analista PMO Sênior - Campinas/SP<br>                             <i>Campinas (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439261934/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_2f38d8579fca334beb06f67a53b6c87c.setContent(html_8ff2a2882f5537ea26aa1b6927256972);
+            
+        
+
+        marker_ee1e0acf9204e5302c4d2e17e977960b.bindPopup(popup_2f38d8579fca334beb06f67a53b6c87c)
+        ;
+
+        
+    
+    
+                marker_ee1e0acf9204e5302c4d2e17e977960b.setIcon(div_icon_887f4ab167e7a57f4057979686d6452c);
+            
+    
+            var marker_3d1a586d1ba507eda2cf7d9cc421c070 = L.marker(
+                [-23.745099596005204, -46.53650038078704],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_568eb6c934a4f247effe8360cd39e0fb = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAD5ElEQVR4nO2WXYhVVRTHf2vtfc79GGd0HDQ/0BKhJgvKgl5Cyzch6ykI8UWE6iFEDCJ68UWsCKJeAiuUXpIkDEJ6KujBkiT6ltEy6MGhNEYHp+vMveecvVYPd0Zl5vYigRF3wYGzP87+7f/6r33YIve/yq0IvSXUPrgP7oP74P8LWHDBui/qIoi4CiCOIB4EB5+diyA2t9S1pgOIuAjEOYqAC3RH40KwWaCcBnGvSA2kQARXYgnqZZ1QIAlXPCBAgQWIaIUrWpIauKMJ7birZA2N7pa5mOAujst8sJuvGrZd27csG6mJOR5dK0A8IAkcjziIqbsgNqvDQdTN0aTiHqOn4E6oxq9MHzpy8sJlRQNqpAwcfIHiotjxxEP7n918U8b1jqt/2RvvnKJJ10FQSD1SPTjYBCg7bc+mRXNoqpmkssoKx4Mtho5r6ahTC0lNWy4oFHSsqtfDokwEzCunClJfumgAz2crgNS1vAc4WQA80xf3H/3s64mljfLgge2r1y7fuffgufPTd6wdOPb60+8e++Lg0ZNKOPDCtvVrFu94/nCSxl0rlty5fuTEyfMrVww+t2vTIxvXUQYy3CoADI8OLiYuPapavTsvOzc+MzZ25dufJ0sPjTyc/m1y7OyVM7+2zP2PS1fHxi6fPjs1OdVpt4sfxiZO/zhVrzf37d42vHL5h5+ceWr3e1/+NE4UIIUSbYOJRQgg9DxOigMGIebkXoXmoY9OvXb406kO5FGyegpoUPIaUaMERCVrEoNEqUd9YMNq8njxUjxy/BsEQC2CiOcu5mLi9Aa7GBAgWoUkdcs9RVJIitWiaXAPrqQ6HtQV6dZphuUAoUI7iFsX22VI97Eb5C30eO6MVTZDRyVVO558eM+urYuaQqdNOW1IZRVlQTWT3MyTVy3KdmleJP/+lz9pM7LEtz+2sUsSd9xg7scCvYtLHaCCdbcP3Xu3DTWqTAsvq9F1wzFrja4aAr1t2cCGewaDViODtWYtf3B0RUmj6Ey88tbHF8Z/f3zr6J6dj26+bw3JCLN6b6QCMu966+3Oy3s3vfTMlipZYZJMFGrRA7RMSvHcZCAWhceOKfiAmElqpxwoLVllWsuGMiK4pxJyCfvfPrHvzc+l3oDqWo4XKpaJVgXEoDFc7wQGrzfzGtRmpYSAZrNDAW74RkIOwFRrBg0uMuu59wTn2fvHvxsYqK0ezpNRiYq4OJV4ZqqkJJqUWBGgDC5OCohpNHdBEBwTRzyYqMjFyasfHP+KrI47ci3hMj/VgJtTFLjP39PNhQh5LirzunsUl6hQr/071H+O/9JFoA/ug/vgPrgP7h1/A23cylsmJndoAAAAAElFTkSuQmCC\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_d0c1f21a138e19a2234c0c63e95ddb14 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_5b6ad0cef8dff8590d6f1f32eecc9462 = $(`<div id="html_5b6ad0cef8dff8590d6f1f32eecc9462" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>HID</b><br>                             Sr. Product Owner, Biometric Readers<br>                             <i>São Bernardo do Campo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439273536/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_d0c1f21a138e19a2234c0c63e95ddb14.setContent(html_5b6ad0cef8dff8590d6f1f32eecc9462);
+            
+        
+
+        marker_3d1a586d1ba507eda2cf7d9cc421c070.bindPopup(popup_d0c1f21a138e19a2234c0c63e95ddb14)
+        ;
+
+        
+    
+    
+                marker_3d1a586d1ba507eda2cf7d9cc421c070.setIcon(div_icon_568eb6c934a4f247effe8360cd39e0fb);
+            
+    
+            var marker_2dcf0e5a83509ef6ffd863d8d56f9346 = L.marker(
+                [-19.885457395102218, -43.942756161292046],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_f94db67facc4209da49e5731faadbdee = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_4f192beaf1d367fa41a2c4119a98f402 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_baa868093cd949a0b22245fa75e21826 = $(`<div id="html_baa868093cd949a0b22245fa75e21826" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Lacerda Diniz Machado</b><br>                             Analista de Projetos (PMO) Júnior - Tributário Consultivo<br>                             <i>Belo Horizonte (MG)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442195291/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_4f192beaf1d367fa41a2c4119a98f402.setContent(html_baa868093cd949a0b22245fa75e21826);
+            
+        
+
+        marker_2dcf0e5a83509ef6ffd863d8d56f9346.bindPopup(popup_4f192beaf1d367fa41a2c4119a98f402)
+        ;
+
+        
+    
+    
+                marker_2dcf0e5a83509ef6ffd863d8d56f9346.setIcon(div_icon_f94db67facc4209da49e5731faadbdee);
+            
+    
+            var marker_0a4522f70694724753d2c6db7950d60e = L.marker(
+                [-22.00302514318502, -47.33773082840129],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_ce0c323c5d606c0ec8cf869550798697 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAJW0lEQVR4nLVYe4weV30953fvzLfvdWzj+hEcJ3acEOLEqXEIVhMJUGQCllBQeQhIW0FbUKOAREtJqxaJSm0FKiBekWgKIUTiYRAQSAo4ECchzgsSu+nWa2cdHDve2I43XnvXu983j/s7/WP2sx3VrowUrkaf7sw3c8/8nufMpSS8wkNAsyYBnu2m+MpiOkCwi3ZWVAD2ygJ3bWwgT5p+hvGKWiynHDQBJNAEkeH3D9y1TyRAEJDO5u542jP/X0jObRgMAGtgtigI9rfys1kWlYQgAoVjZP/kzgOT7aJaMNx/1YXzL1rQD3cHjAkAEJo3FOmkeXIaSKoAQGU0m0q+dWT8l0/sO3BowuHnn7/oxvUr3vTapSAkEnCKEkEWyc3Stl2H7rzv2e17pmYKUDRqwZDfdP2qP33zZS2mRAaxyUTKQSQaJQKiI8HAMtgjYy/e9Z9PP/LM9Kz6coPJS9egtT+4ceVfbrqylw5PbiYGE+jud/xi5PN3j0xpQQy9htqUQOtAmaZuvfGyD77pEjnmYkVQIJxwRyBEEcajnfL2e5/e/OC+Y9WAWr2E514Et8RWSbM08ek/u+Id6y9C6ohBzAgZmJb8wfz5Q4O5Fy3NtlC6mbEeUkn0f+lHO+99ap+ZB3hQTU8iBINgaQ5116FjH7lt639seWFGA1nupk5Q5WQRrbLUp3at3u9tfWaqdlgORkIArJZuuGLJV26+bu2KniIVJTInKgYotpQd1/Cnv//Er5+fAE2ezCvCRYDBKRgfHTv0kS8//NCe4L2DHugMQTGk3FIW3APKGshCtv9IeXSqDVIC4QAsKCjx8mVDX7j5uk2vX+h+jCoIL4JVhsxs/NjAp+78r2cmZ1PIQLLbFRTCL0fHP/HVJ8eODfTkFlU7oryHMtBFEDSxCpkzTs7Gex/fX4FmchEAU0oEiATDTIp3/HT0az/bO5ty5pbI6CVhVVlce3n+L3/x5sU5JToZyIfHjvzd7b/a3+5tWZ6l2g2OLEhgWRuFaDLBDR3HgFKW4eiHN17wobetyZve5u7dShZJkD9/avxfN+/YPx3zYKIJAqqqbr/rmvM/9b6re+AwjhycuuUrjz0/yRCsaZMCBCOcTDVaUTKv2iFLqWCN6KFiYVX5Vxsv+Og7r8rIU/UtQBKkjX+4bPGr+v/pW0+M7D2GfMiR51LOvh89PLF04dhHb7h4Yqb6zDd3jB9Rlge4SAIgkKxO9CALKOogN/VZufF1iy9dNkwvC9ao8+VDURDAUxaf5EciwbLxmerL33/87icnas5rpaKyrEbqtelb33/V7ueOf+sXL8RWS3DOWQsAlAnRrYYzobevnrj1navf/8ZLmn/TXAOCu8jTejW7bOYIAHpRv/3aiw8W2YP/PaXYMjEAhQ987q7dHRjzTCAQTmcfAoYaSiQ9lfMGexcvnvdiu1zUm6uuEDI5gJpGwE6L8ann+b0Hn71ty9j4ZCnrcWdUXQcXMni0VINIsaIiX86qggMIgoBEAQooVyzBxzate+tViySWzIg6A6DwMleTJLll5PBf33Z/1uq9+uKFA60IuFDWlkWPwVUGBFWUneKdLvkKJAR4Yh7dI/3FTv3Y6ORQjF/82Iarlw/I6YwGAoqcW0CEg1aL9z6+v6zt7/9k9R9fc5lBACsgzHkSqTvxLqhOm3j3NwARSMBtP9/12c077/v1vquXr4V1TAJygFF0kZQgQKzkk8c7fT2DV658dQY43Nxgc8EUkHVLIHYnPG0i0Km5eEtGe8PqRXkYPXG8A1BoAaAgIhIOGWAEIeSwVp4npLIoAQkm0FQL1kCczKazTMRT5wRRFFVlsFYA5HCQAQ7CJDqYADeJHgzzhmK76EwcnwEgUPzdFIIJ1KnqfOFou/QwPDQE0BRMpES50Rmc5jBvUkMXLR0qU7nzwLTAoCZq4dz0yVwfb4SPKAGje4/0++zqJT0ADDJVAh3BavOOqW2YNXRoFfialQt7evPHdk60kwg3uP8ONkuEGmTa0Xb52LMT84fjyhULC2CGNmvZLK0A4wP/c/iOe7bXIZos0QLqunLLBkeeO7pj78ENq5bA0TBoo5fFRKHbhU4JWIqiA3ACgiVnDL8aOTh2WP09/f/8tQeCIGQJrnp21ZLheGBiZtvuwltFrGMnhqhOT2KZD8wgv2vLritWLO23SjBTAJMayQFQSXyZG0RSFOFIhkDaS53irvvGktvxdrXtt3mMiqgHenBeDy8MPXH96gU337gS5pmjYxaQYkLb4pYdR+/fcXzz1t0fuP7iBDlSkNMDZDC5lSYC0WHe0JxABKA0IchSSP9+9+jTz55Yv7Jvw+XLt++Z3rbnuAV84K2r3v1Hq4azAOmEzjQe2nX4dbf8cM0tP/zBb/ZLSkq1KyXV7rV75VJyd69dlZQ8uZdKdVKSSkm3b919yYd+/IaP37PjwEtSmpwtPv6NR1f/+bev/9u7n/rtEbmb1FMLUoIqRy0JSaj82ksW/c17LqtQf/Kbv7nz/tE6MRBiDVRBdXQX2IQ9KFGJElAbOFmGz/1k5DObR3t6+cmb1q5ZNt/h83rDP960/sObLp2c6Ty5+6BIJlcjhJrUoMwBF4wC7Tvb9v3bd5+e7tSb1i1+31suXXfBoEFAEMznEswBCCZgRto+NvH1e0Yf3Hlg6aLWP7z39Tdcfj5qyZLTnKoU9o+/dMGSoZxGd6eSGBJFyGSCpAqMUAiGB0YPfvYHO3Y8N7Wwr7XhNcuuu3LRa1fMXzwva8XMSCi1Kz3/Umf0ufH7t48/umu67dWGtfM/8fZ1a5acl1QDMDo9l9ekIVhSTc0JAQE82eu7ddIUkEA7PFN++6HdW7bt3XOwqhgH+8PCoTh/IKOFItmxE51jU+0TM+2eLK656Lwb33jhW9ZdOM+IBLfGJU0hCoBoaOr8//Jx9wVOcXyjbV6cLh7ZfeiJsSNjB6Ynjk63i0qCUcN9cdmrBlcvX3jNmlevXTE0HAlPUC5DYjIZz7Quz2VHoMk4RgOQgHadOmXdqeRSNPRmNtDKMyPgQoIkBVoAJFSG7Izt9pyA50j2JPWzqyrnqLm5xUU66N2rBkACz9xuz81iwCE0n9wAKCI5GskxdzQqFXKwyXGDAnBWcjlHi9FdtfnYJzEnHRrMbuRcEmEgTuPSMyOf+44ACRmAOY83HlS3IEjAYS937MlwnGm538N20zmN/wVwMnc78wiK5AAAAABJRU5ErkJggg==\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_230695f64d9f8b0d7cac6f3460057367 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_4a68f2ad136354ee782a1a05fd0e693f = $(`<div id="html_4a68f2ad136354ee782a1a05fd0e693f" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Mellro</b><br>                             Product Owner | PJ<br>                             <i>Brasil</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442407443/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_230695f64d9f8b0d7cac6f3460057367.setContent(html_4a68f2ad136354ee782a1a05fd0e693f);
+            
+        
+
+        marker_0a4522f70694724753d2c6db7950d60e.bindPopup(popup_230695f64d9f8b0d7cac6f3460057367)
+        ;
+
+        
+    
+    
+                marker_0a4522f70694724753d2c6db7950d60e.setIcon(div_icon_ce0c323c5d606c0ec8cf869550798697);
+            
+    
+            var marker_2d5462c955a3a0a2fe3777f1c375b690 = L.marker(
+                [-23.526412895402913, -46.75695827126298],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_d0f8b9d7e6b24ba36a6824368c7a8680 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_e3d7c896c01c0be72b999e6f0c44ca17 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_e60a8075ef3398a732acbd9dcc0565d2 = $(`<div id="html_e60a8075ef3398a732acbd9dcc0565d2" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Milagro Agro Brasil</b><br>                             ANALISTA DE PROJETOS ESTRATÉGICOS (PMO)<br>                             <i>Osasco (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439615485/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_e3d7c896c01c0be72b999e6f0c44ca17.setContent(html_e60a8075ef3398a732acbd9dcc0565d2);
+            
+        
+
+        marker_2d5462c955a3a0a2fe3777f1c375b690.bindPopup(popup_e3d7c896c01c0be72b999e6f0c44ca17)
+        ;
+
+        
+    
+    
+                marker_2d5462c955a3a0a2fe3777f1c375b690.setIcon(div_icon_d0f8b9d7e6b24ba36a6824368c7a8680);
+            
+    
+            var marker_af4e17c646228f6f40833f4af010ee04 = L.marker(
+                [-23.557412074880812, -46.667826917891716],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_3d68f15be4fc3dd7e4b45fcec937304b = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADvElEQVR4nO2Wz29UVRTHv+fe96adoZbSoT9oAwpaaW1tC6UmFQlGSbSRaKwL0bpSE0w0LvQPYUOiCQkbidUNdUHYlIXVBNHJUFoKLZSEH2p/TWdsaaUzc+89x8Vr0YQ3U3aEOGf17su573PO995zzqPeyufwKEw9EmoJXAKXwCXwYwn2NvQgAQFM/75hkvvPSqBAAmEARCQEAASIABCAEG7h4PsYa4wS+J5HIAGEAAEJURCRAICQCMAQAilABM5YISbfY4In9J84i4IJ0AIBWGHPSz13s39PXZ1Uy6sAKd/T5GmQYiKAFYxiASCsrVibzRFHKmLPdLRuilWMJZKeDWJ8OHCgDwHs2Bjz0eefbd4WH7nwa/Ln8zcuTyylMjZvtFIaPjlI3jmxXplfWVu9q6O5/WDPvv09CzOpb4+fYOOirK0nYQmDHpzHTCBACQi4Z42/Kfrakbf6vzxa92Tj4mx6PHnpWmJ0YmQ0c2eaCTXbG5v3tu/u7mjr6qyqi8/fmv7m2FfnBn6wy6t+pExAwfk8FFgIEoAFIHLCuVy2um7LK+/1vflx//ampwK33F8rTBKteiJY/jF168zJgaFTpxfn01E/opR2BCai8ITDwIHaoHXNBQrkrMuZfFV9fO+r+1/ue+PZrrbahnoIUjNz15PjP54+mzj30935TCRSTiq42hJoFo4NB5NAIBTUEQWfAIgEzC5n8+R51bXxeE01IAupdCaVFiPlnq+UXq8mIREmOAXF4RUVVk6yVizrG4LcmQgEgQjDOSWGRAduwgJm5bHm4IyEwIAWlDk4Ck+6WAMhCCAkJCRGjM2bLTXxA4d6D/T1NnW11TVsA2N+Znbq4vjw4NnE0PDyXNqPlDtfA/AZSgpSw6Ve6xJrbDjhbH61um7rofffOfzhkR1NOwO3bGZFFKJVFcHy9+s3z5z8bmhgcHE2FYuUEykm4gJXegOwEK9aUxaLvv7u2/1ffFK7syEzu3BlZGwycelacix9+08h1OxobNnTvru7s7Wro6o+Pndz+tSxr4e+H8wvZ33fV1CFcg6/1YEZsi1dnR98enRzw9bkLxeSw+dvX55cSmVM3pLSpJVikHPCTpX5lbXxXc83dx7s2fdiT2Y6NXD8xERiVEOFN8wiYIGwRscL3YurKzeuTqile1prpT1SWkERSLBeoSQsIuKstQz2Y7GnW1uisdj4bxd9K1xA62IZA7DGANCeR4V67oMRizjrAPF8v4jbBmOx+OZQIyLP33ja/v/+QErgErgELoEfP/A/t0O3mxbWxW8AAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_940ca23d2def313d2e6b472a10683c98 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_527c2a4a867cc7f8b6a7516097d33c28 = $(`<div id="html_527c2a4a867cc7f8b6a7516097d33c28" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Minsait</b><br>                             PRODUCT OWNER - SENIOR<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439606720/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_940ca23d2def313d2e6b472a10683c98.setContent(html_527c2a4a867cc7f8b6a7516097d33c28);
+            
+        
+
+        marker_af4e17c646228f6f40833f4af010ee04.bindPopup(popup_940ca23d2def313d2e6b472a10683c98)
+        ;
+
+        
+    
+    
+                marker_af4e17c646228f6f40833f4af010ee04.setIcon(div_icon_3d68f15be4fc3dd7e4b45fcec937304b);
+            
+    
+            var marker_d0c86290093047ff323cc9f8a9c6885b = L.marker(
+                [-23.47303664981325, -47.41767982207643],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_bbcd1b8e9ecd0562ab382e1a1ef6b2a4 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_87cfa0ee534994392556e30f4d32bcfd = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_aee91f111687d7ef4871654ca92a1f3b = $(`<div id="html_aee91f111687d7ef4871654ca92a1f3b" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Nextpower</b><br>                             Software Engineer III - Scrum Master<br>                             <i>Sorocaba (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4414722105/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_87cfa0ee534994392556e30f4d32bcfd.setContent(html_aee91f111687d7ef4871654ca92a1f3b);
+            
+        
+
+        marker_d0c86290093047ff323cc9f8a9c6885b.bindPopup(popup_87cfa0ee534994392556e30f4d32bcfd)
+        ;
+
+        
+    
+    
+                marker_d0c86290093047ff323cc9f8a9c6885b.setIcon(div_icon_bbcd1b8e9ecd0562ab382e1a1ef6b2a4);
+            
+    
+            var marker_6111cf48cd54c5e64c84160c8a7a235d = L.marker(
+                [-23.16213343590559, -46.90656061564544],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_69fbe06fdd7c517193591b78e47e96c3 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAFWUlEQVR4nO2Xz29UVRTHv+e+92be9Me0nSmFtuOi0DqNhUJNSlujxAWoKYouIEY2JNo9Bv4CFrKoCRtWTcpmDDExaUzUxMUQqxEUMWqt5WenFmwL7ZRhZvpj5s2b+85x8WT8RZDERGPsWZ13cu/9vPPuOd93L4kI/g1T/wp1A7wB3gBvgP+TYPPPoUKhMDU11djYuHXr1ofOFcDXefW7GADyAAOAQAgEoAzvzlp+rbgqIH/QA8DT09N9fX2HDx8+e/bsX3CJARFWpCBgAoQVkxAxiUFgEDPMq3d//Cp1mYJWMGCZZAo8hn4AmIgAKPUou2BASFDOrU7WVrUVSovVdgurMME0BQIWMj6ZuTh3d64/3ldtMHiZGDY1Nja0/o09JgIIBIGbX1nSnJu88Y7mNQvK8DRISNG5malbuUz3ts3zd5I3Fy4uZ5bSuUw6t6w1m2NjY93d3Y7jXLp0qaurq7+/38/Yt0wmk0wmZ2dno9Hovn372trazp8/n06n+/v7P/zgQxH18isvNjc3RaOta6Ufyt6Ve9nPGuqeD1hRJnw+N/HTvYVtkeDdTKrnscdtKRTcFU81NUe6FCzz4MGD8Xg8l8stLS1ZljUyMjIwMFABX7lyZWhoyLbtbDbb0tJy7ty5M2fOJBKJjo726zduQPDuu89+9HFi8ubbTQ0xB7fvrn1dW9eb11Wf/vhtcX2pPcIBvdweofm59wNWKFi9yVSGiCNUpYhoYWHh9OnTiURCKTU8PJzJZCrg3bt3p1KpW7dujY6Ozs/Pj42NVVdXM/PTTz9z8asL3Tt3Xfjiy1TqqmWhNfpc2H4mEH7146u33/8mWW9RV7Say0vVwbl0brZj25EnOt7qaHmzbcsrCvUAmSKyY8eOQ4cOATh16lQqlVpcXKxU1vr6+ujoaDKZzOVyAHK5HDMDeOON1/t6n+rZ1TP5/fdOsWiEDJGgYq4xqzpbm6tsySxOuqXlBntZce2T7UcIm8AQpQFFZMBvp0AgAMDzPK21YRiWZTGzaZoAjh07lkgkTpw44bru5ORkpeaJFABhAzCIDIBAGsrh0s31tJf2Mls2RRSnHUc/se01IAIAigmoNL0CsLq6mkqlRkZGpqament729raiGh6enpxcXFiYiIWix09evTAgQP+BP9weP+E6AEaREJlAZe1URWqbY919rR3lkvflUrSvfW4gVaC4Xe8ryq+mUQ0MTHR1dXluu727duHh4fj8fjevXuTyeTQ0ND+/ftPnjwZj8dt2wbAzJ7nARDxAGhPA/A8KLZM1VhTtfnGwnshc7MuOVuadsU2vQTUVHQGYgAA+XqnCEBnZ+fx48dbW1sHBgbq6+sBZLPZ8fHxlZWVwcHBy5cvz8zMiIhSaufOnVrra9euDQ4ONjU1nf/8wnTq+v7BFyiUitb0kCpmV2cMmOGaGFEzBEIegf0MIQT4aiq/KOaePXtERGvtuu7a2prjOK7rMrOIFItF3/GtXC6LiOu6juOUnJIua5FyySkV1oulUrlQKAqLsDAzszC7LEWRsoi/Aot4Ip7/aFqWpZTSWs/OzobD4Xw+39DQoJTK5/OhUEhr7VdZOBwuFArZbDYSiWSzWdsOgjxhyzQVkQg4EKjK51Yei8UCQQIIYoBAEgT8RAHwr7kC5vj4eH19vVKKiAKBQCwW818lFAoZhqGU8j+GaZp1dXW2bdu2XVtb61eZiBiGAYDZI1Ih2zYtQ4SI/H+ShV81EL+tLAB0v0r/eJEhIma+3zy/DKuoqYj4fiXuRyrr/FZ3H2jqIXcnIvrzfD/Riu87vqo8OhWVjP95+/+duTbAG+AN8H8f/DMnb8ruvnnbZwAAAABJRU5ErkJggg==\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_ff3fe0f6f2180af3bb33e93976d28260 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_b6a28dd7bf42bb3def8e0b995246fde8 = $(`<div id="html_b6a28dd7bf42bb3def8e0b995246fde8" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Planit Gerenciamento</b><br>                             Engenheiro(a) de Projetos (PMO) com Espanhol Avançado.<br>                             <i>Jundiaí (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439264698/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_ff3fe0f6f2180af3bb33e93976d28260.setContent(html_b6a28dd7bf42bb3def8e0b995246fde8);
+            
+        
+
+        marker_6111cf48cd54c5e64c84160c8a7a235d.bindPopup(popup_ff3fe0f6f2180af3bb33e93976d28260)
+        ;
+
+        
+    
+    
+                marker_6111cf48cd54c5e64c84160c8a7a235d.setIcon(div_icon_69fbe06fdd7c517193591b78e47e96c3);
+            
+    
+            var marker_6a6239d2ec33fa7668f467247c4b51a4 = L.marker(
+                [-23.520238373360765, -46.64017748083728],
+                {
+}
+            ).addTo(map_f3d756120be65742086266c7cf22419f);
+        
+    
+            var div_icon_c79a1155a7f82b0f8d43111a4003c196 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEUklEQVR4nO2XT28cRRDF36vumd21dxPHiUlCgoRExIUDXOHO1+CbwUfhayAkQEmkKCF/vRt7dme7qx6HsU0OWe/GBzgkdZjLjObX73V1VTXvfP8d/o+w/4X6CfxRgPMuH1GgUBOCMMHEAJJAAYD47xOQCAgmiBDPvrkiePgFzmEmEKh29t+BSIASAAEgNuA+FAyAyAEB1SQoOwwKguCwDhtohAlB4NyncyeuqjiIRgrEOnG9nzXKLZJJqIG+WHGrnmRJNqh3gkDS+bqvBk6SSSeN4mDCWzObteuWJ4mAUlVblLpS357Gm+W409jJEBLBDczdwSYWRH/voHxx3U0WAYREAZFRMtOozTdG+dD98dyPl60zhuTajN5+nAj0jO72fnx+UJPMnYAniiRIEIAbepO12XiWxYPaTRu8m2LBW/PPZqUJRMDgQluQusKqGKf1JMs0Wocevxy9Whnp50fgktgOFoQmay8zggY3NIWjR2/Sy84q6ojlcDS9eaN5Nk/PT41ZErlZ6e5gCshWGgYDAkgI0de81sTZ9BovV/XF81wiR3YDSZLSlpO8g9UkQoxQS4To8MT48lbdXy4Wy9yVZu2595JZDY0DwFbqbmAAfZm8rac32oAQCovlPtPelDG13ttF377qOF+lKmC7yUNsz2oRuQhP56NeBGUAYC54dfp6D6d3Jsuvb8VXN9cT20XrrmAAGda87vnoeNTBkEAGEUYACCl8mf349rh7cNiNlRQXVfOSCrJrd9oPy8+6uujz0Z4fTDTJkVOFZDEkPhScTXRzWp4sMoznxXKT9bs2CafJAivffzTXk4WPc7m2Vw/31tebmgIEA07lw73y/CSV7Zu9k9UEBAVAspghmLo6eXKCP57b625oDEFUU7QpGgNowzncTN8JHESfqt+d6cGRz9pqcokIi8iSXRRJ0gJ0XZToSzJtJ6sr4Ucz3TvoGqaDcXu85HLdM2LaxvVRpQ/Scph1fa5BpMAWs98DpiDQk1uIyEGMYs6T0v3ZmeWmeKL302vl/rXSQhFDLQOt7YMvOooiQEiXod+nmKIsGIkyJww/fXP/2/02woUUKf3edT//9fr47rSkQRctOHba03me98ModtakNren94CdMiF7IgLUtNYfjg5+PNIKi1GsRzH7dTH75eFbMQNOMxPHy5qfHNvLZRLThW0farUoAxi5Wjg1Rd/0p6XmJZNHQlC1JF/GatWs2a4cb1eYL3NX2zAIV+9OFBgEEIZKlVBJ7sbsycL6xJo0Wpbxb89aZ+OAEMagBZmG9nXpCLARDFCEGFBkEEiemshoIxpUpZyMuU4a5IQAGIkAmiCFoC5mYQtcsoL3JhfdIEZCWDWL5u9TezhP7jK51vG4q+tEI+18hhYxzLLDPIodmhQ33Y8FEBrm9T1Tw9D5IFXB00jC2U7u2o+2K8bFkjlMigtRYe++GjrT1ZBbwO+GYQfvPjA+vmvqJ/B/Fv8AAmaOGvqLrGMAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_e65c5001fc8569ff755a2e942719756c = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_d61a78325e6ecc46d4d0a9c62bef2d15 = $(`<div id="html_d61a78325e6ecc46d4d0a9c62bef2d15" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Selbetti Tecnologia</b><br>                             Product Owner Sênior (PO / Product Manager)<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4441389414/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_e65c5001fc8569ff755a2e942719756c.setContent(html_d61a78325e6ecc46d4d0a9c62bef2d15);
+            
+        
+
+        marker_6a6239d2ec33fa7668f467247c4b51a4.bindPopup(popup_e65c5001fc8569ff755a2e942719756c)
+        ;
+
+        
+    
+    
+                marker_6a6239d2ec33fa7668f467247c4b51a4.setIcon(div_icon_c79a1155a7f82b0f8d43111a4003c196);
+            
+</script>
+</html>
