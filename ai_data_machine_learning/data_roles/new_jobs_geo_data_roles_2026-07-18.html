@@ -1,0 +1,850 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFpeHie8utvnQ/company-logo_100_100/company-logo_100_100/0/1730239972254/full_pond_logo?e=1785974400&v=beta&t=R4SIcqtMLxpJ2y203oiV7XA5DNUcwaPVGiJUO0JPm7c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer</strong><br><small>FullPond</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441365391/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst - Business (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442435542/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442438364/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQE3_FX9lzWE-A/company-logo_100_100/B4EZ8CevaBHkAM-/0/1782453041015/hire_lago_logo?e=1785974400&v=beta&t=C74aXmActbtOpQL72b1CyGSIVB1T3c5Fx6CS--9eAnE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst - Talentpool</strong><br><small>Lago</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441713982/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQFf6ZWtds1Eig/company-logo_100_100/company-logo_100_100/0/1631305574557?e=1785974400&v=beta&t=1L_Rc3BdhjVef9dLMxoU5MTuWJb0WqtBXsr_MMdDqN0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Technical Data Analyst – Palantir Foundry</strong><br><small>NP Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439615252/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (14 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHAPcwdjFqaFA/company-logo_100_100/B56Zgzht5EHQAk-/0/1753211133835/apptegy_logo?e=1785974400&v=beta&t=ka1q0Q8bArW3GMbBl0LiS6CEXnOPavVGcDFrUdnX-94" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Database Administrator</strong><br><small>Apptegy</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441325911/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1785974400&v=beta&t=fkeypj4BDpyxPE_FG8O_3WZxLWKvYJrxgliF3nhQO40" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Data Engineer Mid/senior</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442429376/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1785974400&v=beta&t=jylcYmYUBlZIdz7otEgiZY5Jo_wx5A-0Z1VZ_3DdN6c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fbs - Data Analyst I</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439270766/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEGLWHBZmzzcA/company-logo_100_100/B56ZYzlx2LHEAY-/0/1744622264274/crossinghurdles_logo?e=1785974400&v=beta&t=0kASQBH2r3ZKNSUaqKWLU_kr7zjxfxNIyIK8v4ToFoU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Financial Data Analyst | $30/hr Remote</strong><br><small>Crossing Hurdles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418275668/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHHJPlsTIjMIQ/company-logo_100_100/B56ZUvbu3qHQAQ-/0/1740257554392?e=1785974400&v=beta&t=U31_GHvP2xjhhgkcIFJE4rmyWl0Uajll3yWAvktiqSg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst - Remote</strong><br><small>Emma of Torre.ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442404623/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHHJPlsTIjMIQ/company-logo_100_100/B56ZUvbu3qHQAQ-/0/1740257554392?e=1785974400&v=beta&t=U31_GHvP2xjhhgkcIFJE4rmyWl0Uajll3yWAvktiqSg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer - Remote</strong><br><small>Emma of Torre.ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439270797/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst - Business (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442464075/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst - Finance (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442460213/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer I (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442447896/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1785974400&v=beta&t=itJMOjyHwuiiSN534o_tHRry3ClyVBz2wnHrOvbQuY4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Database Administrator - Dba (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442466049/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHmCR2yXmzAlw/company-logo_100_100/B4EZcyRxpNHcAQ-/0/1748895210674/jobiltytalentsolutions_logo?e=1785974400&v=beta&t=FwZK3E1IeEXJ9Apf21uCgmaVh6TmTA_g-SfaotupUM8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer – Analytics & Data Platform</strong><br><small>Jobility Talent Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441340297/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst</strong><br><small>Rubiboo</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439274144/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFxR16EhMWlgg/company-logo_100_100/B4DZXS8WCEG8AQ-/0/1743000789589/solvdinc_logo?e=1785974400&v=beta&t=Q1WlDsgRfnWEGp3BcZT-dUzpDXR0vL63njnnvnO9K1k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer</strong><br><small>Solvd, Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442171072/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQG1BU9rh64hwA/company-logo_100_100/B56ZxVU_SBG4AQ-/0/1770958092732/tricura_insurance_group_logo?e=1785974400&v=beta&t=A1WTzHCjUmKRa1SiiHJtP-pEAT4vwUZwtWC4RS_jJls" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer</strong><br><small>Tricura Insurance Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442144123/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFwwwVW9HV1Zw/company-logo_100_100/company-logo_100_100/0/1684782684656/oowlish_logo?e=1785974400&v=beta&t=7tegD4mKDbyuNSQzOxECApGDRP2Qnm4eiJ4eUDq9V5M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst (product & Customer Analytics)</strong><br><small>Oowlish</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442119878/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">Recife</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFwwwVW9HV1Zw/company-logo_100_100/company-logo_100_100/0/1684782684656/oowlish_logo?e=1785974400&v=beta&t=7tegD4mKDbyuNSQzOxECApGDRP2Qnm4eiJ4eUDq9V5M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst (product & Customer Analytics)</strong><br><small>Oowlish</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442120731/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (14 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQECFqP4gGGneQ/company-logo_100_100/company-logo_100_100/0/1630627562555/brunsker_tecnologia_logo?e=1785974400&v=beta&t=p5JCngCHHGyVDux3M6bpRompRU60xKeL2N83D8I75uA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Administrador de Banco de Dados Oracle Sql Server</strong><br><small>BrunSker Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439268318/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFwwwVW9HV1Zw/company-logo_100_100/company-logo_100_100/0/1684782684656/oowlish_logo?e=1785974400&v=beta&t=7tegD4mKDbyuNSQzOxECApGDRP2Qnm4eiJ4eUDq9V5M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst (product & Customer Analytics)</strong><br><small>Oowlish</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442128620/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFtMePGBVzHBw/company-logo_100_100/B4EZ7KQsSXKoAI-/0/1781509834309/keyrus_logo?e=1785974400&v=beta&t=dBto7G9HLBYF3ttrKlZsqp7UeBECVlxv7pjAsXvzZ20" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer (aws)</strong><br><small>Keyrus</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441302983/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1785974400&v=beta&t=eE1ZmMeWgs_RjRFdzfJ46-IbffhcGlhLx2piXMeuqCo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Dba Specialist - Work from Home</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441345185/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFwwwVW9HV1Zw/company-logo_100_100/company-logo_100_100/0/1684782684656/oowlish_logo?e=1785974400&v=beta&t=7tegD4mKDbyuNSQzOxECApGDRP2Qnm4eiJ4eUDq9V5M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst (product & Customer Analytics)</strong><br><small>Oowlish</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442117899/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFVfSMZBwBwYg/company-logo_100_100/company-logo_100_100/0/1690297691684/security_scorecard_logo?e=1785974400&v=beta&t=boCZM9pEV5NROjOp74UIcg6DFPXJ0Lh9yLbHuYQCLv4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer</strong><br><small>SecurityScorecard</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430626996/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Caetano do Sul</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEsI7oqZ-TLFw/company-logo_100_100/company-logo_100_100/0/1688638229966/msx_international_logo?e=1785974400&v=beta&t=34R3vwGGCRw18Qf5qL0fm3a60bDrXGnE7U7zOQd_Ooo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer Ii</strong><br><small>MSX International</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433862832/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1785974400&v=beta&t=4xRRzScLVW524fKlGT8m4axcQPHb_9_EWm-xlr3ACGA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer (microsoft Fabric) - com Inglês - Remoto</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433541344/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF1LcnKeI_UxQ/company-logo_100_100/company-logo_100_100/0/1738709971265/cloudwalk_inc_logo?e=1785974400&v=beta&t=RnMO4eHpSobp_0f96bkxvVp0OP4d61fwmuTHXURIBKw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Analyst</strong><br><small>CloudWalk, Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4427841599/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQGpRhkpxp5A9A/company-logo_100_100/company-logo_100_100/0/1630570672166/ernstandyoung_logo?e=1785974400&v=beta&t=QsXm0lm6EzN9AL1508DcIdveES1JkHKX1-aCrCkXqv4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (cre)</strong><br><small>EY</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430273182/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE5Q1wVXb_ebw/company-logo_100_100/B4DZxbuXAUG0AQ-/0/1771065405812/eburyfintech_logo?e=1785974400&v=beta&t=IuQu7ge122QpRLjQO9Wpkq_-ua40GayP4Oayak8DAN0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer Ii</strong><br><small>Ebury</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433886450/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFtMePGBVzHBw/company-logo_100_100/B4EZ7KQsSXKoAI-/0/1781509834309/keyrus_logo?e=1785974400&v=beta&t=dBto7G9HLBYF3ttrKlZsqp7UeBECVlxv7pjAsXvzZ20" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer (aws)</strong><br><small>Keyrus</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4441323218/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFOnyr6OvM2kw/company-logo_100_100/company-logo_100_100/0/1661205879011/solfacil_logo?e=1785974400&v=beta&t=hDj2Lpj69VAA_OlT_nihiX1cuWSJ0rRVjjnOOI11U_g" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr Tech Manager | Data Engineer</strong><br><small>Solfácil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433448063/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGwqthFsnjhpw/company-logo_100_100/company-logo_100_100/0/1647885722870/klaviai_logo?e=1785974400&v=beta&t=JF7b3swiPKIXureSDXCYwdZDjXPhzXGNwA3dkjvAcvs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Engineer</strong><br><small>klavi</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4415719563/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">Blumenau</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHWOaQ30J0KQQ/company-logo_100_100/B4DZZht8HqG0AQ-/0/1745396155267/hiflylabs_logo?e=1785974400&v=beta&t=S2M9qR4PAZxoPcfS6c6iVpRa4PDD8kpG2usP3W8-ao4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Databricks & Snowflake Data Engineer (spanish-speaking) _ Contractor</strong><br><small>Hiflylabs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442122342/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
