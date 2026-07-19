@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ea5fae6006163609287c66ebe9636de6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ea5fae6006163609287c66ebe9636de6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ea5fae6006163609287c66ebe9636de6 = L.map(
+                "map_ea5fae6006163609287c66ebe9636de6",
+                {
+                    center: [-15.7213681, -48.0197588],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f58079724293a235cca7af804ae962ac = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f58079724293a235cca7af804ae962ac.addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var circle_98b10627438c7f097109e669da77799e = L.circle(
+                [-15.7213681, -48.0197588],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": "5, 5", "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.05, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 1000000, "stroke": true, "weight": 2}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var marker_f8660b3c1e72d4c7188fd6dd8d8edbae = L.marker(
+                [-22.010246030703623, -47.31721923181375],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_88b3a2dbba047c0710087b777f618900 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_af875377169dfced6dbfdf636f1494c0 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_ceb7e39c94073b8bd19cb0ac38227346 = $(`<div id="html_ceb7e39c94073b8bd19cb0ac38227346" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Airbnb</b><br>                             Senior Frontend Engineer, Quality Platform<br>                             <i>Brasil</i><br>                             <a href="https://www.linkedin.com/jobs/view/4434083268/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_af875377169dfced6dbfdf636f1494c0.setContent(html_ceb7e39c94073b8bd19cb0ac38227346);
+            
+        
+
+        marker_f8660b3c1e72d4c7188fd6dd8d8edbae.bindPopup(popup_af875377169dfced6dbfdf636f1494c0)
+        ;
+
+        
+    
+    
+                marker_f8660b3c1e72d4c7188fd6dd8d8edbae.setIcon(div_icon_88b3a2dbba047c0710087b777f618900);
+            
+    
+            var marker_b21a46b56613959fb66ea5c10c00b13e = L.marker(
+                [-23.583531607855743, -46.616089099664535],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_a513005f1bf0c0ad990f3e0c5bcaf868 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAADFUlEQVR4nO2TzUvjQBjGZzJpTaWxGr8QMYiVigERQkU0ghcLOXkS/A+EHj2q4EEEoSL04kXQg/hx0XrwpuBBilakFb9QEIoUe6ggmibG1MTMHiLd0nVbXBb2sPkdwszknfeZeeZ9AbCxsbGxsbGxsbGx+X+AEP6V4DJZIISCINTV1V1eXiaTSWuxo6MjmUzquu5wODiO83g8uVzu4uJCVdXKykpBECiKOj09fXx8NE2zvb2d47iHh4dEIgEhhBCapllGmCTJ2dnZ5ubm+/t7juNCodDJyUlnZ+fBwcHY2Nju7i7Lsqurq/F4vKqqKpfLTU9Ph8NhRVEkSWpraxsfH+/q6goGg8fHx93d3UdHR4uLiwAAjHEZo3ie39jYsMZut9vtdgMA5ubmZmZmVlZWCILwer3hcBgAwDDMzs5OMBgMhUJWfE1NDUVR6+vrPp8PAOByuSKRSFNTU95/soSw0+nUNM0aK4qCEGppaRFF8erqyu/3+/3+VCrV29u7trbmdDr39vZkWX59fbXin5+fHQ4HQkiWZQDA29sbxpgkf8qVsrqiomJpaenp6SkajQYCgUgkwvO8JEmbm5sDAwOiKC4sLExOTk5MTBiGIUlSQ0PD8vJyLBa7u7sTRXF+fp7n+eHh4a2trcHBQVmWp6amLJ8xxmWKi6bpkZERlmXPzs729/d7enoSiYSiKCRJ9vf3X19ft7a2xuNxAABBEKZp1tfXj46OVldXHx4eRqNR0zSHhoYEQbi9vd3e3jYMAyFkmmb5Z/4SgiAKp1atEgRR1Dy/9pIV862GLJbJb6Zp+ku9wm+hMELo89cfaHu9Xp/Pp+t6IBCQJAkh9PLyQlHUzc1NOp1ubGz0eDyWqizLNE0jhDDGmUwmFoupqmr5XKqqf3djhJBhGJlMJpVKZbPZvr6+8/NzCKGmae/v77quq6qaTqcZhqmtrf34+Mhms4qisCyradofvi4AACFUOCUIgmGYEkfMh7lcrsI3+rbVVmVhjCGE+d6wqgZjbK1Y2fOXswo+n+Ez5rvChRcqWilhY9FR/iU/AAO2V9IOPnPWAAAAAElFTkSuQmCC\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_fb5d2c8d5672996c3a2989d26f9273ce = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_d32f37e19662799d606a73c3ff5fdd57 = $(`<div id="html_d32f37e19662799d606a73c3ff5fdd57" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Capco</b><br>                             Desenvolvedor(a) Full Stack Senior | Inglês<br>                             <i>São Paulo (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4338783997/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_fb5d2c8d5672996c3a2989d26f9273ce.setContent(html_d32f37e19662799d606a73c3ff5fdd57);
+            
+        
+
+        marker_b21a46b56613959fb66ea5c10c00b13e.bindPopup(popup_fb5d2c8d5672996c3a2989d26f9273ce)
+        ;
+
+        
+    
+    
+                marker_b21a46b56613959fb66ea5c10c00b13e.setIcon(div_icon_a513005f1bf0c0ad990f3e0c5bcaf868);
+            
+    
+            var marker_a95a4c49442ce59f1f2dd8b54df8a7e0 = L.marker(
+                [-21.96400920160055, -47.295609161815435],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_9f7412cc11a8062a7684c1e0dff51378 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_f6bc6b4183fd377418aec3e9813a6b8b = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_e163e169d8fa5ab0ef57ae48bb2f94cf = $(`<div id="html_e163e169d8fa5ab0ef57ae48bb2f94cf" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>EPAM Systems</b><br>                             Lead .NET Full Stack Engineer (Angular)<br>                             <i>Brasil</i><br>                             <a href="https://www.linkedin.com/jobs/view/4417205530/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_f6bc6b4183fd377418aec3e9813a6b8b.setContent(html_e163e169d8fa5ab0ef57ae48bb2f94cf);
+            
+        
+
+        marker_a95a4c49442ce59f1f2dd8b54df8a7e0.bindPopup(popup_f6bc6b4183fd377418aec3e9813a6b8b)
+        ;
+
+        
+    
+    
+                marker_a95a4c49442ce59f1f2dd8b54df8a7e0.setIcon(div_icon_9f7412cc11a8062a7684c1e0dff51378);
+            
+    
+            var marker_6dc6bcefc07dc7835d828abe6d85d708 = L.marker(
+                [-21.956197891332398, -47.359363694192695],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_2029ebd0b6dc0e6078614284df500349 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAABTGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8kZOcW8wkwMCQm1dSFOTupBARGaXA/oiBmUGEgZOBj0E2Mbm4wDfYLYQBCIoTy4uTS4pyGFDAt2sMjCD6sm5GYl7K3IkMtg4NG2wdSnQa5y1V6mPADzhTUouTgfQHII5PLigqYWBg5AGyecpLCkBsCSBbpAjoKCBbB8ROh7AdQOwkCDsErCYkyBnIzgCyE9KR2ElIbKhdIMBaCvQsskNKUitKQLSzswEDKAwgop9DwH5jFDuJEMtfwMBg8YmBgbkfIZY0jYFheycDg8QthJgKUB1/KwPDtiPJpUVlUGu0gLiG4QfjHKZS5maWk2x+HEJcEjxJfF8Ez4t8k8iS0VNwVlmjmaVXZ/zacrP9NbdwX7OQshjxFNmcttKwut4OnUlmc1Yv79l0e9/MU8evpz4p//jz/38AR4Nk5SKet7kAAAYYSURBVHic7ZY9ixXNEsf//6rqnnPOnnUFxcXriqCBIPgSCH4EwUwwMBATMdpE8Q1DEVQ0MNivYGooiILpAQUDwVeMFEHRVVbPruecma66wazPfXi86r2XC09izTDTw3TXr6qrurpZVRX+DpG/hfob/Bv8G/wb/Bv8G/wzsf+kU0RMJhMRUdVSSkSYWUQ0TZNSiohSCgCSAFJK/wewu7t7VVX79+9fWlp68uTJ1q1bZ2dnB4NBr9fbt2/fYDDodrtzc3PuPhqNcs6DwcDdc87t8Naa74U/OQiUUmZmZubm5nbv3n306FFVvXXr1qFDhz58+PDo0aMtW7ZUVbW0tKSqs7Ozc3NzT58+nZubO378eL/fv3//fsv+kfwwxhFRVdX169d37dq1ZcuW69ev37lzZ/Pmzffu3btw4cKmTZvevXt36tSpTqfT6/UuXbo0GAyuXbv27Nmzbrd7+vTpgwcP1nX9v4Druj537tynT59u3LghIvPz8wcOHBiNRiRzzl++fLl9+/bVq1c3bNjQNI2qkhQREVleXj579uzJkyd37tzZNM1/B44IkouLi+vXr+/1egCeP3++sLDw+PFjVXV3M5ufn799+/bbt29FhH8SABs3bqzremVl5UcB/pnHKaWFhYXXr18fOXKklDIYDNavX799+3YRyTl3u93xePzw4cM21QG0+IiYmZk5ceLE+fPnX758KfJD/f8+q1vbzezixYvr1q3bu3fviRMnJpPJzZs3jx07tmfPnrt37+7atevy5cuj0ejjx49N0wyHw/Y5mUzOnDnz6tWrnyfXz7IaQES4u6pu27bt8+fPO3bsOHz48JUrV968eTM9Pb1mzZrhcAhgOBxOTU0Nh8N+v7+0tDQej81+sVB/8ZukqkbEs2fP3H12dvbBgwcvXrzIOS8uLr5//15EIkJEVlZWRPXr+/ci8ksqAHaqHPg+BQIA2xfaJkGUUiLc1CKc/Ff8CEQAcDAAAYgAGN9U/UU/f+Fx/OUzQkUiGIjv05UkKEFHCENAtnYEHCAi/nAkEADNv1ex6i0ACQQgBAAXCEhSCIEIW4coAFsswAKQwpBvKiJQWqMZHuHuDhSHG8P/BG0HkGBQQIIKCikiRkhQKUYoRIIEhaIACUHbH0EyQPqq7R5FEIGAl/CGpXgZhY9bsIAaIKgUJZSioilEIUYxiLl0KEbRoAaNoiGKP+yDgBJEsLRz1k4AAIQXD8DhDi8eBfWy1F8N0iEVmsBEzaIppKJmmFFSSIJaiIWmIgrRAEMUIiHtlABktDWLAByI1Yi6INorEMEIekS4NJOoRyZ5rWiCVbAOtQNNrpVrxZYniWoh4lYgAtFQgbR3ARGCIEEEIRSu5g4QgEtEG10gEB5wD49SHO7G3j8iZ1iGVNCqWGqShqqohghUqBIqYU4TCCFtQBmqQYYSJEBhu6Y8KBEEVl2UEgzCw0vAg75alMz7G5ATzEISzUoyGKiAKZQw0jSMJYWYQgBhKEUoQgFDvoEhYIAlIBFs5xZeEBEOlKCDpW27FLemvxZZIymVMPUkzEEjTCMxVMIUBrVQNShFFaJUaZOdIqQAlLaK0ANEoF024d54A49oHI4oEcVRexQ3n+4gEUnCIFmQxROYhGaRhKZqKqo0Jk2qZmqqWdQgVFURUbYBQBAOR9AjihePUqJuvC6tNMVLKXXjTY26MfSJLMhGA7IwEYnMSVKSlMxytpxSZrLKqiw5M1daZU0GSZREU6zux61LARQvDbyJuo565ONJqWuvR/VoUuq6mdTNuNQTQ1+RDVmZlKasRCrRnC3nlDqVdnup27VOJZ2OdXpS9djpslMxGZihRlWIkAQLoyAi2ESZoB57PcbkS4y+lvE4xitlZbn5Om7GX5uV8WRk0VNWgso8mVm2brZsVa66aaqbej2dWqNT09rpozel3SnpdCN3kJJYW6sUIu3+HXBGE0FhCdQotTSjmHzGaNm+Dn35S+l2dGU5LWttJmZSGStFZaySVVWn6uVc9XKvn6b6Nj0t/bXan5Fej9WUdHqRKzcFZbVGoz1jSFswsLolBKXAi0SNTgfVF6bsYmKiguJOJ/BPoQ4N5X9sOTwAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_ef87708349ad36d7a2e689db246bf57b = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_b663ba4cde3f0bc7a59edf15f5fea178 = $(`<div id="html_b663ba4cde3f0bc7a59edf15f5fea178" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>EPAM Systems</b><br>                             Senior .NET Full Stack Engineer (Angular)<br>                             <i>Brasil</i><br>                             <a href="https://www.linkedin.com/jobs/view/4416892869/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_ef87708349ad36d7a2e689db246bf57b.setContent(html_b663ba4cde3f0bc7a59edf15f5fea178);
+            
+        
+
+        marker_6dc6bcefc07dc7835d828abe6d85d708.bindPopup(popup_ef87708349ad36d7a2e689db246bf57b)
+        ;
+
+        
+    
+    
+                marker_6dc6bcefc07dc7835d828abe6d85d708.setIcon(div_icon_2029ebd0b6dc0e6078614284df500349);
+            
+    
+            var marker_133f82b37d18eac55ce1f6d58f0088ad = L.marker(
+                [-23.511230906517312, -46.654315236865834],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_c61f5bf6dbda4f4b72a04c91f76ffa91 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_e48777cf7d0e6d16ad5a82dc36889665 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_a1064d46a2652ae465296a240b773504 = $(`<div id="html_a1064d46a2652ae465296a240b773504" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             FrontEnd Web Developer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442504692/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_e48777cf7d0e6d16ad5a82dc36889665.setContent(html_a1064d46a2652ae465296a240b773504);
+            
+        
+
+        marker_133f82b37d18eac55ce1f6d58f0088ad.bindPopup(popup_e48777cf7d0e6d16ad5a82dc36889665)
+        ;
+
+        
+    
+    
+                marker_133f82b37d18eac55ce1f6d58f0088ad.setIcon(div_icon_c61f5bf6dbda4f4b72a04c91f76ffa91);
+            
+    
+            var marker_c12ef80b188383b3da0292af8a83764f = L.marker(
+                [-23.519777294061043, -46.70522702983013],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_2f0d5efae006b0bd06f3a14aadd2dabe = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_833d6bd6efbddb9969a7530bd3cfaebe = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_14dbc500aabe39625d8bcf173da43b60 = $(`<div id="html_14dbc500aabe39625d8bcf173da43b60" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Frontend Engineer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442522082/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_833d6bd6efbddb9969a7530bd3cfaebe.setContent(html_14dbc500aabe39625d8bcf173da43b60);
+            
+        
+
+        marker_c12ef80b188383b3da0292af8a83764f.bindPopup(popup_833d6bd6efbddb9969a7530bd3cfaebe)
+        ;
+
+        
+    
+    
+                marker_c12ef80b188383b3da0292af8a83764f.setIcon(div_icon_2f0d5efae006b0bd06f3a14aadd2dabe);
+            
+    
+            var marker_9eb8d0af6e7202f4c0575e8f76b10495 = L.marker(
+                [-23.565945417345592, -46.696541849526966],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_4b04ed2b46afaee1502512ef0a01d2fc = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_cb37045c7f1ee563a346c2e282fd1907 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_547ff4a35f8057a54391dd8248045aa7 = $(`<div id="html_547ff4a35f8057a54391dd8248045aa7" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Frontend Web Developer - HTML,CSS (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442502772/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_cb37045c7f1ee563a346c2e282fd1907.setContent(html_547ff4a35f8057a54391dd8248045aa7);
+            
+        
+
+        marker_9eb8d0af6e7202f4c0575e8f76b10495.bindPopup(popup_cb37045c7f1ee563a346c2e282fd1907)
+        ;
+
+        
+    
+    
+                marker_9eb8d0af6e7202f4c0575e8f76b10495.setIcon(div_icon_4b04ed2b46afaee1502512ef0a01d2fc);
+            
+    
+            var marker_75cd3726536562c70385c46af16f9b8e = L.marker(
+                [-23.55421369063708, -46.68267569580524],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_1a92e7114ba619201db1bbc432b066c3 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_a8f6a813d424ddda092fda95c3b4b2f1 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_fe26ec8433344219bf80df72f76a872f = $(`<div id="html_fe26ec8433344219bf80df72f76a872f" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Full Stack Developer - JavaScript (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442519103/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_a8f6a813d424ddda092fda95c3b4b2f1.setContent(html_fe26ec8433344219bf80df72f76a872f);
+            
+        
+
+        marker_75cd3726536562c70385c46af16f9b8e.bindPopup(popup_a8f6a813d424ddda092fda95c3b4b2f1)
+        ;
+
+        
+    
+    
+                marker_75cd3726536562c70385c46af16f9b8e.setIcon(div_icon_1a92e7114ba619201db1bbc432b066c3);
+            
+    
+            var marker_17b88727a77809fa7cd6fd97ec094a21 = L.marker(
+                [-23.530645658508483, -46.706395659110306],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_c28e22389f4b641496af23c2592b8d36 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_a04a866fced826e83bb769586f035803 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_73d7dd63718ea5758b7c4e7e23392f2a = $(`<div id="html_73d7dd63718ea5758b7c4e7e23392f2a" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Full Stack Engineer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442512300/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_a04a866fced826e83bb769586f035803.setContent(html_73d7dd63718ea5758b7c4e7e23392f2a);
+            
+        
+
+        marker_17b88727a77809fa7cd6fd97ec094a21.bindPopup(popup_a04a866fced826e83bb769586f035803)
+        ;
+
+        
+    
+    
+                marker_17b88727a77809fa7cd6fd97ec094a21.setIcon(div_icon_c28e22389f4b641496af23c2592b8d36);
+            
+    
+            var marker_29c0fd47bf242fde4c9913da20ff98ea = L.marker(
+                [-23.49520025864844, -46.680727079329586],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_8f112c35bb20c7a31b593c780b1912c8 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_cb1d9a698740dd46c7d1eee31e3aec0a = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_38b1b6d2f811cdc22166dd34f4409836 = $(`<div id="html_38b1b6d2f811cdc22166dd34f4409836" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             JavaScript Developer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442500979/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_cb1d9a698740dd46c7d1eee31e3aec0a.setContent(html_38b1b6d2f811cdc22166dd34f4409836);
+            
+        
+
+        marker_29c0fd47bf242fde4c9913da20ff98ea.bindPopup(popup_cb1d9a698740dd46c7d1eee31e3aec0a)
+        ;
+
+        
+    
+    
+                marker_29c0fd47bf242fde4c9913da20ff98ea.setIcon(div_icon_8f112c35bb20c7a31b593c780b1912c8);
+            
+    
+            var marker_ef491e1377989163a63e5a1d9cbf4f75 = L.marker(
+                [-23.503935866158315, -46.678760273828026],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_e5134708ad34e35949cbe79a65d40524 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_9cc982697903cf4476206ab4eaa2dfd4 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_7c6f764c60c098042f332c08ad478cd8 = $(`<div id="html_7c6f764c60c098042f332c08ad478cd8" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Senior Frontend Developer - JavaScript (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442512411/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_9cc982697903cf4476206ab4eaa2dfd4.setContent(html_7c6f764c60c098042f332c08ad478cd8);
+            
+        
+
+        marker_ef491e1377989163a63e5a1d9cbf4f75.bindPopup(popup_9cc982697903cf4476206ab4eaa2dfd4)
+        ;
+
+        
+    
+    
+                marker_ef491e1377989163a63e5a1d9cbf4f75.setIcon(div_icon_e5134708ad34e35949cbe79a65d40524);
+            
+    
+            var marker_126f991a07018361ebd77bad65f74dcd = L.marker(
+                [-23.54641444066307, -46.6951472798245],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_0bb828fd5b258ed902e52a3656b8ef5d = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEZ0lEQVR4nO1Yv49UVRT+zrn3/ZjJ7MIKogaIAQspQDQxEjCImNgYC2OlndqorVJZ2BgkFmqhQaWQ8C8YEzujpQkxdtCARANkf2R32cGdmffuOZ/FwrqBN7ODboREv7zizc2977vn3O+eHyPtVoG7Ab0rrP8T/5uIjaMk+/2Ka0bKIlNdf5fu3h/Uqz8FKMtcRMYidvfOROf48Q8mJzruDkBVP/7k0wsXfo0hu/lJ3r7QUtq9a9e7x95xN4GISrfb/fDER93u9YZNt1vFLU+exZ07HlyYnyaNHJAD0o88czAo2mWrXbbaZXn7qnariCpHDz9NkqzIirRr81d37nioyGPD5Ns3LgKSvV5vsrNsZgJoqFdMXxdm5vWyWQ0ghNDr9djgGuDeVzVBNkmkee4GEm88xiJekfCqJQIK6BAyEEpxccLFoRACTujKEoHLEA803+OGDRKAUkRgQgMRxImyIjXVkxBHXHavnQIJrCniCMTQ4xmTWFyCgAIHYKIUjZ5iff3g/eVLeyZ3bwkQnr/S+32zukCAvsYgQgYM4R6LmCJVXSejDPoOuATCC8Hbj08eO5Bvy7pIAwR5YXtY4MXeD58VR94Es8J6ipp36GpZq06Se/ftU3qexyQRgFr1VLzy3v7BZpurLGYpwNxCmkozS9+cSJu2lE+8LIShBWmmaB4VkVUXEXCzL7/4PCI5gkkWWUs1V516JTv3k8egSNAIqICDUOZpafDjmXLP8yi3IiwPu17NqhbB2lsrICy5mbmZJfGqN/vb0uXLCBRYIFyM4uoepS4Im744mLtKLYInvSNXk1gb6gKcRC1R6IBTkQZLXvdEhIjiSQBXQEFYALyqrFpESKRiSNwZT1wQDSFqhFvQIKLtzpS0oy8QaqYInsVkUHMIgLwos3YHTHXUYXFsTFXr3MKSpSSgSRCR3Cbkvsfya/MRNQVEDQhFhVYT8vCT+dZHUVuR6mERdGghsPougIb42utv/Hz2bJ5nhgDAPR3qpJPPbt6Wz4GuDg90RTT8MbGz/dxb/WwqQ4+CYeIaZvGtsxcXF+dm5zXPAFGkJPHbudq/b71/+IHHNl2HDFTRD/mluG3HqyeyRw4lW7YsN0SyOZ+OGzKjalAgFkovvB6o1rH47pKdn5k9uqu1d6o0wS9Xrdo+dXr/i5ZqYQqe5ebDksGYxATIGxEbDlWwMI2ZXarkq3M9RQjkIFUHtrTEBWClWSZu6v9IXCv3ywWRBiBJBhDiNVQExY2rKsElRwLokEgqQZFheWJcV4/GmCXCWtzbhcB/lHhDS70RabHVamnW0SwBBIJoJAEZXV0zBNW8rUiAA7HVKmVI0dVY0Gu/X58+fWZiouNuAERlZmYmhDDaiBDC9PTs16dOknQyqHSvd/v9vjYlKGn4R4BCojforx0bs2mjeb+60bRxZNPWTHzzRNnYnK0P6l/UQ06n6YyF42tkJEbpcZj3ePO5U6xEz/U7vI0JmQ0QH23xiPL2bxKueR/lsD8BaXIzQvedn8QAAAAASUVORK5CYII=\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_3a030735b399023e294fcf1b0113bcd5 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_c09a2e512a8dd2e329c0140582c67aad = $(`<div id="html_c09a2e512a8dd2e329c0140582c67aad" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hire Feed</b><br>                             Senior Full Stack Engineer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442502808/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_3a030735b399023e294fcf1b0113bcd5.setContent(html_c09a2e512a8dd2e329c0140582c67aad);
+            
+        
+
+        marker_126f991a07018361ebd77bad65f74dcd.bindPopup(popup_3a030735b399023e294fcf1b0113bcd5)
+        ;
+
+        
+    
+    
+                marker_126f991a07018361ebd77bad65f74dcd.setIcon(div_icon_0bb828fd5b258ed902e52a3656b8ef5d);
+            
+    
+            var marker_5b3febcffcb7bbefb9cdf864fe03a77a = L.marker(
+                [-23.55460318255105, -46.679171930213755],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_a1929e51e8a65c236a0602b23f8e466f = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAEiUlEQVR4nO2XS0grVxjHv+/MNI7E5gaLEgRJRAMVdSNGQfBBc0vHEjeu3IrgRvFexZWbCq2CIIKX0IAIgosufCwEjfgAEfEqqIgg+EhAGxFR6xONzowzp4uJublxnERtL4XeP2EgZ845v+91HgPwVf8NIaL6DEuzj8FgiPyr2S1KRJ+KiIQQSmmkHVGilDY3N3s8nsLCQoZhwp1fJRWcmJio362np4dSKgjC7Oysy+WKZ2ZW/7VqfmdnJyIODAwsLy/Dg9+RnsmyDAAGg6G8vPz09HRsbCwmWC/UYbbVam1oaJifn5+ZmSktLX0czMgUiKIYc864wPDgUEJCgtPp5HkePnf3ZYoLrEqFiaLIcVxqauqXA6vxFEXRarUuLCy43e7i4mKWjVEl/wA4jEdEq9VaX18/Nzfn9XpNJpOai38XDACUUkmSAIBl2ZKSErP5jaIoXwgcLmNJEgHg/OLy/OomeCcCQMgEfPg9oRdmKNIMABDF+5O/zmVJSfnuzd2tFGrW3Tdf4jEhhOO4iAZEZAiw8j1cXNxeXwc/mUSfhD8bzDDM4eFhX1/fyckJABgMBgACFIESQAYJQX1PXwO+vLysq6srKHC8e//u48dFSpWHjFOqhj4k1DHi2WB1G0GEQODPDz0feP7ng4MDlmUBVahCSWhpYeihzX52cUVsywQARFFQW2kop58cpkARnlzfLymukAFAw2tHrSFEQEqAxjXni8GRuQQCkMh9wzIEATGiknVOkrhC/fjiEXU6DQ7+QQg6f/gxK+t7g8EAgLrQOMCISCnVPwQR0e/b+e3XXzy/u9++/enbpCREpBRismMIEfPz891udyAQoJR2dHQ87qDekCJbYk+rwwvvyarHKSkpVVVV5+fng4ODjwEEUaEKAiqUhsfqhEr7ugoPJ0F4MCJGHUHhm29ULiKHwNN3FW2PI93VlCYpymj9ytBeTrW1tSMjI0lJSXl5eV6v1+FwZGdnj4+PFxcX22w2r9c7NTU1PT3d3d1tNBrLy8snJiampqZmZmY8Ho/RaOzt7Z2cnJycnGxtbTUajc8A5+bmVlZWWiyWzMxMnudTU1OTk5MrKirS0tJMJhPP84eHh5ubm01NTS6Xy2Kx8Dx/fHy8tLS0srLCMIzauL293d7e3tLSAlrlpg0WBIFl2cXFxf7+fgBQFEVNsCzLagBzcnIKCgqOjo52dnbUlsLCQpfLdX19fXt7SyldXV1tbGz0+/1lZWWglWltMMMwoig2NTV1dXVFvVJt39rastvtGxsba2tr6ofT0NBQZ2en3+9PSEiglJrNZofDYbFYDg4OND3W3kDu7++vrq5GR0fz8vIkSVLrVhAEWZYVRRFFcXh4eH19va2traioKBgMCoJQU1Mjy7LP56uurj47O3M6nSUlJT6fr7u7WxOhvZwsFovZbPb7/RzH2Wy2vb09RVEyMjICgYAkSVlZWfv7+4Ig2O32o6Oju7u79PR0QgghJBgM7u7u2mw2juMURdnb27u5uVE/+171DRDXlvR5H0JInB+u0eOfGvO86b7qf6i/AbQxGFecBqKhAAAAAElFTkSuQmCC\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_f950b82eeedf5c612774f821038b6716 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_94911a99ac3394795f72592a470ad6cf = $(`<div id="html_94911a99ac3394795f72592a470ad6cf" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Hired</b><br>                             Fullstack Developer (React/Node.js) (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442503729/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_f950b82eeedf5c612774f821038b6716.setContent(html_94911a99ac3394795f72592a470ad6cf);
+            
+        
+
+        marker_5b3febcffcb7bbefb9cdf864fe03a77a.bindPopup(popup_f950b82eeedf5c612774f821038b6716)
+        ;
+
+        
+    
+    
+                marker_5b3febcffcb7bbefb9cdf864fe03a77a.setIcon(div_icon_a1929e51e8a65c236a0602b23f8e466f);
+            
+    
+            var marker_e761e1e8d7baffe600852c5742c26b36 = L.marker(
+                [-29.185574596023656, -51.173010419073236],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_62f47139f8e5f29eb23b7b2f381e6c82 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_6367bd317703be323e3c9a0cff5aed9c = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_d949203cb095cb30be65753672d263ba = $(`<div id="html_d949203cb095cb30be65753672d263ba" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>LOHR</b><br>                             DESENVOLVEDOR FULL STACK PLENO<br>                             <i>Caxias do Sul (RS)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439644671/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_6367bd317703be323e3c9a0cff5aed9c.setContent(html_d949203cb095cb30be65753672d263ba);
+            
+        
+
+        marker_e761e1e8d7baffe600852c5742c26b36.bindPopup(popup_6367bd317703be323e3c9a0cff5aed9c)
+        ;
+
+        
+    
+    
+                marker_e761e1e8d7baffe600852c5742c26b36.setIcon(div_icon_62f47139f8e5f29eb23b7b2f381e6c82);
+            
+    
+            var marker_672831f04258938a9bbfbae5de179058 = L.marker(
+                [-23.565187507062024, -46.63719399321082],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_25a75bd49c6761882f6e4ef768706e4f = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_9b7887625800eab025be49cc57ad78fb = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_d8fb481b827161b4461738396531e0a8 = $(`<div id="html_d8fb481b827161b4461738396531e0a8" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Quik Hire Staffing</b><br>                             Angular Frontend Developer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442519064/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_9b7887625800eab025be49cc57ad78fb.setContent(html_d8fb481b827161b4461738396531e0a8);
+            
+        
+
+        marker_672831f04258938a9bbfbae5de179058.bindPopup(popup_9b7887625800eab025be49cc57ad78fb)
+        ;
+
+        
+    
+    
+                marker_672831f04258938a9bbfbae5de179058.setIcon(div_icon_25a75bd49c6761882f6e4ef768706e4f);
+            
+    
+            var marker_70b6aec418e2b4976aaf8ec49180cb16 = L.marker(
+                [-23.54806193049568, -46.689935093310474],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_be9c6097015f28a44a97d5dfa2ed6925 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_72e8cfe7a691260eb31f3d4f4751225b = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_893b58649f259cc933e1c22d603e3cb7 = $(`<div id="html_893b58649f259cc933e1c22d603e3cb7" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Quik Hire Staffing</b><br>                             Frontend Developer (React) (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442522147/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_72e8cfe7a691260eb31f3d4f4751225b.setContent(html_893b58649f259cc933e1c22d603e3cb7);
+            
+        
+
+        marker_70b6aec418e2b4976aaf8ec49180cb16.bindPopup(popup_72e8cfe7a691260eb31f3d4f4751225b)
+        ;
+
+        
+    
+    
+                marker_70b6aec418e2b4976aaf8ec49180cb16.setIcon(div_icon_be9c6097015f28a44a97d5dfa2ed6925);
+            
+    
+            var marker_bbab88ce9622bcfd8007bb3dacd5a4e6 = L.marker(
+                [-23.567718256221138, -46.633850925267325],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_b62a137c88715af1f5fc39e10dda98c5 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_46484de84af70af531f1d0bbd0731e13 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_9cbb9da881a541e60c7d04d73702112e = $(`<div id="html_9cbb9da881a541e60c7d04d73702112e" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Quik Hire Staffing</b><br>                             JavaScript Frontend Developer (Remote)<br>                             <i>América Latina</i><br>                             <a href="https://www.linkedin.com/jobs/view/4442505722/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_46484de84af70af531f1d0bbd0731e13.setContent(html_9cbb9da881a541e60c7d04d73702112e);
+            
+        
+
+        marker_bbab88ce9622bcfd8007bb3dacd5a4e6.bindPopup(popup_46484de84af70af531f1d0bbd0731e13)
+        ;
+
+        
+    
+    
+                marker_bbab88ce9622bcfd8007bb3dacd5a4e6.setIcon(div_icon_b62a137c88715af1f5fc39e10dda98c5);
+            
+    
+            var marker_64f340ec82a30897f151bdd3574e77b0 = L.marker(
+                [-25.399876287924492, -49.241438570711246],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_9d11a809cf5c682c6466919481ad3c79 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_d050c1e4828b29298b4d7ec1a1cafbe5 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_ca455b9a1405e1cc3f4f9287fcdca475 = $(`<div id="html_ca455b9a1405e1cc3f4f9287fcdca475" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>Unova Digital</b><br>                             Desenvolvedor(a) Frontend Vue.js<br>                             <i>Curitiba (PR)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4441748281/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_d050c1e4828b29298b4d7ec1a1cafbe5.setContent(html_ca455b9a1405e1cc3f4f9287fcdca475);
+            
+        
+
+        marker_64f340ec82a30897f151bdd3574e77b0.bindPopup(popup_d050c1e4828b29298b4d7ec1a1cafbe5)
+        ;
+
+        
+    
+    
+                marker_64f340ec82a30897f151bdd3574e77b0.setIcon(div_icon_9d11a809cf5c682c6466919481ad3c79);
+            
+    
+            var marker_baae9cac5d8b9acd3a27f48164f1c040 = L.marker(
+                [-30.040150711609705, -51.2166651433214],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_f7f5af1ec0d3243f1ec031c2e29674e3 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_d2a30b44102165bb8099343b8bcce0c1 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_ed7ed5754b99f19ede7a6534b09a8d42 = $(`<div id="html_ed7ed5754b99f19ede7a6534b09a8d42" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>ZANC Assessoria Nacional de Cobrança</b><br>                             Desenvolvedor Full Stack Nodejs - Oportunidade Atual<br>                             <i>Porto Alegre (RS)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439673353/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_d2a30b44102165bb8099343b8bcce0c1.setContent(html_ed7ed5754b99f19ede7a6534b09a8d42);
+            
+        
+
+        marker_baae9cac5d8b9acd3a27f48164f1c040.bindPopup(popup_d2a30b44102165bb8099343b8bcce0c1)
+        ;
+
+        
+    
+    
+                marker_baae9cac5d8b9acd3a27f48164f1c040.setIcon(div_icon_f7f5af1ec0d3243f1ec031c2e29674e3);
+            
+    
+            var marker_8b4b03a66cafa28ec4414ba628e90e58 = L.marker(
+                [-30.028267419408664, -51.23953515621283],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_7d6bd6c94633f53b9d89af4033725885 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_3025ca523441fb2e54559be04f72f5ec = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_b3c874c8298610040e0393afd27dba5b = $(`<div id="html_b3c874c8298610040e0393afd27dba5b" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>ZANC Assessoria Nacional de Cobrança</b><br>                             Desenvolvedor Full Stack Nodejs - Porto Alegre - Cadastro Imediato<br>                             <i>Porto Alegre (RS)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439664613/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_3025ca523441fb2e54559be04f72f5ec.setContent(html_b3c874c8298610040e0393afd27dba5b);
+            
+        
+
+        marker_8b4b03a66cafa28ec4414ba628e90e58.bindPopup(popup_3025ca523441fb2e54559be04f72f5ec)
+        ;
+
+        
+    
+    
+                marker_8b4b03a66cafa28ec4414ba628e90e58.setIcon(div_icon_7d6bd6c94633f53b9d89af4033725885);
+            
+    
+            var marker_d1d622c5139b3442a27b877f7c81f862 = L.marker(
+                [-23.208935638538094, -45.8857358065188],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_868db559b18b871d88b9c0b49f8b42e3 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_617d15e2ee3e5afc680e27249dd241d3 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_62ff61be513d23f018bddd317ec8659b = $(`<div id="html_62ff61be513d23f018bddd317ec8659b" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>eCondos</b><br>                             Web Designer Wordpress<br>                             <i>São José dos Campos (SP)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439630391/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_617d15e2ee3e5afc680e27249dd241d3.setContent(html_62ff61be513d23f018bddd317ec8659b);
+            
+        
+
+        marker_d1d622c5139b3442a27b877f7c81f862.bindPopup(popup_617d15e2ee3e5afc680e27249dd241d3)
+        ;
+
+        
+    
+    
+                marker_d1d622c5139b3442a27b877f7c81f862.setIcon(div_icon_868db559b18b871d88b9c0b49f8b42e3);
+            
+    
+            var marker_17b6419d6dd03603b30512908d0eb64c = L.marker(
+                [-22.90418864629352, -43.0918533193209],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_8351e7fb9c4ceeb97a42444de3f6bdaa = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_d9d9799a5276510d92d792da33f53af3 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_523e3caa898d6d4862fed30f84c6b123 = $(`<div id="html_523e3caa898d6d4862fed30f84c6b123" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Front-end Angular<br>                             <i>Grande Rio de Janeiro (RJ)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439656131/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_d9d9799a5276510d92d792da33f53af3.setContent(html_523e3caa898d6d4862fed30f84c6b123);
+            
+        
+
+        marker_17b6419d6dd03603b30512908d0eb64c.bindPopup(popup_d9d9799a5276510d92d792da33f53af3)
+        ;
+
+        
+    
+    
+                marker_17b6419d6dd03603b30512908d0eb64c.setIcon(div_icon_8351e7fb9c4ceeb97a42444de3f6bdaa);
+            
+    
+            var marker_8c1c012269c4f15df4a328cfe58af1d0 = L.marker(
+                [-22.903251508155318, -43.053975316306015],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_667f062090ef09df32c36b6f01eda732 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_2c3526a2f4e4e2687169150ce0c70fb0 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_b2d17ce2eb76e736753b6956c4352e3f = $(`<div id="html_b2d17ce2eb76e736753b6956c4352e3f" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Full Stack<br>                             <i>Grande Rio de Janeiro (RJ)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439658195/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_2c3526a2f4e4e2687169150ce0c70fb0.setContent(html_b2d17ce2eb76e736753b6956c4352e3f);
+            
+        
+
+        marker_8c1c012269c4f15df4a328cfe58af1d0.bindPopup(popup_2c3526a2f4e4e2687169150ce0c70fb0)
+        ;
+
+        
+    
+    
+                marker_8c1c012269c4f15df4a328cfe58af1d0.setIcon(div_icon_667f062090ef09df32c36b6f01eda732);
+            
+    
+            var marker_7ae0e2de25bb4f71fcd7b0b9ac8f0c1e = L.marker(
+                [-22.87896396124431, -43.13552414719324],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_d9496c36e91558a7ce44568a1f600a35 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_c8fca61f0e99c23fea1597956844030f = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_78a9879eeba07034f3fe87be77527185 = $(`<div id="html_78a9879eeba07034f3fe87be77527185" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Full Stack .NET<br>                             <i>Grande Rio de Janeiro (RJ)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439647685/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_c8fca61f0e99c23fea1597956844030f.setContent(html_78a9879eeba07034f3fe87be77527185);
+            
+        
+
+        marker_7ae0e2de25bb4f71fcd7b0b9ac8f0c1e.bindPopup(popup_c8fca61f0e99c23fea1597956844030f)
+        ;
+
+        
+    
+    
+                marker_7ae0e2de25bb4f71fcd7b0b9ac8f0c1e.setIcon(div_icon_d9496c36e91558a7ce44568a1f600a35);
+            
+    
+            var marker_3c38c28137dc819305d5f90198bec9a6 = L.marker(
+                [-22.93680070986249, -43.112418496358266],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_a2f5f7a10030a92d2602639ae8fc7f24 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_8c458a86d675e2372cb20c410a41bb5e = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_f52c19396e892beb12b9396df2b693db = $(`<div id="html_f52c19396e892beb12b9396df2b693db" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Full-Stack PHP Vue.js<br>                             <i>Grande Rio de Janeiro (RJ)</i><br>                             <a href="https://www.linkedin.com/jobs/view/4439641876/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_8c458a86d675e2372cb20c410a41bb5e.setContent(html_f52c19396e892beb12b9396df2b693db);
+            
+        
+
+        marker_3c38c28137dc819305d5f90198bec9a6.bindPopup(popup_8c458a86d675e2372cb20c410a41bb5e)
+        ;
+
+        
+    
+    
+                marker_3c38c28137dc819305d5f90198bec9a6.setIcon(div_icon_a2f5f7a10030a92d2602639ae8fc7f24);
+            
+    
+            var marker_093c6b67e64126e7e7552fdcc5778dd8 = L.marker(
+                [-23.619613543964974, -46.353130535919156],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_7cd99aca31e187dc36f405b094f7c78b = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_ec287ba3fe818ddcf25dc5dfa3559e5e = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_cb623fddaec719bf7479b0bb536f3a1d = $(`<div id="html_cb623fddaec719bf7479b0bb536f3a1d" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Front-end React e Salesforce Marketing Cloud<br>                             <i>Grande São Paulo (SP) </i><br>                             <a href="https://www.linkedin.com/jobs/view/4439655291/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_ec287ba3fe818ddcf25dc5dfa3559e5e.setContent(html_cb623fddaec719bf7479b0bb536f3a1d);
+            
+        
+
+        marker_093c6b67e64126e7e7552fdcc5778dd8.bindPopup(popup_ec287ba3fe818ddcf25dc5dfa3559e5e)
+        ;
+
+        
+    
+    
+                marker_093c6b67e64126e7e7552fdcc5778dd8.setIcon(div_icon_7cd99aca31e187dc36f405b094f7c78b);
+            
+    
+            var marker_90fd26141ee4bfa370919d600cd584e1 = L.marker(
+                [-23.591285267857764, -46.41733427437368],
+                {
+}
+            ).addTo(map_ea5fae6006163609287c66ebe9636de6);
+        
+    
+            var div_icon_7b480f09099b05c14e3db6aee239fac2 = L.divIcon({
+  "html": "\u003cimg src=\"data:image/png;base64,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\" style=\"width:30px; border-radius:5px; border:1px solid #300a24;\"\u003e",
+  "className": "empty",
+});
+        
+    
+        var popup_b935676caa41f642c0cf40834dea7788 = L.popup({
+  "maxWidth": 600,
+});
+
+        
+            
+                var html_b7227f5cbbd6d92a6520a940edc829b2 = $(`<div id="html_b7227f5cbbd6d92a6520a940edc829b2" style="width: 100.0%; height: 100.0%;">                         <div style="font-family: 'Ubuntu', sans-serif;">                             <b>innolevels</b><br>                             Desenvolvedor Fullstack Mobile Node.js e React Native<br>                             <i>Grande São Paulo (SP) </i><br>                             <a href="https://www.linkedin.com/jobs/view/4439656097/" target="_blank">Ver Vaga</a>                         </div>                         </div>`)[0];
+                popup_b935676caa41f642c0cf40834dea7788.setContent(html_b7227f5cbbd6d92a6520a940edc829b2);
+            
+        
+
+        marker_90fd26141ee4bfa370919d600cd584e1.bindPopup(popup_b935676caa41f642c0cf40834dea7788)
+        ;
+
+        
+    
+    
+                marker_90fd26141ee4bfa370919d600cd584e1.setIcon(div_icon_7b480f09099b05c14e3db6aee239fac2);
+            
+</script>
+</html>
