@@ -1,0 +1,883 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region: Região Centro-Oeste (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Mato Grosso</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;">Cuiabá</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEem5VQTs4zjg/company-logo_100_100/company-logo_100_100/0/1674137563197/grupomatos_logo?e=1786579200&v=beta&t=9l9EAJtC2xY__mjVE3AzeF7lZqkKeWY5nFKaHkUiO1E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultora de Vendas - o Boticário Shopping Pantanal - Mt</strong><br><small>Grupo Matos</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442396040/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;">São José do Xingu</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE-JavwZhEueQ/company-logo_100_100/B56ZVIHolwGoAQ-/0/1740671715990/cargill_logo?e=1786579200&v=beta&t=NxYyF1WBxW7pGQutXVf0mkUlT2eFmRGhn_gFI-O_zWA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Classificador(a) - São José do Xingú/mt</strong><br><small>Cargill</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4414041127/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Bahia</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;">Barreiras</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE-JavwZhEueQ/company-logo_100_100/B56ZVIHolwGoAQ-/0/1740671715990/cargill_logo?e=1786579200&v=beta&t=NxYyF1WBxW7pGQutXVf0mkUlT2eFmRGhn_gFI-O_zWA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estágio 2026 - Engenharia Mecânica (barreiras / Ba)</strong><br><small>Cargill</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4414358286/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Ceará</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;">Fortaleza</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHvZJa5VpJ9MQ/company-logo_100_100/company-logo_100_100/0/1722866409756/the_kraft_heinz_company_logo?e=1786579200&v=beta&t=3GwQzoRJK3LkzaKgOdMjIqeLdWER0408V1OSLXQB3Gs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador de Projetos</strong><br><small>Kraft Heinz</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4436026736/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;">Igarassu</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEH2cARdsXBkw/company-logo_100_100/B4EZpzv3SDIUAQ-/0/1762878519078/unilever_logo?e=1786579200&v=beta&t=2WUxn6KyveOaadxa8qhE9_ELKjaJtPadzOqkBAzzr24" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Manutenção</strong><br><small>Unilever</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444877751/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (30 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;">Campo Belo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFdoIhv055bEw/company-logo_100_100/company-logo_100_100/0/1715940378252/red_bull_logo?e=1786579200&v=beta&t=oVyrEZd_Bdj_J6Ld2xSAKlLIPnBZziRcU06gaoukg8o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Red Bull Student Marketeer - Unibh</strong><br><small>Red Bull</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418647861/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;">Extrema</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Estoque Pleno</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4280266721/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;">Extrema</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Logística Pleno</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4422204193/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;">Passos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFGMcUwOz0TTQ/company-logo_100_100/B4EZaMIR_CGYAQ-/0/1746107703763/heineken_logo?e=1786579200&v=beta&t=RO2vZPVva5AYwI_7LaDKUWw7yR_cMy4_TNCiE-EqMbQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Técnica de Produção Ii - Envase - Passos/mg</strong><br><small>The HEINEKEN Company</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444872322/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Compras Pleno Mro - Exclusiva para Pessoa com Deficiencia (pcd)</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4294491400/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Estoque Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4412813204/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4278856665/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4418532764/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4383083560/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4305282558/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4395151652/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Assistente de Operação</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4375580845/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Comprador Pleno - Commodities</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4285598728/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Líder de Operação</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4291130815/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Técnico de Segurança do Trabalho Junior</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416761268/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">Pouso Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Técnico de Segurança do Trabalho Pleno</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4422755276/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFdoIhv055bEw/company-logo_100_100/company-logo_100_100/0/1715940378252/red_bull_logo?e=1786579200&v=beta&t=oVyrEZd_Bdj_J6Ld2xSAKlLIPnBZziRcU06gaoukg8o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Red Bull Student Marketeer - Mackenzie - São Paulo</strong><br><small>Red Bull</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4144426113/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;">Aguaí</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEH2cARdsXBkw/company-logo_100_100/B4EZpzv3SDIUAQ-/0/1762878519078/unilever_logo?e=1786579200&v=beta&t=2WUxn6KyveOaadxa8qhE9_ELKjaJtPadzOqkBAzzr24" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador de Seguranca do Trabalho e Meio Ambiente</strong><br><small>Unilever</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444877749/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;">Cajamar</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Assistente de Logistica</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4302675850/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEZRSga0FreWA/company-logo_100_100/company-logo_100_100/0/1656631574816/ab_inbev_logo?e=1786579200&v=beta&t=-ZbpKbw2wRP7vHqvzcHbgV6kEnswRsi2myLjVn0pusI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente Júnior de Operações Sap (pmo)</strong><br><small>AB InBev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445138900/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">Sumaré</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFGMcUwOz0TTQ/company-logo_100_100/B4EZaMIR_CGYAQ-/0/1746107703763/heineken_logo?e=1786579200&v=beta&t=RO2vZPVva5AYwI_7LaDKUWw7yR_cMy4_TNCiE-EqMbQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ajudante Entrega - Sumaré</strong><br><small>The HEINEKEN Company</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444866956/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Bernardo do Campo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Transportes Junior (torre de Monitoramento)</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4299264457/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Bernardo do Campo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Transportes Júnior - Exclusiva para Pessoa com Deficiência</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4270117257/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Bernardo do Campo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador(a) de Projetos e Infraestrutura de Ti</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4260752890/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGJtja_t-YixQ/company-logo_100_100/company-logo_100_100/0/1697452847932/jbs_logo?e=1786579200&v=beta&t=Su9TJ5gvzMbs77a1f70XBLwUgEMfG98qjhuILN3U7qE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Vendedor Externo - in Natura - São Paulo</strong><br><small>JBS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442848904/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEH2cARdsXBkw/company-logo_100_100/B4EZpzv3SDIUAQ-/0/1762878519078/unilever_logo?e=1786579200&v=beta&t=2WUxn6KyveOaadxa8qhE9_ELKjaJtPadzOqkBAzzr24" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Operações e Distribuição</strong><br><small>Unilever</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444832252/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEH2cARdsXBkw/company-logo_100_100/B4EZpzv3SDIUAQ-/0/1762878519078/unilever_logo?e=1786579200&v=beta&t=2WUxn6KyveOaadxa8qhE9_ELKjaJtPadzOqkBAzzr24" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cd Performance Coordinator - Foods</strong><br><small>Unilever</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444835253/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEc41FEInZ78g/company-logo_100_100/company-logo_100_100/0/1635873911509/whirlpool_corporation_logo?e=1786579200&v=beta&t=KGWFrLb3E4TiWb-f7Z_gJPEsQcRBRJ4FVh3cnrWvn1k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analyst, Channel Sales (commission)</strong><br><small>Whirlpool Corporation</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4409061585/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEc41FEInZ78g/company-logo_100_100/company-logo_100_100/0/1635873911509/whirlpool_corporation_logo?e=1786579200&v=beta&t=KGWFrLb3E4TiWb-f7Z_gJPEsQcRBRJ4FVh3cnrWvn1k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analyst, Information Systems</strong><br><small>Whirlpool Corporation</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4378616398/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">Valinhos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFGMcUwOz0TTQ/company-logo_100_100/B4EZaMIR_CGYAQ-/0/1746107703763/heineken_logo?e=1786579200&v=beta&t=RO2vZPVva5AYwI_7LaDKUWw7yR_cMy4_TNCiE-EqMbQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Promotora Trade Execução - Valinhos (sp)</strong><br><small>The HEINEKEN Company</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4428131721/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">Curitiba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQHyiELnRonDow/company-logo_100_100/company-logo_100_100/0/1631339395596?e=1786579200&v=beta&t=_-U3vpBOo4CFOUt_EqVCxTaFbRZG2u9BNkOKJb41ioM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Promotor(a) de Merchandising – Curitiba Pr</strong><br><small>General Mills</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4364118597/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">Maringá</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHLbk5HtPaFrA/company-logo_100_100/company-logo_100_100/0/1722945249128/natura_logo?e=1786579200&v=beta&t=058Cm_q7HzqV_S4cZ_vMXIc4sOQcXAFu1jdFb2cHiqQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Loja | Shopping Avenida Center - Paraná</strong><br><small>Natura</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442852191/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">Maringá</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHLbk5HtPaFrA/company-logo_100_100/company-logo_100_100/0/1722945249128/natura_logo?e=1786579200&v=beta&t=058Cm_q7HzqV_S4cZ_vMXIc4sOQcXAFu1jdFb2cHiqQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Vendedor (a) de Loja - Shopping Avenida Center - Paraná</strong><br><small>Natura</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442852238/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;">São Mateus do Sul</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQH08LrcCymSKg/company-logo_100_100/company-logo_100_100/0/1701365902301?e=1786579200&v=beta&t=vr74LEzEGkSbhIVHbZpHLcTqVJ2G_qwdsCO8ipIo-eI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Consultora de Vendas e Experiência do Cliente – o Boticário | Quiosque | São Mateus do Sul/pr</strong><br><small>Grupo Arilda</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445624449/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;">Joaçaba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF-V-4Vo0FjAQ/company-logo_100_100/B4DZoH8uvvH0AQ-/0/1761069952452/man_broker_distribuio_nestl_logo?e=1786579200&v=beta&t=UFRtxWM8uS4BVRMPb5Pz3WmtAlhBDgn6vHeoIs5Eqsc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador Comercial</strong><br><small>Maná Broker Distribuição Nestlé</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442835749/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
