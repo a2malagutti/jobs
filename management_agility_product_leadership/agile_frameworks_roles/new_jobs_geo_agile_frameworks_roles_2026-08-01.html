@@ -1,0 +1,655 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (6 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHsHMIGkFifsw/company-logo_100_100/B4DZwerWdfIoAQ-/0/1770041207049/brq_logo?e=1787184000&v=beta&t=YvYbthwF5iCXl_Ultm_0WnG9TiZUNjBEmza5kCWDihc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Scrum Master- Pj</strong><br><small>BRQ Digital Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447710267/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEn4Rh-gSlFKg/company-logo_100_100/company-logo_100_100/0/1704928393464/luzcondigital_logo?e=1787184000&v=beta&t=XXz_BNDpwgmn3BrT6s4WhOwHyt9eOqqj5eiyenoOyLQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Scrum Master</strong><br><small>Luz Consulting</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447724707/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFGdctkzx8Cfw/company-logo_100_100/B4DZaIREVsG0AU-/0/1746042898188/radixeng_logo?e=1787184000&v=beta&t=6IZu-12piSLaABQ8MjUnybg_4uw1WsZFmV06SHXglGo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Profissional Product Owner Sênior</strong><br><small>Radix</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445546429/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFBudSGoYdD9g/company-logo_100_100/company-logo_100_100/0/1736441557682/revolut_logo?e=1787184000&v=beta&t=DpUCY4qa_xLtqEEOLU2gvgYyH5ppOWj4mDHJ8S41rrM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner (crypto)</strong><br><small>Revolut</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4218025513/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGKFTdmgRWATQ/company-logo_100_100/B4DZsH_iKYKQAQ-/0/1765365654638/runtalent_logo?e=1787184000&v=beta&t=oRQY-6UqxediKR1bgJsmPedFkByjycI7Uzs9w3i0dIM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Business Analyst / Pmo</strong><br><small>Runtalent</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447581909/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF9hclRurD5gA/company-logo_100_100/company-logo_100_100/0/1733148827276/sysmap_solutions_logo?e=1787184000&v=beta&t=6evyFt4iTFxjfMpWu4de-QY9Bd8RjeExD5PZWp6Cj00" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Coach</strong><br><small>SysMap Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445554247/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (21 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHUieUBcVuQxA/company-logo_100_100/B4DZ0lR0wTIAAU-/0/1774446923201/provider_it_logo?e=1787184000&v=beta&t=XeAHXBN7eTr1IGBIH2S363jc_4HPp9I75tw2IwV9tEU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>10258 - Senior Consultant - Agile Master - Home Office</strong><br><small>Provider IT</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447174327/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1787184000&v=beta&t=3yvg98EPvzrxxU_JKheRIdM1XrRPFpjjdiWAaBqvklM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pmo Sênior</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445566377/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;">Rio de Janeiro</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=1787184000&v=beta&t=MokWKueIh7ckaPSSpMfS3fBxdABVym9Xf3JEQr0okfg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Negócios | Pmo | Rio de Janeiro</strong><br><small>Deloitte</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439317994/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGubnL3V3JUGw/company-logo_100_100/B4EZ8SOZfiJUAI-/0/1782717192383/minsait_logo?e=1787184000&v=beta&t=n1xatZqL8RFNLPBlZj2KyBJ0OGA1rTzFUm5y47z4ik0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sênior - Sgr</strong><br><small>Minsait</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445519781/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEATHMUo8sshg/company-logo_100_100/B4DZd7OnTLHkAQ-/0/1750119118553/totvs_logo?e=1787184000&v=beta&t=sP9LW0Lk3O5H8sM4iqxsyb9NSNOxo1dIbap4bvK2YO0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>[projetos] Analista Pmo Corporativo Sênior</strong><br><small>TOTVS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445512878/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF6qlnhGHoVZw/company-logo_100_100/B4DZmb3QnoGsAQ-/0/1759256578947/foursys_logo?e=1787184000&v=beta&t=VgfdhqxHW0HBjt_ggoYrvb3Kqkh1ptHoL-M0oSZ9cM4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sr – Dados Marketing Pj - Hibrido</strong><br><small>FOURSYS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447522855/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFOPyOhO4wTTg/company-logo_100_100/company-logo_100_100/0/1719784126380/stefanini_brasil_logo?e=1787184000&v=beta&t=_jd43E_5ec7OxlrGkbq51n65B54nsLmjjlW8aRO8c00" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Coach</strong><br><small>Stefanini Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447738175/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFOPyOhO4wTTg/company-logo_100_100/company-logo_100_100/0/1719784126380/stefanini_brasil_logo?e=1787184000&v=beta&t=_jd43E_5ec7OxlrGkbq51n65B54nsLmjjlW8aRO8c00" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Coach</strong><br><small>Stefanini Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447731298/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQERrO4FKqw5Mg/company-logo_100_100/company-logo_100_100/0/1631314677308?e=1787184000&v=beta&t=owrjfVpdi0DfqmKjlzwp3thJxnjvwJUvHPrlYSc5vwg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Scrum Master Sr</strong><br><small>Addvisor Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447405813/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEvoKIrjSYiMQ/company-logo_100_100/B4DZuUx3oCH0AU-/0/1767727659919/ntconsult_logo?e=1787184000&v=beta&t=InOeBrXp89752TDxs-oeDWBaMvtTYTHu4VThTq30Te0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sênior</strong><br><small>NTConsult</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447420517/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;">Osasco</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHNV1DPBFCCEw/company-logo_100_100/company-logo_100_100/0/1719587181974/ntt_data_inc_logo?e=1787184000&v=beta&t=nJCBIiS2lMb-uvKf_eQfkT8q-YIG-yt1H6R7eJ6BwWo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Coach</strong><br><small>NTT DATA, Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447188213/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">Sorocaba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGS4g3lUy9V4A/company-logo_100_100/B4EZopGccqHgAQ-/0/1761626146989/catalent_logo?e=1787184000&v=beta&t=hPW1g_XGi6vyarMi3NvacB0yG00aSI2cz7ev77W5Yng" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pmo / Escritório de Projetos (desenvolvimento de Produtos Farmacêuticos)</strong><br><small>Catalent</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4419899733/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;">São José dos Campos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHW9O0BorSSng/company-logo_100_100/company-logo_100_100/0/1693333629828/kenvue_logo?e=1787184000&v=beta&t=TeqtN5w-m8Xi2wRS_Knh-1TspP0ZdzuL7uCCtWkGLls" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pmo Lead – Brazil Tax Reform (fixed Term: 12 Months)</strong><br><small>Kenvue</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447416576/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE6fpDeeWjKEQ/company-logo_100_100/B4DZ2IKtLRG0AQ-/0/1776106001521/alleasy_logo?e=1787184000&v=beta&t=vP6NIX793rH3TJKg-ALc7vQFLAkqqOwSC5P1xoT7hi8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Scrum Master Pleno</strong><br><small>AllEasy</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445095788/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFYqP3nQdhFuQ/company-logo_100_100/company-logo_100_100/0/1716229480273/adriano_cobuccio_logo?e=1787184000&v=beta&t=wVUZeePXvpwokp0mScmVo_laD9zcVM0qpqK4jy92PTk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner - Pleno</strong><br><small>Grupo Adriano Cobuccio</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447714804/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEv67uGFge5Sw/company-logo_100_100/B56ZfEsEVpHoAU-/0/1751351576332/infosys_logo?e=1787184000&v=beta&t=24X-96tjshuTjHj6yC88pQrXlhVYurZxVSSr0tpJfr8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Power Bi (pmo e Performance)</strong><br><small>Infosys</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4428227039/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG3-l0_lTdw4Q/company-logo_100_100/company-logo_100_100/0/1685618205295/petroleo_ipiranga_logo?e=1787184000&v=beta&t=HVvXRd7uwQHqnHJo9w-DAgIZNo9gznI5F47Hyb98f00" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Pmo Sr</strong><br><small>Ipiranga</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447779175/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHdvjiq_3u9SQ/company-logo_100_100/company-logo_100_100/0/1651181402504?e=1787184000&v=beta&t=ecGpPR8oCrerwo1SXyW4jpKUKUW1nXm1kB3Vo7S7FP4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Especialista</strong><br><small>Porto</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439315781/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHdvjiq_3u9SQ/company-logo_100_100/company-logo_100_100/0/1651181402504?e=1787184000&v=beta&t=ecGpPR8oCrerwo1SXyW4jpKUKUW1nXm1kB3Vo7S7FP4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sênior - Superapp</strong><br><small>Porto</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439333012/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF_VuzKrOTAkw/company-logo_100_100/B4DZ8dklp3JwAI-/0/1782907558746/roxpartner_logo?e=1787184000&v=beta&t=c9V45ydmyJ1-TrRCg_VF7d6UZ78XnVrzgAtS3yPLYAg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Product Owner</strong><br><small>Rox Partner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447413720/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQF0wKfjAB0xAg/company-logo_100_100/company-logo_100_100/0/1732730785506/veritydigital_logo?e=1787184000&v=beta&t=Ge-BZ-flJ4RE0M75g-XwjsJqg-xjl5K5_wvYJUVP2kE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Program Manager - Pmo - Híbrido</strong><br><small>Verity Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445562175/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">Curitiba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGAmPqn7rq0xg/company-logo_100_100/company-logo_100_100/0/1630571230077?e=1787184000&v=beta&t=-QhRyZTGhQ-J9hqiyvarwP961yugbNXf9OkhINxvXzk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>The Coffee</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447571510/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São José</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG49y3WXf0RFQ/company-logo_100_100/company-logo_100_100/0/1719256535527/topmedsaude_logo?e=1787184000&v=beta&t=5PCB-5pa6GJcPnZcIl4rQ5PHLFKHbar15U16xpwNPi4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner — Agentes de Inteligência Artificial</strong><br><small>TopMed Saúde Digital</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447411803/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        

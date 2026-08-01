@@ -1,0 +1,886 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQERNQFncHNMhw/company-logo_100_100/company-logo_100_100/0/1651080962129/seek_peru_logo?e=1787184000&v=beta&t=1-ZR4jF-r3PC79pA1rG0cTfmBThbR5b1WeU6DoOiscE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Java Solutions Architect</strong><br><small>Seek</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445531539/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQG8ROjMkeDLMA/company-logo_100_100/company-logo_100_100/0/1687877925232/phdata_logo?e=1787184000&v=beta&t=ulaAH4kwR7G5mKtwKQDNj7ajNjAl0bxxUL28hiKEQPQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Machine Learning Solutions Architect</strong><br><small>phData</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4323904644/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQG8ROjMkeDLMA/company-logo_100_100/company-logo_100_100/0/1687877925232/phdata_logo?e=1787184000&v=beta&t=ulaAH4kwR7G5mKtwKQDNj7ajNjAl0bxxUL28hiKEQPQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr. Machine Learning Solutions Architect</strong><br><small>phData</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4420691114/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHsHMIGkFifsw/company-logo_100_100/B4DZwerWdfIoAQ-/0/1770041207049/brq_logo?e=1787184000&v=beta&t=YvYbthwF5iCXl_Ultm_0WnG9TiZUNjBEmza5kCWDihc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Prestação de Serviço | Arquiteto de Dados - Gov Ia</strong><br><small>BRQ Digital Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447724143/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEJpAnzKI9J0Q/company-logo_100_100/B4DZiq5tb7HYAQ-/0/1755213912214/cast_group_logo?e=1787184000&v=beta&t=HvH45XmrfND20IZa1oZMyrvbocu6ZjqPKqmYHvbrDA4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software.</strong><br><small>CAST</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447590135/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEJpAnzKI9J0Q/company-logo_100_100/B4DZiq5tb7HYAQ-/0/1755213912214/cast_group_logo?e=1787184000&v=beta&t=HvH45XmrfND20IZa1oZMyrvbocu6ZjqPKqmYHvbrDA4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software</strong><br><small>CAST</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447571815/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1787184000&v=beta&t=iF6bqrcUuTkk8dkeJxk-5kaD2KUtt9PsjLcIAAIAP2Y" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>.net Software Architect, Brazil</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430462949/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1787184000&v=beta&t=iF6bqrcUuTkk8dkeJxk-5kaD2KUtt9PsjLcIAAIAP2Y" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Engineering Lead / Ai Solutions Architect</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447744828/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Goiás</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;">Goiânia</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Vendedor</strong><br><small>Apoiarh Consultoria em Gestão de Pessoas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445566264/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (27 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;">Nova Lima</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHLLRFM74NFSQ/company-logo_100_100/company-logo_100_100/0/1630579415455/sistemastecnol_logo?e=1787184000&v=beta&t=SGWujYRyY-eCU1DuOHLBunFvM-vKJhU0eMfs6zmVayc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software</strong><br><small>Tecnol Sistemas de Automação</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445535257/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHsHMIGkFifsw/company-logo_100_100/B4DZwerWdfIoAQ-/0/1770041207049/brq_logo?e=1787184000&v=beta&t=YvYbthwF5iCXl_Ultm_0WnG9TiZUNjBEmza5kCWDihc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Corporativo Sênior - Pj</strong><br><small>BRQ Digital Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447564106/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGlkyJOKvz6WQ/company-logo_100_100/company-logo_100_100/0/1718300941618/extremedigitalsolutions_logo?e=1787184000&v=beta&t=XRZUSZhfG6WwywnhJr7t4Tt5T-eoKmoNGZPN5lfqBTo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Vmware Iii - Banco de Talentos</strong><br><small>Extreme Digital Solutions - EDS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4402297660/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHUKdeg5gYZag/company-logo_100_100/company-logo_100_100/0/1727968831406/ipnet_logo?e=1787184000&v=beta&t=JpFKBc7s-dSVWWbM_T8vk1b5gQpnguXEcOdJcU0qhtA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Cloud Sênior Dados Ia - Techsales</strong><br><small>IPNET by Vivo</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445565209/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1787184000&v=beta&t=oLjklZCB9RzrbQTfsV60_Nv8qLxLbsNVuFjqYNTWYDY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sap Analytics Solutions Architect - Work from Home</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447198857/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF6qlnhGHoVZw/company-logo_100_100/B4DZmb3QnoGsAQ-/0/1759256578947/foursys_logo?e=1787184000&v=beta&t=VgfdhqxHW0HBjt_ggoYrvb3Kqkh1ptHoL-M0oSZ9cM4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto(a) de Segurança da Informação Sênior</strong><br><small>FOURSYS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447568135/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHWJ8CzNXXwLw/company-logo_100_100/company-logo_100_100/0/1631368257431?e=1787184000&v=beta&t=hLADHTzCpWS5AfIusZZXgpmFNEbewsTuXjal8Ziy3AY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Especialista Ia</strong><br><small>Tech For TI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445097756/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFyjg0-gyNWBw/company-logo_100_100/B4DZxNQIVLIUAQ-/0/1770822600965/tiberio_construtora_logo?e=1787184000&v=beta&t=0Tzd6ZVigO-s7URHQzJ5SWkEbYsfnmy9dc0aDEjG5co" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Incorporação - Projeto de Prefeitura</strong><br><small>Tibério Construções e Incorporações S/A</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445576057/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1787184000&v=beta&t=3yvg98EPvzrxxU_JKheRIdM1XrRPFpjjdiWAaBqvklM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Sap Analytics</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445588026/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1787184000&v=beta&t=3yvg98EPvzrxxU_JKheRIdM1XrRPFpjjdiWAaBqvklM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Dados</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445579055/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1787184000&v=beta&t=3yvg98EPvzrxxU_JKheRIdM1XrRPFpjjdiWAaBqvklM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Sistemas</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445559935/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1787184000&v=beta&t=3yvg98EPvzrxxU_JKheRIdM1XrRPFpjjdiWAaBqvklM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Soluções Ibm Tririga</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445574201/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1787184000&v=beta&t=uF2rPL50xsSDFPfspNZ8Fl1AXetGi3OIgeN1ZygNgsE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto/arquiteta Pegasystems</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447708056/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;">Barueri</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1787184000&v=beta&t=uF2rPL50xsSDFPfspNZ8Fl1AXetGi3OIgeN1ZygNgsE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto/arquiteta Servicenow - Bcm</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447707066/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;">São Carlos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGW4EB1A1aUYQ/company-logo_100_100/B4DZyL2uQ_IUAY-/0/1771872904949/serasaexperian_logo?e=1787184000&v=beta&t=-Jf02HBDIM5Acgsig7N8vW0Ys7S7f0lphFc0uUKUdDw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Solutions Architect</strong><br><small>Serasa Experian</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447519779/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQH2gEZpU9Oy5Q/company-logo_100_100/company-logo_100_100/0/1630559270452/clarobrasil_logo?e=1787184000&v=beta&t=lgRhNEpWne8gXreNLl5mlAvX5yWGQ6A0Sn4rReuJTOE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Pré Vendas Cloud</strong><br><small>Claro Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4443780438/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHAuktkpZqyFQ/company-logo_100_100/B4DZvCl._ZIAAQ-/0/1768496296434/diagonalsocial_logo?e=1787184000&v=beta&t=cmA_wmaOh9bkNm3vTMKoWT4wf7sPy570-IdzUQb_Zao" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto - Prazo Determinado</strong><br><small>Diagonal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447199024/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto e Urbanista</strong><br><small>Empresa de Consultoria</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445545187/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGG_PyIEk0O0w/company-logo_100_100/B4DZfW8646GkAU-/0/1751657983926/evertecbr_logo?e=1787184000&v=beta&t=ZiVb57cY9OQ4aX0HMaMaQWaAhkLuifGS19VGO4h3uZY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software Especialista | Ia</strong><br><small>Evertec Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447402165/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGG_PyIEk0O0w/company-logo_100_100/B4DZfW8646GkAU-/0/1751657983926/evertecbr_logo?e=1787184000&v=beta&t=ZiVb57cY9OQ4aX0HMaMaQWaAhkLuifGS19VGO4h3uZY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software Especialista | Ia</strong><br><small>Evertec Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447194839/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF5_1b1qz6tnA/company-logo_100_100/B4DZpZnuxjIEAQ-/0/1762440179522/somosmontreal_logo?e=1787184000&v=beta&t=EV1WXZbe0IeEM1HgJBtuX_b90d_CNBgAEmlFF8t_jGY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Sistemas</strong><br><small>Montreal Oficial</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445557258/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF_VuzKrOTAkw/company-logo_100_100/B4DZ8dklp3JwAI-/0/1782907558746/roxpartner_logo?e=1787184000&v=beta&t=c9V45ydmyJ1-TrRCg_VF7d6UZ78XnVrzgAtS3yPLYAg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Ia Especialista – Google Cloud Platform (gcp)</strong><br><small>Rox Partner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447406811/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF_VuzKrOTAkw/company-logo_100_100/B4DZ8dklp3JwAI-/0/1782907558746/roxpartner_logo?e=1787184000&v=beta&t=c9V45ydmyJ1-TrRCg_VF7d6UZ78XnVrzgAtS3yPLYAg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Soluções e Sistemas Especialista Ia – Google Cloud Platform (gcp)</strong><br><small>Rox Partner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447404925/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEmir2HOzQ9lg/company-logo_100_100/B4DZ5FueV4HMAI-/0/1779286271652/semantixai_logo?e=1787184000&v=beta&t=IZN2kSN6k4Bl_QvntHHjq9416rQ_h6ZIPa-EN84KVfE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto(a) de Pré-vendas Digital Workplace</strong><br><small>Semantix</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445527988/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGW4EB1A1aUYQ/company-logo_100_100/B4DZyL2uQ_IUAY-/0/1771872904949/serasaexperian_logo?e=1787184000&v=beta&t=-Jf02HBDIM5Acgsig7N8vW0Ys7S7f0lphFc0uUKUdDw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Design de Produto Sênior - Design System</strong><br><small>Serasa Experian</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439092163/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHWJ8CzNXXwLw/company-logo_100_100/company-logo_100_100/0/1631368257431?e=1787184000&v=beta&t=hLADHTzCpWS5AfIusZZXgpmFNEbewsTuXjal8Ziy3AY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Sap (pi/po/cloud) - Varejo (qsr) - Remoto</strong><br><small>Tech For TI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445526628/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHWJ8CzNXXwLw/company-logo_100_100/company-logo_100_100/0/1631368257431?e=1787184000&v=beta&t=hLADHTzCpWS5AfIusZZXgpmFNEbewsTuXjal8Ziy3AY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Ia - Especialista (segmento Bancário)</strong><br><small>Tech For TI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445513833/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">Curitiba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEJpAnzKI9J0Q/company-logo_100_100/B4DZiq5tb7HYAQ-/0/1755213912214/cast_group_logo?e=1787184000&v=beta&t=HvH45XmrfND20IZa1oZMyrvbocu6ZjqPKqmYHvbrDA4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Software</strong><br><small>CAST</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447545007/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEKud2JB16WWQ/company-logo_100_100/company-logo_100_100/0/1719239408534?e=1787184000&v=beta&t=Cw32zrSyMD5CKjDIRNjRtTZhY99zpjqnRFfd-7lyueo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto Júnior de Legalização – Poars</strong><br><small>Simon RH</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445574072/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;">Montenegro</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFnf7MoIbtEqQ/company-logo_100_100/company-logo_100_100/0/1693390195179/provectus_it_inc_logo?e=1787184000&v=beta&t=duNCnX8uaQ-BI7MbhV3NgihxXfKEneunOEC3ECsCIIA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Solutions Architect (genai, Python/data, Aws)</strong><br><small>Provectus</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447528725/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
