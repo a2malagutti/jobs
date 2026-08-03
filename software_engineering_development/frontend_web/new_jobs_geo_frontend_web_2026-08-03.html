@@ -1,0 +1,865 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (19 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEGLWHBZmzzcA/company-logo_100_100/B56ZYzlx2LHEAY-/0/1744622264274/crossinghurdles_logo?e=1787184000&v=beta&t=h1Qt_kSqw2VYo5V4r1-yLsXSNp7vk5kH2w-BpnfM3zA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Developer | $90/hr Remote</strong><br><small>Crossing Hurdles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439145871/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1787184000&v=beta&t=9uHOQQNxhI3-82EdKdidyq7jqmxwYuyfuIE7nAdWfTs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Developer - Typescript (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448127932/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1787184000&v=beta&t=9uHOQQNxhI3-82EdKdidyq7jqmxwYuyfuIE7nAdWfTs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Engineer - Angular, Javascript (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448144689/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1787184000&v=beta&t=9uHOQQNxhI3-82EdKdidyq7jqmxwYuyfuIE7nAdWfTs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448144677/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Web Developer (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448151053/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Engineer - Vue.js (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448134925/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>React Native Developer (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448130931/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer - Ai Products Remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448139607/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full-stack Engineer - Frontend Focussed (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448146216/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1787184000&v=beta&t=FAAtPkGp6IDTxDnh3KvWkSP0cECHM7jFjhVb_BOQaEM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Engineer - Javascript (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448135983/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1787184000&v=beta&t=FAAtPkGp6IDTxDnh3KvWkSP0cECHM7jFjhVb_BOQaEM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Full Stack Developer - Javascript (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448143634/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1787184000&v=beta&t=FAAtPkGp6IDTxDnh3KvWkSP0cECHM7jFjhVb_BOQaEM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fullstack Developer (react/node.js) (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448132878/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1787184000&v=beta&t=FAAtPkGp6IDTxDnh3KvWkSP0cECHM7jFjhVb_BOQaEM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Developer - Javascript (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448145074/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1787184000&v=beta&t=FAAtPkGp6IDTxDnh3KvWkSP0cECHM7jFjhVb_BOQaEM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448136901/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1787184000&v=beta&t=ATFn2Njg_-NF36lizXPag--DKOCKI_fZrjamHNG_Onc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Developer (angular.js/react.js)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4303021904/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1787184000&v=beta&t=ATFn2Njg_-NF36lizXPag--DKOCKI_fZrjamHNG_Onc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Developer (react.js+next.js)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4295363299/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFzvHK-9_P_vg/company-logo_100_100/company-logo_100_100/0/1689269712803/moove_it_logo?e=1787184000&v=beta&t=8qhn8-jcb44JjhnJrLJfIr4g_Mboa-geX1OQaUNzQZI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer (elixir + Vuejs)</strong><br><small>Qubika</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448183997/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFSp7eWinmffw/company-logo_100_100/B56Zk8u8FtHcAQ-/0/1757660562030/micro1_logo?e=1787184000&v=beta&t=4pMPhSFZifsE4XHZW14aqusJm4AVMewEdWQOQcCSg-M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Angular Developer</strong><br><small>micro1</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448165165/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFSp7eWinmffw/company-logo_100_100/B56Zk8u8FtHcAQ-/0/1757660562030/micro1_logo?e=1787184000&v=beta&t=4pMPhSFZifsE4XHZW14aqusJm4AVMewEdWQOQcCSg-M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Javascript Developer</strong><br><small>micro1</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448167119/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (13 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEV_M0RDJciew/company-logo_100_100/B4EZ1JyLAoHUAQ-/0/1775059382763/ds3_digital_dynamic_software_servios_e_solues_ltda_logo?e=1787184000&v=beta&t=8c3XuMxI4t2ehqpoi72rr2vVlvGKoSSKwJOmmciPsoA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor de Front-end Angular</strong><br><small>DS3 Digital</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448177901/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1787184000&v=beta&t=9uHOQQNxhI3-82EdKdidyq7jqmxwYuyfuIE7nAdWfTs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Engineer - Angular, Javascript (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448179118/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Web Developer (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448162977/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Developer - Typescript (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448171305/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Engineer - Javascript (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448184041/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Web Developer - Html,css (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448168914/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Frontend Web Developer - Html,css (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448168902/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Full Stack Engineer (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448172305/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fullstack Developer (react/node.js) (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448170373/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Javascript Developer (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448167908/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG6dDbCPSmUIg/company-logo_100_100/B4DZ0k8alIKgAQ-/0/1774441311024/hiredddd_logo?e=1787184000&v=beta&t=IgRgxEcoLpfWUAk0YZ2R1NAz0b6DSR5-yKmDIWxhc_o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Software Engineer (typescript) (remote)</strong><br><small>Hired</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448167936/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1787184000&v=beta&t=ATFn2Njg_-NF36lizXPag--DKOCKI_fZrjamHNG_Onc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Developer (angular.js/react.js)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4304143993/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1787184000&v=beta&t=ATFn2Njg_-NF36lizXPag--DKOCKI_fZrjamHNG_Onc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Frontend Developer (react.js+next.js)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4304162008/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraíba</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">João Pessoa</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFp74o6WJLKGg/company-logo_100_100/B4DZoi5ChAKQAQ-/0/1761521969944?e=1787184000&v=beta&t=Df171gLybQsU1LQzI90AlGXYjclNE9bG3SbRhtYaBH0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Frontend</strong><br><small>ShiftLabs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448127302/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGaZpYWHidaqw/company-logo_100_100/company-logo_100_100/0/1738000677714/dexian_brasil_logo?e=1787184000&v=beta&t=vwlxbdjFo7t_XKoeBXccFjnbZr01dfdIHOOiyXnD700" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full Stack Sênior (java) | Híbrido | São Paulo/sp</strong><br><small>Dexian Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447980469/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFS8Oq_RoTX9Q/company-logo_100_100/B4EZmE9ECUIUAQ-/0/1758872224292/gft_technologies_logo?e=1787184000&v=beta&t=V59MsMH3xlHgEgbfspO_o9I15E16Zb22ePF5PH8GF28" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvimento Fullstack .net / React (híbrido Sp) - 133794</strong><br><small>GFT Technologies</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433983459/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQGll4s8xYKZWg/company-logo_100_100/company-logo_100_100/0/1631377124754?e=1787184000&v=beta&t=Qp4qQ2yA8vqwPlip_gXXbW1deMYnEuuDyM3u9SZVV-o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full Stack</strong><br><small>Watermelon Tecnologia & Participações</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445898848/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">Sorocaba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEGqFwja7d7Ug/company-logo_100_100/company-logo_100_100/0/1700163606207/kalfecalcados_logo?e=1787184000&v=beta&t=8sFtIr-laa-LlXFL1C9ooUoWbyhoMXKnYrqwm8eoF9Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estágio em Desenvolvimento .net e React (jsx)</strong><br><small>Kalfe Calçados</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448198063/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHngaOfGfuitw/img-crop_100/B4DZzV3JKEIAAM-/0/1773114529490?e=1787184000&v=beta&t=hwLCpi-cFkislUdyOFzIlqOMzElteUx7gUe0FLDPxn0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Product Engineer — Ai-native</strong><br><small>Bloxs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4444598698/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;">Passo Fundo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGegAuLcKhWMg/img-crop_100/B4DZrc3ndQIgAM-/0/1764642161116?e=1787184000&v=beta&t=fj684KD8HGm70MsON4d7U1H3McaFUonL6fgYwGBktxw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full Stack – Home Office – Passo Fundo – Rs - Painel de Empregos</strong><br><small>BuscarVagas - Empregos Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445861947/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;">Blumenau</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFOxON9TsLKkA/company-logo_100_100/company-logo_100_100/0/1695217062714/usys_logo?e=1787184000&v=beta&t=ezRXiyS7IwlFoi7d2HSJAX2D_AaDaFVVg4EpDPhL8i8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Full Stack Jr | Laravel + React | Presencial – Blumenau/sc</strong><br><small>USYS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4445889996/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
