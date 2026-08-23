@@ -1,0 +1,946 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (9 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEGLWHBZmzzcA/company-logo_100_100/B56ZYzlx2LHEAY-/0/1744622264274/crossinghurdles_logo?e=1788998400&v=beta&t=54AqXsrNAkzcYeJJKTJOy9oY_b8hSgg3oCNmBj0K-Rk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sales Executive | $42/hr Remote</strong><br><small>Crossing Hurdles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456669070/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE-0GobDYeRfQ/company-logo_100_100/B56ZmoA3KlJwAU-/0/1759460424343/globaltize_logo?e=1788998400&v=beta&t=XjWkDa1lU1m1n4H7AXT42jU8Y8n122KdNxYXUvyvN-A" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Real Estate Executive Assistant</strong><br><small>Globaltize</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457525081/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1788998400&v=beta&t=_dztUJOm55E2h95MzdCkeWnFYe9DNW22WHm9znD_C9E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Assistant (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457569665/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGbz0urdPTPpw/company-logo_100_100/company-logo_100_100/0/1738113107998/hireoverseascontractors_logo?e=1788998400&v=beta&t=-9ETmcOfXTix-l0d0k9NMUArJkdw51ZPhaCFoutaz2k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Native Executive Assistant</strong><br><small>Hire Overseas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457519030/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGbz0urdPTPpw/company-logo_100_100/company-logo_100_100/0/1738113107998/hireoverseascontractors_logo?e=1788998400&v=beta&t=-9ETmcOfXTix-l0d0k9NMUArJkdw51ZPhaCFoutaz2k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Assistant (chief of Staff)</strong><br><small>Hire Overseas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457517236/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFM0QmPI3hK_g/company-logo_100_100/B4EZsjht6zHgAQ-/0/1765827600477/scalearmycareers_logo?e=1788998400&v=beta&t=jiyhIltnTqsUd4sEc_lKhq_W67dkLqkMUDYspZbgmUA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive</strong><br><small>Scale Army Careers</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456637231/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHEfIdoJWd0MA/company-logo_100_100/company-logo_100_100/0/1718748039680/the_talenthq_logo?e=1788998400&v=beta&t=mKMuLx1vJS_p6Zg9ZsFgptiVxrsnBG3kS5V01-8wGws" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Paid Media Account Executive</strong><br><small>The TalentHQ</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4436270118/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEjXOhvbIkU9g/company-logo_100_100/B4EZy1sxsXIQAQ-/0/1772574940341/vivahq_logo?e=1788998400&v=beta&t=gL5W55lpDMe-9o3hYVbcEi7HuVdlsWCoKd1A82ynHq8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Bilingual Virtual Executive Assistant (remote)</strong><br><small>Viva Talent</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457836152/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGvB2yqzWYnOg/company-logo_100_100/company-logo_100_100/0/1696359606370/work_better_now_logo?e=1788998400&v=beta&t=-zHulLzrjPQZIpBmoBvRoSxGS7Z3DuMEu0vkx8qLGvI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Business Development Executive -remote</strong><br><small>WorkBetterNow</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454594146/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (9 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEpTNFsa8lg5Q/company-logo_100_100/company-logo_100_100/0/1722246209422/container_xchange_logo?e=1788998400&v=beta&t=OnggNjoLsfywONLcv_bBmFZW8CJjkeorkxR1kIjXKT4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sales Executive - Us Market</strong><br><small>Container xChange</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4455012711/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGB0C_8WLbxMg/company-logo_100_100/company-logo_100_100/0/1707857994736?e=1788998400&v=beta&t=QbBZ67VZV08EqXcY0ZHIyDXo55POmjK5_ibYOB16k_0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head de Expansão Comercial</strong><br><small>Corporate Gestão 360º</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4451638944/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHzj3-ajS3kBA/img-crop_100/B4EaAqdJ9rH0AM-/0/1787418681968?e=1788998400&v=beta&t=osZulPI4b4w-DJR6Npu89iMdgi-PdDnpCqVWqLYb5RM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive</strong><br><small>Curvia AI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456142579/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQE5m0IBKiWT4g/company-logo_100_100/B4EZzeCWnyJwAQ-/0/1773251685253/everpure_data_logo?e=1788998400&v=beta&t=9yCjsFGOPUf2Pv3FgC7SnoojSizzqJmS4Y4VgSTrZh8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive, Enterprise (são Paulo)</strong><br><small>Everpure</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456621428/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHA7jbVAxkZXQ/company-logo_100_100/B4EZgXYt9RHIAQ-/0/1752739012753/happyrobot_logo?e=1788998400&v=beta&t=fRGkGQX6MIU3vR2LM8uCtGglQDj31K7IxmhJ6bj8gpc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Enterprise Account Executive</strong><br><small>HappyRobot</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4387558213/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEeII6H9qdObQ/company-logo_100_100/B4DZ3OfC9fHwAQ-/0/1777285738853/hirefeedd_logo?e=1788998400&v=beta&t=_dztUJOm55E2h95MzdCkeWnFYe9DNW22WHm9znD_C9E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Assistant (remote)</strong><br><small>Hire Feed</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457598980/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHJ0-9S2oyCgA/company-logo_100_100/company-logo_100_100/0/1694146343235/myopinionpesquisademercado_logo?e=1788998400&v=beta&t=Gjj2aM1pE5unRhyid4F8bXycLabKCgHrWjyyXch7tEo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head / Diretor / Gerente Sênior de Mídia | Agências e Anunciantes</strong><br><small>My Opinion</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4455031568/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGvB2yqzWYnOg/company-logo_100_100/company-logo_100_100/0/1696359606370/work_better_now_logo?e=1788998400&v=beta&t=-zHulLzrjPQZIpBmoBvRoSxGS7Z3DuMEu0vkx8qLGvI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Business Development Executive -remote</strong><br><small>WorkBetterNow</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4450636161/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGvB2yqzWYnOg/company-logo_100_100/company-logo_100_100/0/1696359606370/work_better_now_logo?e=1788998400&v=beta&t=-zHulLzrjPQZIpBmoBvRoSxGS7Z3DuMEu0vkx8qLGvI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Assistant</strong><br><small>WorkBetterNow</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4446596242/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGMAPERRvd2YA/company-logo_100_100/B4DZVr.XUYHIAQ-/0/1741273265821/abler_vagas_br_logo?e=1788998400&v=beta&t=oORuVeKjTflW7kFwKNXCYteaU1EYo0MXZ9I9feUn94s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head de Infraestrutura de Ti</strong><br><small>abler Vagas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457502856/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Mato Grosso do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;">Dourados</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEUwreILeGS7Q/company-logo_100_100/B4DZ5wJQzAG4AM-/0/1779997937122/jobbol_empregos_logo?e=1788998400&v=beta&t=EsZ5nHVufGP7T86Xy1s8SpgJKfl1O9vdAcrlvUJHbfU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head de Marketing</strong><br><small>Jobbol</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457570212/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">Recife</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF052ZU2AibkA/company-logo_100_100/B4DZkvbAYgGgAU-/0/1757437233216/liferay_inc__logo?e=1788998400&v=beta&t=0BFW5JBsUpOt6hZCp5QKSxknhEu8wjapXELl2HlI4sU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Account Executive</strong><br><small>Liferay</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454776308/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (22 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHkiy2VFbWxtA/company-logo_100_100/B4DZ8fQGvSIYAI-/0/1782935743653/atlanticahospitalityinternational_logo?e=1788998400&v=beta&t=X5NO_aHY_fUGV9jJtGYpU1OR0auiEGBmGY7hObonP4U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Camareira(o) | Hotel Transamerica Executive Belo Horizonte</strong><br><small>Atlantica Hotels International</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454684204/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHkiy2VFbWxtA/company-logo_100_100/B4DZ8fQGvSIYAI-/0/1782935743653/atlanticahospitalityinternational_logo?e=1788998400&v=beta&t=X5NO_aHY_fUGV9jJtGYpU1OR0auiEGBmGY7hObonP4U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Supervisor(a) de Andares | Hotel Transamerica Executive Belo Horizonte</strong><br><small>Atlantica Hotels International</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454682204/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFTJpEKJy3XsA/company-logo_100_100/B4DZip9S2KHwAQ-/0/1755198075652/inter_logo?e=1788998400&v=beta&t=9tfdAUTMZDAms_qYQDE2IxLWtoBoqwtreUVSsFnaEvQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Products Executive Manager - Shopping & Loop Mkp</strong><br><small>Inter</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457525007/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGBZTLVXcOf3Q/company-logo_100_100/company-logo_100_100/0/1642876961454?e=1788998400&v=beta&t=9_RE2Z1k1chX009ZY3UYbY3VSLKmvdKfeGI0KMwG91U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Assistant</strong><br><small>AGS Youth Soccer Club</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457533912/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGBZTLVXcOf3Q/company-logo_100_100/company-logo_100_100/0/1642876961454?e=1788998400&v=beta&t=9_RE2Z1k1chX009ZY3UYbY3VSLKmvdKfeGI0KMwG91U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Executive Coordinator (operations & Leadership Support)</strong><br><small>AGS Youth Soccer Club</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457538950/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">Rio de Janeiro</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGg4xHa1i0XsQ/company-logo_100_100/B4EZ0q4_LgJAAU-/0/1774541075450/aspen_technology_logo?e=1788998400&v=beta&t=4FuKvgaRUgE6MwQqTv9o5B1NCvlMRMgmMux-gAs5Isg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sales Account Executive - Digital Grid Management</strong><br><small>Aspen Technology</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4427872128/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFqdm1TZ-RZKQ/company-logo_100_100/B4EZgOay6gHEAY-/0/1752588562343/amazon_web_services_logo?e=1788998400&v=beta&t=q6J7iiOShX-lcomT3T_t0cq1x9jg52fsKpFbMZo1VvE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Solutions Architect, Automotive and Manufacturing Brazil</strong><br><small>Amazon Web Services (AWS)</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/search/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quant Research Intern</strong><br><small>Fabio Freitas Executive Search</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454661898/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQH2JgFZ-PkBGw/company-logo_100_100/B4EZrf8gJIGoAQ-/0/1764693771187/gartner_logo?e=1788998400&v=beta&t=bbD0Gsx_K_Mzxz-cTfpUamgC0EIgNv1l2OLiraIU0-s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive, Le, Gts - Porto Alegre, Rs</strong><br><small>Gartner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456629528/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQH2JgFZ-PkBGw/company-logo_100_100/B4EZrf8gJIGoAQ-/0/1764693771187/gartner_logo?e=1788998400&v=beta&t=bbD0Gsx_K_Mzxz-cTfpUamgC0EIgNv1l2OLiraIU0-s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive, Le, Gts - São Paulo</strong><br><small>Gartner</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4421443619/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQE87eri2HYuwA/company-logo_100_100/company-logo_100_100/0/1631357563640?e=1788998400&v=beta&t=iuUwxxsbBdK1cJp-wMuLXdTRie-hHIejKmuoCk1aIxo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Chief Technology Officer (cto)</strong><br><small>Green, llc</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4455001273/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEt7p-nrFitKg/company-logo_100_100/company-logo_100_100/0/1630607939644?e=1788998400&v=beta&t=hlW18hSBNEEGkcydSYA9ilmnc2suNG-b76hJlIly-TM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head of Growth</strong><br><small>MANUAL</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4402053444/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGHxXrxenyCJQ/company-logo_100_100/company-logo_100_100/0/1714996638663/nucleabr_logo?e=1788998400&v=beta&t=K-xTp7eatQ_Y_IQsX0xaP-QU4PpvxXHMXqjnvy27McU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head de Monitoramento em Prevenção À Lavagem de Dinheiro (pld) e Fraudes</strong><br><small>Núclea</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454655766/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFhSD86O7AkYA/company-logo_100_100/company-logo_100_100/0/1720039737493/sas_logo?e=1788998400&v=beta&t=cmi9vyC14vDOJSVjeyGELpMbFOzWpQqFk8EQyAKdMAg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive - Financial Services</strong><br><small>SAS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4447701288/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE5n6OOh3vi3Q/company-logo_100_100/company-logo_100_100/0/1662729011339/stafford_house_international_logo?e=1788998400&v=beta&t=azvLD9K2P6ENXMKL9buhRpKotoZogtYaMD8wehEl5bQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Merketing Executive</strong><br><small>Stafford House International</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457532650/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEZQ73DBLnfwg/company-logo_100_100/B4DZ4tXA2qHAAM-/0/1778877468290/stone_co_logo?e=1788998400&v=beta&t=H65cpChXAatrPpOwOgM27g0334VDfzbFj3vHhjqQnP0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive - Hunter (hibrido/sp)</strong><br><small>Stone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430496956/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQETCvDcCaXOZA/company-logo_100_100/company-logo_100_100/0/1708538790771/usetako_logo?e=1788998400&v=beta&t=jKdPa4vYDHvYhcvZt-JgY8CcXvUvRCiUfB9FuUnGboQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive</strong><br><small>Tako</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454670905/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEEPUY2vtcPNA/company-logo_100_100/B4DZ2I3NhNHMAQ-/0/1776117668603?e=1788998400&v=beta&t=EV5V55Owabl3hUSVj5_vzMcp7ozZFKFs-iHL5VBbtrk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head of Brand & Product - Unio</strong><br><small>UNIO TECNOLOGIA E SOLUÇÕES DIGITAIS LTDA.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4455036789/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFiYnR1Mbtxdg/company-logo_100_100/company-logo_100_100/0/1630552741617/uber_com_logo?e=1788998400&v=beta&t=AkvS-iYRkEgDindtXtD680DhZSRKktjNs-bYsIym6o0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>New Verticals Account Executive</strong><br><small>Uber</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457594090/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGuwANNml02DA/company-logo_100_100/company-logo_100_100/0/1630650735642/vtex_logo?e=1788998400&v=beta&t=2r7ORPZcMjc_OVxrT2c521gXawzaPJQlwzi3XIyORdA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sales Account Executive - Enterprise</strong><br><small>VTEX</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4389594349/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;">Paraíso</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHU0Y6EjkswZA/company-logo_100_100/company-logo_100_100/0/1698059830917/sintelautomotive_logo?e=1788998400&v=beta&t=NMYOi1KOdhN4n2m0QtKwORVUdyNghfA6NTAk1XrvcvU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Account Executive Farmer (edi) - Vendas Consultivas Tecnologia (sp)</strong><br><small>Sintel</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4454665933/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;">Sales</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQEuBPeAdNzErQ/company-logo_100_100/company-logo_100_100/0/1662080132932/tribecavp_logo?e=1788998400&v=beta&t=vuWmBXNhCLD-0nhzfNeFV7U7xPQ_5S-xN7-TqWYTYrs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr Sales Executive</strong><br><small>Tribeca Venture Partners</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4455058128/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
