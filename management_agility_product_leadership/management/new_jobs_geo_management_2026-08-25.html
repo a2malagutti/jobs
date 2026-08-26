@@ -1,0 +1,919 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGuTxHpx7S9WQ/company-logo_100_100/B4EZZub1gHHQAQ-/0/1745609513489/aspenview_logo?e=1788998400&v=beta&t=J5FPEwmPOMpSDe9Sz3Q_t_rVyH6gf6fMN3geTWfULSU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Program Manager - Retail</strong><br><small>AspenView Technology Partners</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456911895/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1788998400&v=beta&t=ajBXZp72Kdsf-wQqdUKMZA4ud5xHXqTJKC9TFMwMevo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Strategic Project Manager (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458581385/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHCeeKbZuVJlg/company-logo_100_100/B4EZpu.ZcUGcAQ-/0/1762798442551/toloka_logo?e=1788998400&v=beta&t=50l_MR2sntioJPgRi8RR76RY6_VNOyd2kZFw4D2y7eo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Freelance Workforce Project Manager</strong><br><small>Toloka</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458744869/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (14 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1788998400&v=beta&t=cX7uGzXnhsK312oerRbR2ozH_LMdBTAJXOvGJwS4K0U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457616104/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQE2uTXvISMMwA/company-logo_100_100/company-logo_100_100/0/1630548701849/grupo_boticario_logo?e=1788998400&v=beta&t=yDv4iwTz3ujBGl2ybtI2kNPJ6DMwdzFsulBXPi-8cK4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Tech Manager Ii (jornada do Colaborador)</strong><br><small>Grupo Boticário</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456549309/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1788998400&v=beta&t=wiyYbQCQVJojH5dJ-79wUqww3kGLgd6bBjZu0ghf4yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engineering Manager - Product</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457469318/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1788998400&v=beta&t=wiyYbQCQVJojH5dJ-79wUqww3kGLgd6bBjZu0ghf4yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager Senior</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457410845/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1788998400&v=beta&t=wiyYbQCQVJojH5dJ-79wUqww3kGLgd6bBjZu0ghf4yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Product Manager, Funnels/workflow</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457418078/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1788998400&v=beta&t=wiyYbQCQVJojH5dJ-79wUqww3kGLgd6bBjZu0ghf4yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr. Project Manager</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457485392/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1788998400&v=beta&t=wiyYbQCQVJojH5dJ-79wUqww3kGLgd6bBjZu0ghf4yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Technical Project Manager (ai Products)</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457402773/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1788998400&v=beta&t=ajBXZp72Kdsf-wQqdUKMZA4ud5xHXqTJKC9TFMwMevo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engineering Manager (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458761783/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEeXjvtRvoV1w/company-logo_100_100/B56Z0gEWqLKsAQ-/0/1774359506020/hirewaveee_logo?e=1788998400&v=beta&t=ajBXZp72Kdsf-wQqdUKMZA4ud5xHXqTJKC9TFMwMevo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Strategic Project Manager (remote)</strong><br><small>Jobs Ai</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458756230/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHz7k3xiXwNIw/company-logo_100_100/B4EZpbRhK0HgAQ-/0/1762467910619/modus_create_logo?e=1788998400&v=beta&t=JdIBVrgkhnqPd5jxV1U_n7fo0_t0xbfMhXnlcGrf_2M" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager</strong><br><small>Modus Create</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458585093/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFYxxMZnepyAw/company-logo_100_100/B56ZsDhgBgI0AQ-/0/1765290672906/quik_hire_staffing_logo?e=1788998400&v=beta&t=uq18MSmI5Eij0ZBRRhnC6ghh6cV5riqYtiPPZ2sCVwc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager (remote)</strong><br><small>Quik Hire Staffing</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458765800/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFYxxMZnepyAw/company-logo_100_100/B56ZsDhgBgI0AQ-/0/1765290672906/quik_hire_staffing_logo?e=1788998400&v=beta&t=uq18MSmI5Eij0ZBRRhnC6ghh6cV5riqYtiPPZ2sCVwc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Strategic Project Manager (finance) - Remote</strong><br><small>Quik Hire Staffing</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458760842/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFgwQd0YhdeQg/company-logo_100_100/B4DZZeOeeFG0AU-/0/1745337575559/toptal_logo?e=1788998400&v=beta&t=5cFA6iM4MjogW_Xa8aMAQLZBs0_JL9_zMpKWQpjuB0g" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Product Manager</strong><br><small>Toptal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448685084/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQFupNOyDYF1sg/company-logo_100_100/company-logo_100_100/0/1631315877254?e=1788998400&v=beta&t=dzpMPY5pBbh8tJ_XJGOzNvpwQi9EceDyqYyrr94-TRI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Group Product Manager I - Produto Disrupt | Tech</strong><br><small>iFood</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458577391/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (24 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;">Governador Valadares</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Produtos - Mg</strong><br><small>M.H. Combustiveis Ltda.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456568104/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;">Lagoa Santa</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEcIm6B6SuCWQ/company-logo_100_100/company-logo_100_100/0/1706110765958/medika_logo?e=1788998400&v=beta&t=wbbPKbXH5ld3I48UiG97ueSL_r-HmVhCtjBQjbGcnwc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos</strong><br><small>Medika</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458551355/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGq6l2fsjkJrg/company-logo_100_100/B4DZTx5OgOGcAQ-/0/1739225098792?e=1788998400&v=beta&t=fgQJ_5sJFNDG6HIUTp4hkUo2BCrA9GC5r4QhPYFjiAY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador de Ti</strong><br><small>7LAN COMERCIO E SERVICOS LTDA</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458751189/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHUKdeg5gYZag/company-logo_100_100/company-logo_100_100/0/1727968831406/ipnet_logo?e=1788998400&v=beta&t=yP2cOFcBGyMfOezGc8NjcYfIpU2vWLS4_4VJI1XNDY8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos Estratégicos - Pleno I Rio de Janeiro - Rj</strong><br><small>IPNET by Vivo</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456554594/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1788998400&v=beta&t=id5CrBGB8YKdYMHC1Z4nDKP56KFtK8PmimDl_yNjufs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>(1527) Technical Project Manager</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448199229/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1788998400&v=beta&t=vQ0I4yUMmiQlHgpF20sfIB4aXKAkYABU3GwlymBihNg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos - Rj</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456551884/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDLy4STCnHbg/company-logo_100_100/B56ZnZxDipI0AQ-/0/1760295142304/amazon_logo?e=1788998400&v=beta&t=jYGS2bU0DQBeYJrtKyA6zFDuiWQOpH_XXkOKYnCWq1Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Program Manager, Speed Ef, Br Ops</strong><br><small>Amazon</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458727725/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFpcmgTMiaTrQ/company-logo_100_100/B4DZT6pFClHYAY-/0/1739371860558/bravocorp_logo?e=1788998400&v=beta&t=4FdSBhQtz7dPpF9mshGfAElsU4RP5W1aR-6T8pLOwuY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos - Ams</strong><br><small>Bravo | Simplify Everything</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457185756/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFZ7LIUQt60bQ/company-logo_100_100-alternative/company-logo_100_100-alternative/0/1630524100844/brokerkit_logo?e=1788998400&v=beta&t=tIfjmdM47hrcXMLCEcEXboft3xNNRnaSVbQivwt2rz0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Associate Product Manager - Latam Remote</strong><br><small>Brokerkit</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457199525/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGR6FSAnbBWcQ/company-logo_100_100/company-logo_100_100/0/1719847292094/emerson_logo?e=1788998400&v=beta&t=oS7Xhg_YwsbvguNQnhBUSnWHJ4bIBqunscv8PXQW52o" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos</strong><br><small>Emerson</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457608049/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGZ34Z5Azy0Qw/company-logo_100_100/company-logo_100_100/0/1630556337246/fever_inc_logo?e=1788998400&v=beta&t=VrlN-_GFLgs-zCoqvumtXIstWIGi-y3yTjboUN9R8LI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Partner Project Manager</strong><br><small>Fever</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4446609699/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFLVXcbv7aiNw/company-logo_100_100/B4DZrfNQ3XJAAQ-/0/1764681387988/ford_brasil_logo?e=1788998400&v=beta&t=VEwDsODHooLtbBMB7gN7URIiHjfXhWeDjjw7e9XGZwI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager - Costumer Success</strong><br><small>Ford Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458784526/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQFhEni_JauxUg/company-logo_100_100/company-logo_100_100/0/1631300968602?e=1788998400&v=beta&t=vTFVuz5y5zD6cZ2EIKWLSzvTWBQa_kX3A3jgN7qD76U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager</strong><br><small>InterSystems</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458595055/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGGGDZT12LbJg/company-logo_100_100/B56ZeGwlz9HEAU-/0/1750312575106/jll_logo?e=1788998400&v=beta&t=0cwOkqRoCxan5J2rzVVQt9sG6R5i6ai_YAM-upEqdvc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos Sênior</strong><br><small>JLL</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458533300/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGClQJLMFgusw/company-logo_100_100/B4DZbUceftGwAU-/0/1747320957641/agenciajustlive_logo?e=1788998400&v=beta&t=-mIYV8c3iA0AMg4lcSbU1UP5hrRqrhwaiWywOZSt-O0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos</strong><br><small>Just Live</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456944364/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEodS0tsV-9cA/company-logo_100_100/company-logo_100_100/0/1635526473146/mouts_logo?e=1788998400&v=beta&t=eb_hLZSDDqgbb2p7lL24tPnC6WlFWCQ0p8dtjB_DSu0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos Sênior</strong><br><small>Mouts IT</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458762739/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHpXmVDvF7gvQ/company-logo_100_100/B4DZkvU3xhJgAQ-/0/1757435624969/nava_technology_logo?e=1788998400&v=beta&t=jHEN05_nhwNucZEthV3ykADUFPjb_Z2M2cq9KBGL0CM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos</strong><br><small>Nava | Tech for Business</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458527801/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1788998400&v=beta&t=id5CrBGB8YKdYMHC1Z4nDKP56KFtK8PmimDl_yNjufs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>(1527) Technical Project Manager</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448199227/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQHnOfAZvrwizA/company-logo_100_100/company-logo_100_100/0/1631350962903?e=1788998400&v=beta&t=_kHhGW_IS_MgGwBIzstkwUpbcTSYvUmb05jK2Q5Htsg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos Campinassp - Sp</strong><br><small>RDANILLO</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456563569/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHYSyauUcA3RQ/company-logo_100_100/company-logo_100_100/0/1719255636166/rockcorps_logo?e=1788998400&v=beta&t=KndXJMQp1mbsiYbJNKeMzkKyjwAFrbtmZxftK7eYBrw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager</strong><br><small>RockCorps</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458719474/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFfmskUMxPNHw/company-logo_100_100/company-logo_100_100/0/1650278940409/selbettioficial_logo?e=1788998400&v=beta&t=CiWUn_lrqtRFka9T_UCq4XK0tHcWSx4K53SvPIhhYJI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos Sênior | Pmo</strong><br><small>Selbetti Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457193750/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEBslBrPsESTw/company-logo_100_100/B56ZVcta7LGsAc-/0/1741017166743/sideglobal_logo?e=1788998400&v=beta&t=KquqmW2IQGuP1Vd8t2-yCXc7fdS9CgnQtUnEfvWRKBc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager, Qa</strong><br><small>Side</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458547050/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGsGR9p4ikS5w/company-logo_100_100/company-logo_100_100/0/1708946550425/tata_consultancy_services_logo?e=1788998400&v=beta&t=La2rat12cs807KWqYVIv6-CtXl5K0DTvDNN9Vl7Gedo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>It Finance Project Manager</strong><br><small>Tata Consultancy Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458730021/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGA_mzWHXViJw/company-logo_100_100/B4EZ85Dsw4HwAM-/0/1783368699219/totalpassbrasil_logo?e=1788998400&v=beta&t=5FvN0hu-duhsnwe5Tm68DN7c70isLoLjIFUjPiH1NME" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Group Product Manager</strong><br><small>TotalPass Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458767167/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;">Porto Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEKJkNi0jPq6g/company-logo_100_100/company-logo_100_100/0/1692091283547/blankdesignstudio_logo?e=1788998400&v=beta&t=aStCtm75tRD4VOHrPnI8RKztQ3gGfNa4c_zh9kJn_pU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Project Manager</strong><br><small>Blank Design Studio</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4456594330/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;">Palhoça</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFkUuPBaqVzJg/company-logo_100_100/B4DZvcE3jEK0AQ-/0/1768923822662/prologapp_logo?e=1788998400&v=beta&t=KtGhHzUX8HqCbjND1WtQCYpD0Ca1aiUOuwlmiFDhNOw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Manager | Sênior</strong><br><small>Prolog App | Gestão de Frotas</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457414272/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
