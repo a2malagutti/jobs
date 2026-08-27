@@ -1,0 +1,871 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1789603200&v=beta&t=462eNKuGtdmaazruF8_uP3fQMJcbWkKBb0mmdiW8Nyo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Devops Engineer (aws)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4296431261/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFhwIeQEAp9Og/company-logo_100_100/B56ZkHQ4zAHQAU-/0/1756763491979/tekton_labs_logo?e=1789603200&v=beta&t=A147uTWlEhx1dHWbmrJpRyGvb6ctTL9tbpy6OYhPKJk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Fullstack Developer (.net & React)</strong><br><small>Tekton Labs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4438016675/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (9 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHs0947GSZjbQ/company-logo_100_100/company-logo_100_100/0/1630575796505/affinity_portugal_logo?e=1789603200&v=beta&t=-zy4XH6Dr48LhyvOuHfNTHMxY79AKxbFhBKhfaCTbaY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Aws Devops Engineer — Portugal</strong><br><small>Affinity</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459690252/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1789603200&v=beta&t=p1FW2b5vEEhzvjQhTMOxOhxKoC_TJZKSHB1FWjrABOE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Aws Data Specialist, Brazil</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459800996/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1789603200&v=beta&t=p1FW2b5vEEhzvjQhTMOxOhxKoC_TJZKSHB1FWjrABOE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Aws Database, Brasil</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459609489/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1789603200&v=beta&t=p1FW2b5vEEhzvjQhTMOxOhxKoC_TJZKSHB1FWjrABOE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Specialist Aws Data Developer, Brasil</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459393522/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1789603200&v=beta&t=p1FW2b5vEEhzvjQhTMOxOhxKoC_TJZKSHB1FWjrABOE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sênior Kotlin/java Developer Aws, Brasil (c</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459353149/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459397695/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1789603200&v=beta&t=vtaqotfHHEVv62O-uiCc0QhQ8B0f1_wCoU0NlzsZzrs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Aws Database</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458396937/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFVelLHpNdUlw/company-logo_100_100/company-logo_100_100/0/1680002101871/proxify_se_logo?e=1789603200&v=beta&t=462eNKuGtdmaazruF8_uP3fQMJcbWkKBb0mmdiW8Nyo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Devops Engineer (aws)</strong><br><small>Proxify</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4306716279/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFYxxMZnepyAw/company-logo_100_100/B56ZsDhgBgI0AQ-/0/1765290672906/quik_hire_staffing_logo?e=1789603200&v=beta&t=rW3Fy1dhie2mSg9-6clcF0T45fCVw8pqOkUjUO3Xluw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Backend Engineer - Node.js & Aws (remote)</strong><br><small>Quik Hire Staffing</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459820054/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459393718/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Goiás</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;">Goiânia</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459399637/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Bahia</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459393720/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Ceará</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Fortaleza</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459398686/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">Recife</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459387764/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Norte (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Amazonas</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGOukiDWuOB4Q/company-logo_100_100/B4EaArtUtwGwAI-/0/1787439697052?e=1789603200&v=beta&t=Ej8UcJueb6moR3gRsscKfhdVFfi7LYHM3cbiYsNUMrg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Software em Cloud/aws</strong><br><small>Auth21</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459654974/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459395706/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (12 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459393721/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459388777/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFqdm1TZ-RZKQ/company-logo_100_100/B4EZgOay6gHEAY-/0/1752588562343/amazon_web_services_logo?e=1789603200&v=beta&t=pyoNLMI3TlgJj_4qFzFk4V03vreNj_pdZJPiUPMOx8s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Enterprise Account Manager, Brazil Sales</strong><br><small>Amazon Web Services (AWS)</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459345410/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGOukiDWuOB4Q/company-logo_100_100/B4EaArtUtwGwAI-/0/1787439697052?e=1789603200&v=beta&t=Ej8UcJueb6moR3gRsscKfhdVFfi7LYHM3cbiYsNUMrg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Aws Sr</strong><br><small>Auth21</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459670181/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGA04kR-6DdWw/company-logo_100_100/company-logo_100_100/0/1719854511297/factset_logo?e=1789603200&v=beta&t=hkev4-SJh3Ws0sQHjUkeh918K2TbKM0RANCZo8IApNM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cloud Engineer - Gcp/aws (hybrid)</strong><br><small>FactSet</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448486344/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGA04kR-6DdWw/company-logo_100_100/company-logo_100_100/0/1719854511297/factset_logo?e=1789603200&v=beta&t=hkev4-SJh3Ws0sQHjUkeh918K2TbKM0RANCZo8IApNM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Principal Cloud Engineer - Gcp/aws (hybrid)</strong><br><small>FactSet</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449874526/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459388769/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFS8Oq_RoTX9Q/company-logo_100_100/B4EZmE9ECUIUAQ-/0/1758872224292/gft_technologies_logo?e=1789603200&v=beta&t=GSqJx7Wh3s1iXsawt0baa6gw7dmMHURN3aXYcqFhA5I" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvimento .net/python Aws Sênior - Híbrido - 134722</strong><br><small>GFT Technologies</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457702043/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFS8Oq_RoTX9Q/company-logo_100_100/B4EZmE9ECUIUAQ-/0/1758872224292/gft_technologies_logo?e=1789603200&v=beta&t=GSqJx7Wh3s1iXsawt0baa6gw7dmMHURN3aXYcqFhA5I" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvimento Java/node Aws Junior/pleno - Híbrido São Paulo -133713</strong><br><small>GFT Technologies</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4451262751/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_100_100/company-logo_100_100/0/1688684715866/ibm_logo?e=1789603200&v=beta&t=_kr6Pa0tWyWbnmOMowp-YI5AGqGmIBQeD4fg0_0tlgI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Application Developer - Aws Cloud Modernization - Student Conversion</strong><br><small>IBM</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457297192/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1789603200&v=beta&t=HIiH1M8Q9v7kSTTUPMo8MMSPq1OFUGjdNGP6yp2GhfU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Aws Cloud Security Engineer - Remote Work</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459331238/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHvZWGCjUlORw/company-logo_100_100/B4EZ6DQIrcH8AI-/0/1780318506699/insi_global_logo?e=1789603200&v=beta&t=4kIGs9pyJFUcjRYS_Gb_VTHUwEm55TqQtiyQBSrJYRE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Soluções Sênior (aws/.net)</strong><br><small>Insi</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457292792/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGOukiDWuOB4Q/company-logo_100_100/B4EaArtUtwGwAI-/0/1787439697052?e=1789603200&v=beta&t=Ej8UcJueb6moR3gRsscKfhdVFfi7LYHM3cbiYsNUMrg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Desenvolvedora Aws Sênior</strong><br><small>Auth21</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459674050/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFl6I0phUCDQg/company-logo_100_100/B4EZo1FC7hIIAQ-/0/1761827107300/fullstack_labs_logo?e=1789603200&v=beta&t=EaUf2bj304nEROSo7R0XvgxiEZ4q5tfa-OSs2vxhX3s" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Engineer (python + Aws + Dbt) - Remote - Latin America</strong><br><small>FullStack</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459390683/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
