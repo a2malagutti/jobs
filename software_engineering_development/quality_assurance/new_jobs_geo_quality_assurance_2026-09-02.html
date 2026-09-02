@@ -1,0 +1,898 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (3 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQF_Ttlsp4CzVw/company-logo_100_100/company-logo_100_100/0/1688068182381/akureyinc_logo?e=1790208000&v=beta&t=MRY3d9G8B1gMcLPs1f_KT109AciyqWSYKha3JJd_VCs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Qa Engineer for Ai Platform Systems (part-time)</strong><br><small>Akurey</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462076410/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790208000&v=beta&t=fra0ABqxIBcxtbNTi6Ri0kzvYwWHZ44oBBRH7IV9vW0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Automation Engineer (playwright) - Remote Work | Ref#295453</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462079357/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1790208000&v=beta&t=OYOFalqCc9Q576O96Gx5olQnJEMRKDihMxFw6dMqQ18" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Analyst - Remote Work</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462416584/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (11 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGXQxaCwPelVw/company-logo_100_100/company-logo_100_100/0/1655962311797/7teen_games_logo?e=1790208000&v=beta&t=fOZcm9_eTSBQUkbfcZ1gXylUQkKde-scCVZb70mQivE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Lead</strong><br><small>7TEEN Games</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4461784991/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEZh_JBu4nx6A/company-logo_100_100/company-logo_100_100/0/1696892619449/astroti_logo?e=1790208000&v=beta&t=-0La751KsnMU4ENOw1xh67tXv5MkkMpqNYUpPHn8GfQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qa — Automação / Cypress</strong><br><small>Astro 7</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459567553/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790208000&v=beta&t=fra0ABqxIBcxtbNTi6Ri0kzvYwWHZ44oBBRH7IV9vW0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Automation + Appium Engineer- Remote Work | Ref#302596</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462089110/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1790208000&v=beta&t=m5UmujpUWrp4y5DdqfVEyt0cB755SW_NAfBd_MpBcZk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Automação Playwright e Restsharp - Sênior</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459587876/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEOodjhjK04fg/company-logo_100_100/B4DZ7vdnjrGkAI-/0/1782133979615/mizuioficial_logo?e=1790208000&v=beta&t=W49mUdvstaUYu9FMLkVk5su8tRyhvAgUOdGDCago7Fc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Mizui | Qa Engineer | Pleno | Remoto</strong><br><small>Mizui</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459968196/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFYxxMZnepyAw/company-logo_100_100/B56ZsDhgBgI0AQ-/0/1765290672906/quik_hire_staffing_logo?e=1790208000&v=beta&t=4d_BcbS5DVmB4awCzJ5z9nuRrkC-hkhmDPhJX-Uq5WA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Engineer (remote)</strong><br><small>Quik Hire Staffing</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462404623/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQH8llcPyq22gw/company-logo_100_100/B56Z0owiw9HkAQ-/0/1774505307486/rex_zone_logo?e=1790208000&v=beta&t=3zQ5z4XJQ13dQ4QTZFWpjJiVhPC2DXstX3vjhrQYybg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Freelance Generalist Jobs in Brazil</strong><br><small>Rex.zone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4416067237/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH2fSyKzOKvxQ/company-logo_100_100/B4DZhm6.XDGkAc-/0/1754073395323/tivit_logo?e=1790208000&v=beta&t=0a82zBgHBcaixNWI50r2gCxyh3Su-A5a-EjwPBzvNbY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Testes de Qa (funcional e Automatizado ) Sr</strong><br><small>TIVIT</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459943696/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFldwQOJXJwkQ/company-logo_100_100/B4EZo_o3rJGoAQ-/0/1762004270064/tesseralabsai_logo?e=1790208000&v=beta&t=2YZPC-JCNiPWVvee3OivacgYV1s5AyXuRkl7P-Kyeoc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Qa Engineer</strong><br><small>Tessera Labs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460684080/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFBTzr0P991_g/company-logo_100_100/company-logo_100_100/0/1630658819155/velozient_logo?e=1790208000&v=beta&t=CfDJ7LY3LWzB-maY1l3vpsmKPWmetd__gB4m_UvCs70" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Automation Lead (playwright/typescript)</strong><br><small>Velozient</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462065433/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHrvDipHN_Wwg/company-logo_100_100/company-logo_100_100/0/1688386929035/viceri_logo?e=1790208000&v=beta&t=wEth47jpb9-wFPWDvm6Op6A3xAOu1JfrHt9C586rtzU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Analista de Qa Sênior (especialista em Automação)</strong><br><small>Viceri SEIDOR</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459578153/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (5 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGA1uEmsE4iDw/company-logo_100_100/B4DaA1Q1YjHsAI-/0/1787600000776/digisystem_logo?e=1790208000&v=beta&t=r9CPGOA_R38nox_AV7IBFgpQg3SXlrlv7Z8ILSt1bD8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor Qa</strong><br><small>DIGISYSTEM - IT Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462097669/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGA1uEmsE4iDw/company-logo_100_100/B4DaA1Q1YjHsAI-/0/1787600000776/digisystem_logo?e=1790208000&v=beta&t=r9CPGOA_R38nox_AV7IBFgpQg3SXlrlv7Z8ILSt1bD8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor Qa</strong><br><small>DIGISYSTEM - IT Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462118140/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGA1uEmsE4iDw/company-logo_100_100/B4DaA1Q1YjHsAI-/0/1787600000776/digisystem_logo?e=1790208000&v=beta&t=r9CPGOA_R38nox_AV7IBFgpQg3SXlrlv7Z8ILSt1bD8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor Qa</strong><br><small>DIGISYSTEM - IT Solutions</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462097666/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGubnL3V3JUGw/company-logo_100_100/B4EZ8SOZfiJUAI-/0/1782717192383/minsait_logo?e=1790208000&v=beta&t=EImQa9hN-QNQPPvEkZek6utCKXjO1p9KAdER6lwRv-0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Testes / Qa - Pleno</strong><br><small>Minsait</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459937551/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Goiás</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;">Goiânia</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGLRWEa5qWq_g/company-logo_100_100/company-logo_100_100/0/1630610882422?e=1790208000&v=beta&t=0IVjjLqeOrdkFZuK2qhE7onVpM1scj-UrLSGpSGz3V0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Testes (qa) - Júnior/pleno</strong><br><small>Ponto iD Technology</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462187244/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Ceará</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;">Fortaleza</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1790208000&v=beta&t=OYOFalqCc9Q576O96Gx5olQnJEMRKDihMxFw6dMqQ18" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Analyst - Remote Work</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462429021/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;">Recife</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1790208000&v=beta&t=OYOFalqCc9Q576O96Gx5olQnJEMRKDihMxFw6dMqQ18" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Analyst - Remote Work</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462428076/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (16 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFTJpEKJy3XsA/company-logo_100_100/B4DZip9S2KHwAQ-/0/1755198075652/inter_logo?e=1790208000&v=beta&t=wvEqVGPc5HKXpaQmqXIus9hCcEd51WkfymYr5RtzTvA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Analyst I</strong><br><small>Inter</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462033235/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEpsGN1uRFM1g/company-logo_100_100/company-logo_100_100/0/1719853325841/wsp_brasil_logo?e=1790208000&v=beta&t=2IFPn47V5sDtAxm_6htOno2BExU-FhkdE_RA-V3pRFs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Ambiental 1 - Foco em Qa/qc (belo Horizonte/mg)</strong><br><small>WSP in Brazil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4452001358/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE0wyub1rswiA/company-logo_100_100/company-logo_100_100/0/1654720569889/btgpactual_logo?e=1790208000&v=beta&t=VGQ1B4lB5NvvWMg-BbMzfQhycLCY3Kb9aj1a9ccG8gc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Qualidade Sênior (qa) | Governança de Qualidade</strong><br><small>BTG Pactual</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4443553161/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE0wyub1rswiA/company-logo_100_100/company-logo_100_100/0/1654720569889/btgpactual_logo?e=1790208000&v=beta&t=VGQ1B4lB5NvvWMg-BbMzfQhycLCY3Kb9aj1a9ccG8gc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Software Qa - It Credit & Architecture</strong><br><small>BTG Pactual</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462036207/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790208000&v=beta&t=fra0ABqxIBcxtbNTi6Ri0kzvYwWHZ44oBBRH7IV9vW0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Junior Qa Automation / Pesquisa + Desenvolvimento - Trabalho Remoto | Ref#249010</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4140301154/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790208000&v=beta&t=fra0ABqxIBcxtbNTi6Ri0kzvYwWHZ44oBBRH7IV9vW0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Engineer - Trabalho Remoto | Ref#272322</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4140195869/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHm1ULYG7xpsw/company-logo_100_100/company-logo_100_100/0/1630576352748/beesbrasil_logo?e=1790208000&v=beta&t=YXtGqGVe_QIjJWF7xNNe0wKGrRf_uq2Z1hI0KikVZdA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Intermediate Quality Assurance</strong><br><small>Bees Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460622890/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHm1ULYG7xpsw/company-logo_100_100/company-logo_100_100/0/1630576352748/beesbrasil_logo?e=1790208000&v=beta&t=YXtGqGVe_QIjJWF7xNNe0wKGrRf_uq2Z1hI0KikVZdA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Specialist</strong><br><small>Bees Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460989908/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFG34xYbx2GNg/company-logo_100_100/B4DZfAFqW2HMAY-/0/1751274399497/ntt_data_europe_latam_logo?e=1790208000&v=beta&t=h8tgtZ5KcGQ7mZ2CvdlfBxP3o3hRbezpgGP4h0ja8DE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Analista de Qa (híbrido)</strong><br><small>NTT DATA Europe & Latam</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460988238/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHpXmVDvF7gvQ/company-logo_100_100/B4DZkvU3xhJgAQ-/0/1757435624969/nava_technology_logo?e=1790208000&v=beta&t=LkGnUvJxcQpa395pZ_G7kVWkcf_w1UCD-gJbAt0JN20" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Sênior</strong><br><small>Nava | Tech for Business</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459562381/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHpXmVDvF7gvQ/company-logo_100_100/B4DZkvU3xhJgAQ-/0/1757435624969/nava_technology_logo?e=1790208000&v=beta&t=LkGnUvJxcQpa395pZ_G7kVWkcf_w1UCD-gJbAt0JN20" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Sênior</strong><br><small>Nava | Tech for Business</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462093463/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQF7yJBqW7gTew/company-logo_100_100/company-logo_100_100/0/1657741350419/pipastudios_logo?e=1790208000&v=beta&t=kXXAS-gdhhGDOwTxFUQw5NQHsFOmQhU7dVxV2lf0uQQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista de Qa</strong><br><small>Pipa Studios</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460977474/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHdvjiq_3u9SQ/company-logo_100_100/company-logo_100_100/0/1651181402504?e=1790208000&v=beta&t=s_i5K6mtxZ81kUckyx6_p6zjnIjlyFkddXItucutv60" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Qa Pleno I Auto</strong><br><small>Porto</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462077533/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEATHMUo8sshg/company-logo_100_100/B4DZd7OnTLHkAQ-/0/1750119118553/totvs_logo?e=1790208000&v=beta&t=SASe5JFbDJaQtkBGc7GdhMcoebNZ8608b5BodmNQoxY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>[tech] Analista de Qualidade Júnior - Qa/tester</strong><br><small>TOTVS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459530738/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">Guarulhos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1790208000&v=beta&t=OYOFalqCc9Q576O96Gx5olQnJEMRKDihMxFw6dMqQ18" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Qa Engineer - Remote</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462402690/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">Guarulhos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQErXjIzfHesyQ/company-logo_100_100/company-logo_100_100/0/1666898446316/indi_staffing_services_logo?e=1790208000&v=beta&t=OYOFalqCc9Q576O96Gx5olQnJEMRKDihMxFw6dMqQ18" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Quality Assurance Analyst - Remote Work</strong><br><small>INDI Staffing Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462416632/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">Santa Maria</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQETFYGyitZ05A/company-logo_100_100/company-logo_100_100/0/1663359156172/jetimob_logo?e=1790208000&v=beta&t=ZxhZRzMMQBxwYtmkn7cKz6TKdLph8K0QF-mlL56Os0k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Testes / Qa</strong><br><small>Jetimob</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462100555/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
