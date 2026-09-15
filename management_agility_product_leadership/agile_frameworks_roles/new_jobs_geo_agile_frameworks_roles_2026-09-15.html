@@ -1,0 +1,976 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América Latina</div>
+                    
+                    
+                        <div class="coun-h">Country: </div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790812800&v=beta&t=HFXtM2kAOD6gsCJimO78_N877hGdFhFSaal16f5cBKk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Junior Product Owner - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467788357/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGm8L_ITpbtVA/company-logo_100_100/company-logo_100_100/0/1727806243091/scanntechuruguay_logo?e=1790812800&v=beta&t=-Y7TBjVyzQGFUJRjAVNZPnhVScOScFawX_6rIrPcRa0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>Scanntech Uruguay</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467744080/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (13 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHs0947GSZjbQ/company-logo_100_100/company-logo_100_100/0/1630575796505/affinity_portugal_logo?e=1790812800&v=beta&t=_mihooYEWAjWJBlMjzZG1abxrF-OKU4A8mckRa2nY8k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>Affinity</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467723677/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1790812800&v=beta&t=mBVzHdG691TF0GYvHXjcIqkmJScpmpamNFAuuP53AvM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fbs - Agile Product Manager Iii - Product Owner Team Lead (safe / Art)</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4451274288/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1790812800&v=beta&t=mBVzHdG691TF0GYvHXjcIqkmJScpmpamNFAuuP53AvM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Fbs - Product Owner L</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449853866/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGS2dYkE6pQUA/company-logo_100_100/B4DZ2b.l4WIkAY-/0/1776438370262/compass_uol_logo?e=1790812800&v=beta&t=LtKeSV_DxlAvTeU6HZeD5k8T9yEa2kqUwsDV_1bvU5g" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Scrum Master (mid-level) (remote)</strong><br><small>Compass UOL</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467495043/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFdHemo5gYGsw/company-logo_100_100/company-logo_100_100/0/1692024257489/engbimus_logo?e=1790812800&v=beta&t=_c0rAEwjtUb7MWi5BXhYIWtxVPoyhtvFax3fbSgk5To" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Bim Product Owner</strong><br><small>ENG</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466538273/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEzMzmY-T_F1g/company-logo_100_100/company-logo_100_100/0/1670441718552/grupofcamara_logo?e=1790812800&v=beta&t=87Lkr8Q_9UrapDgGpi3hLGN-730W5hQmW8LHcHSmpnM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>FCamara</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467789263/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHvZWGCjUlORw/company-logo_100_100/B4EZ6DQIrcH8AI-/0/1780318506699/insi_global_logo?e=1790812800&v=beta&t=wCrG0KAa7Rh3yijmtjUwHDv28OAiKx7CdTI9fcKzEqQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Master Sênior</strong><br><small>Insi</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465560809/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQEXh1MsUSE84A/company-logo_100_100/B56Z7gEpI_G8AI-/0/1781875775095/insight_global_logo?e=1790812800&v=beta&t=g2hNp44t_qK9ZwVJGFdt3PccqTegGVo-wgrF_C51Uw0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Healthcare Product Owner</strong><br><small>Insight Global</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466570214/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1790812800&v=beta&t=7IJNW1kitOq3jLfDfYJ-XPOtsOfjpomviAVe8FzkKv8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sr</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466160948/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHdx4NngvFyPA/company-logo_100_100/B4EZ5GHh6CHEAU-/0/1779292839822/jobgether_logo?e=1790812800&v=beta&t=7IJNW1kitOq3jLfDfYJ-XPOtsOfjpomviAVe8FzkKv8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner [talents Bench]</strong><br><small>Jobgether</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466171126/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEqgrJdCVtQwA/company-logo_100_100/B4EZ1BijK_IkAQ-/0/1774921069560/pasitoinc_logo?e=1790812800&v=beta&t=Mpup-OQc9II2INolmFnl50G7wZuGPRQjgu1MbTo4b38" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>Pasito</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466160537/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQH1EwM3qpWyaQ/company-logo_100_100/B4EZY55yQ0HgAg-/0/1744728172606/skelt_beauty_brands_logo?e=1790812800&v=beta&t=a7XXNtCiWo7gfo2Vwyo8P4uYCHl001qxRkDzdb80bf0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente Pmo – Projetos de Pesquisa & Desenvolvimento (p&d) | Curitiba-pr</strong><br><small>Skelt Beauty Brands</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467723852/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1790812800&v=beta&t=RT430m5jZCYlnLSTEd0DC1iIqUBsXsb2wHrlGoLxvHc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pmo - Sp</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465277654/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQH5devd-1maKg/company-logo_100_100/company-logo_100_100/0/1630612930771/sos_docs_logo?e=1790812800&v=beta&t=G1bCX8pqccI2nG7cCusv2VyW8RtLNP6TY4RFd9xTnPk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>SOS DOCS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465905602/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraíba</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;">João Pessoa</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFKSNRAdYg9gg/company-logo_100_100/company-logo_100_100/0/1697553551298/engenheiros_logo?e=1790812800&v=beta&t=FiQyJztj0mZDXajI5XwqmHFbPXsX0AqPxnAsJ2qikHg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Pleno</strong><br><small>Capitani Engenheiros</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467757183/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (17 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH9o89gJ0S2GQ/company-logo_100_100/B4DZ7XO8i5HEAI-/0/1781727480290/luza_group_logo?e=1790812800&v=beta&t=VRdf1afNAEcQr2jcTFm_uu7GoRdRG2UsQpNw-Ss-MQY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estagiário - Pmo</strong><br><small>LUZA Group</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465571982/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1790812800&v=beta&t=RT430m5jZCYlnLSTEd0DC1iIqUBsXsb2wHrlGoLxvHc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pmo Sênior - Rj</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465258959/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHAB4V5EEskmw/company-logo_100_100/B4DZ9xS7wCIIAI-/0/1784312216961/autoavaliar_logo?e=1790812800&v=beta&t=Bs4XpNlnYKEgc2gnuJusvZtpE0yqf64EB_5qnQ0fgKA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner</strong><br><small>Auto Avaliar</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466554199/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFtcmFAiKSggg/company-logo_100_100/B4DZsI1b1XLgAQ-/0/1765379784421/b3_oficial_logo?e=1790812800&v=beta&t=3Jfm-nvCCSKRj3oeVQYtnXYT8_9EyKKqy-bZZkwTtiI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>8145 - Product Owner Sênior (qa)</strong><br><small>B3</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465587806/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790812800&v=beta&t=HFXtM2kAOD6gsCJimO78_N877hGdFhFSaal16f5cBKk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Junior Product Owner - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467788378/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGTKLNDZJpEMg/company-logo_100_100/company-logo_100_100/0/1710961290554/grupo_bridger_logo?e=1790812800&v=beta&t=8B-spijA1Vcewq0ZpV9YR_aRQOYiZIPekzgl6taDXbg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Negócios / Product Owner (po) – Pleno</strong><br><small>Bridger</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465246798/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQE8koeGR7tZZg/company-logo_100_100/B4DZraFXYXGQAQ-/0/1764595431319/grupo_unipar_logo?e=1790812800&v=beta&t=Gub_64-3bYSFyGOiee3zJbvrnx0hPenLWZP5hh2ejms" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista Tecnologia Sr | Foco em Pmo (509862)</strong><br><small>Grupo Unipar</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467421111/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQENyqBIl_NQqg/company-logo_100_100/company-logo_100_100/0/1656015036504/itacceptbr_logo?e=1790812800&v=beta&t=ykwo75lfdvMSPnIUG56xC0dhD4Z9KtJ0ymJ1P3K25as" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner / Analista de Negócios Júnior (híbrido – São Paulo)</strong><br><small>IT Accept - Soluções em Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467774980/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF63LzFLHiMCw/company-logo_100_100/company-logo_100_100/0/1730468966843/instituto_de_pesquisas_eldorado_logo?e=1790812800&v=beta&t=Fj7OLH7eHKVVGyAK1o9DysY4rzS1-VOMerOIS7rWqa0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner Sênior</strong><br><small>Instituto de Pesquisas ELDORADO</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465253741/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEUwreILeGS7Q/company-logo_100_100/B4DZ5wJQzAG4AM-/0/1779997937122/jobbol_empregos_logo?e=1790812800&v=beta&t=8TXYz27b9WuJkspGbGIZSOsAaspEE5KMoxKabdplZyw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Gerente de Projetos</strong><br><small>Jobbol</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467423595/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQE-4STpXFyWJg/company-logo_100_100/company-logo_100_100/0/1694698700031?e=1790812800&v=beta&t=b7wYTK-JXWCGiSAn1ZkOLqcdg-i6vg6vv60ZFf9fkz4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Analyst Pmo & Operations</strong><br><small>Johnson & Johnson Innovative Medicine</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467280751/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGW4EB1A1aUYQ/company-logo_100_100/B4DZyL2uQ_IUAY-/0/1771872904949/serasaexperian_logo?e=1790812800&v=beta&t=4fNJTZVuw24eQ1VrCaY4umSXF7ar_yDKkVRYbdeDYt0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Projetos Sênior - Pmo (b2b)</strong><br><small>Serasa Experian</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4448604821/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGsGR9p4ikS5w/company-logo_100_100/company-logo_100_100/0/1708946550425/tata_consultancy_services_logo?e=1790812800&v=beta&t=n6U7CO7brXJiNln9d-MBwWRO-wA1z6zmeGCkIUXe1Yo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Owner - Po</strong><br><small>Tata Consultancy Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465905133/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQG91qry-d7hlw/company-logo_100_100/company-logo_100_100/0/1660833393242/tokstok_logo?e=1790812800&v=beta&t=3Iuh7J7levbhTjWR5GrrOrUCxf3u8aBzrd_pS0Q9lY8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estagiário(a) em Operações de Criação e Branding (creative Ops/pmo)</strong><br><small>Tok&Stok</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467787953/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1790812800&v=beta&t=RT430m5jZCYlnLSTEd0DC1iIqUBsXsb2wHrlGoLxvHc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Agile Coach - Sp</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465259821/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">Guararema</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFxhsUQuX5Qyg/company-logo_100_100/company-logo_100_100/0/1630500222462/mars_logo?e=1790812800&v=beta&t=-zBCfDiV1hVjQV5Y9O9lUk8najg8NOFFhNKv2Tj18vU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Ops Product Owner</strong><br><small>Mars</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465076715/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">Guarulhos</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1790812800&v=beta&t=HFXtM2kAOD6gsCJimO78_N877hGdFhFSaal16f5cBKk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Junior Product Owner - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467783366/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (8 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEwrZ-IGA6Ayw/company-logo_100_100/B4DZbP.ViQGUAQ-/0/1747245947538/techsolutionbrasil_logo?e=1790812800&v=beta&t=lxQU5OCg_O9Dcr7kZZkq9JAU9ZeDZmXN3ry_yzdj49g" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Produto (pmo)</strong><br><small>TECHSOLUTION</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465556863/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Manobrista Cnh B - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465267370/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Operador de Condução a - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465271716/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Operador de Estacionamento - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465277603/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Supervisor Operacional - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465261650/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;">Canoas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Operador de Caixa - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465278504/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;">Canoas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFR2VbViD24iA/company-logo_100_100/B4DZdA41kYGUAQ-/0/1749140331275/safe_park_estacionamentos_logo?e=1790812800&v=beta&t=CbhW0owTZWh9jD-DLHj8MDcWattqKm9wms1gVc5ec5k" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Operador de Estacionamento - Rs</strong><br><small>Safe Park</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4465275325/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHLSJs2N17hhw/company-logo_100_100/company-logo_100_100/0/1656709238568/mv_saude_digital_logo?e=1790812800&v=beta&t=dNS65Atbun7dMsy3fs_vhky0x1rqmbOXKTboiQPV6Zk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Coordenador Sistemas Junior</strong><br><small>MV</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467471226/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
