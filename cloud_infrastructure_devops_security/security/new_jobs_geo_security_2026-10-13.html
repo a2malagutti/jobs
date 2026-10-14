@@ -1,0 +1,967 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (9 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Appsec Engineer - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478152671/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Segurança - Trabalho Remoto</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478148161/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE4WhSY33g_Ag/company-logo_100_100/company-logo_100_100/0/1734557363884/caylent_logo?e=1793232000&v=beta&t=GRUrTlPRky-lDTff7jaOejA1-8_rejN1CF1XJOqtPmw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Security Engineer</strong><br><small>Caylent</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4469973935/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGNh_4pInYIIQ/company-logo_100_100/company-logo_100_100/0/1647617951142/ciklum_logo?e=1793232000&v=beta&t=EvkOTmpazI4mz1FvZc4lgwsjsLYmNtHpdhWuRHVD9S8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Application Security Engineer</strong><br><small>Ciklum</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4479048115/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEV_M0RDJciew/company-logo_100_100/B4EZ1JyLAoHUAQ-/0/1775059382763/ds3_digital_dynamic_software_servios_e_solues_ltda_logo?e=1793232000&v=beta&t=FbtI0YyziN6rzvlWKtRBM3arujiSRZ5jFKJmqhnqsWQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cyberark</strong><br><small>DS3 Digital</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4479068225/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHVErrvczv6pA/company-logo_100_100/B56ZfGKsjIHUAQ-/0/1751376382536/edwards_lifesciences_logo?e=1793232000&v=beta&t=x9Z7oExwLVSnK6a227aZ6NIuasvAWll5HmUBXT9VMW0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Data Security Architect, Ai & Aws Cloud</strong><br><small>Edwards Lifesciences</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4404134262/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEI7MyzjbVrcg/company-logo_100_100/B4DZjr5ea7G8AU-/0/1756304369968/useparallel_logo?e=1793232000&v=beta&t=KiRliqDwd1mhla6imUdq0xarnu1eFlVIOIN3d6GKDIs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai Security Red Teamer</strong><br><small>Parallel</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478124494/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFBudSGoYdD9g/company-logo_100_100/company-logo_100_100/0/1736441557682/revolut_logo?e=1793232000&v=beta&t=CoiK5O_iLC6Fll8f-0Qh_hAt78LLr4P9v-7te_LrMfQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Information Security Manager</strong><br><small>Revolut</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477963971/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHYnDOfMRYPZQ/company-logo_100_100/B4DZraA3sxIgAQ-/0/1764594253290/riachuelo_logo?e=1793232000&v=beta&t=SmmQk2CS-zBfI0DXpfyzlJ6xHHbTCM6mprPWTuDg234" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista Red Team</strong><br><small>Riachuelo</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478147281/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Goiás</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEQacgEm8ynuQ/company-logo_100_100/company-logo_100_100/0/1669068851556/jalles_logo?e=1793232000&v=beta&t=QjtdkaAeq_vfHDfr8BAVgKYOR-mZ86GCQzYDzzIhrtM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Segurança da Informação</strong><br><small>Jalles</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4479007153/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Nordeste (1 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Pernambuco</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=1793232000&v=beta&t=3ewYf6-TWoJsdqRpBtMbHc1fbSzF3S-0ijMJU3-0144" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor(a) de Inteligência Artificial | Recife Ou São Paulo Ou Rio de Janeiro</strong><br><small>Deloitte</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442141427/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (30 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQG64dSXK4S4aw/company-logo_100_100/B4EZsIpKlaGoAQ-/0/1765376568001/dxctechnology_logo?e=1793232000&v=beta&t=2Qn-6Ga2BKeudd_kIxCOb0GNyz_Tk-IOeuPC1JWc0NU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista Sênior em Segurança de Redes</strong><br><small>DXC Technology</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4469916552/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGaiayRMr-4Wg/company-logo_100_100/B4DZ8ZeXmuK8AM-/0/1782838820188/dtidigital_logo?e=1793232000&v=beta&t=kspTLBwC_W7r0vYXN9YKnzWng1dgAes6-oGdutO0pbw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Segurança da Informação - Estágio (modelo Híbrido)</strong><br><small>dti digital</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478111237/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cloud Security Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478730630/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Data Security & Dlp Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478745037/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Identity & Access Management (iam) Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478723917/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Incident Response Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478742103/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Network & Infrastructure Security Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478731538/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Vulnerability Management Analyst</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478744030/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cybersecurity Defense Expert</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478741190/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cybersecurity Penetration Testing Expert</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478743094/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHD7jKpwp33DA/company-logo_100_100/B56ZsP32kCG4AQ-/0/1765497858824/alignerr_logo?e=1793232000&v=beta&t=UEj8G2mfrvhB295g0YtuWBPOPamkmoL8pLu-bo4w7QQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cybersecurity Penetration Testing Expert</strong><br><small>Alignerr</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478738218/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Segurança - Trabalho Remoto</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478136579/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Segurança - Trabalho Remoto</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478145323/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Product Security Engineer - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478155678/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF1LcnKeI_UxQ/company-logo_100_100/company-logo_100_100/0/1738709971265/cloudwalk_inc_logo?e=1793232000&v=beta&t=TUYrTI0xGk58vv9bnM6IKINZaw22hHOiRmNV_jAKAP4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Offensive Security Engineer</strong><br><small>CloudWalk, Inc.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4468588756/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGjXeKYZojbuA/company-logo_100_100/company-logo_100_100/0/1669408162187/evox_tech_global_logo?e=1793232000&v=beta&t=YZWHdoJ-W5MNW1nqUTaDsfH6At8dY3LJ2fq8ZI1w74E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cloud Data Platform Engineer</strong><br><small>EVOX Global</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476497260/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEAUwpMMYarzA/company-logo_100_100/B4DaD3pJyPGkAI-/0/1790861155855/einstein_hospital_israelita_logo?e=1793232000&v=beta&t=Ma5kwTCHGGtXvzLg3sNe1uzaTLeIZEyY4o0zplUDTl4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Segurança da Informação Pl. - Segurança Ofensiva - Cuidado Público</strong><br><small>Einstein Hospital Israelita</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476481643/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF6qlnhGHoVZw/company-logo_100_100/B4DZmb3QnoGsAQ-/0/1759256578947/foursys_logo?e=1793232000&v=beta&t=bWUb5R1oNVj2dMTBWpJkTpSrw258M-lFXhAobVMqkDQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista de Soc - Híbrido</strong><br><small>FOURSYS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4479044283/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEUwreILeGS7Q/company-logo_100_100/B4DZ5wJQzAG4AM-/0/1779997937122/jobbol_empregos_logo?e=1793232000&v=beta&t=iGOz3hyZOiJnlNRxG5Bu7Gj8hiwWBuBUAlwQMU17Gsw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Segurança da Informação Sênior</strong><br><small>Jobbol</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478739435/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF99Ijb_CUslA/company-logo_100_100/B4DZwAWgqRIgAQ-/0/1769532427255/m_technologia_logo?e=1793232000&v=beta&t=aQV-Y8fyIJ4mtbaWmZ-3haQCwqReD3tgDkYwhG8iIp0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Devsecops</strong><br><small>M-Tech</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4479024514/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEjX5q_Qg8fyQ/company-logo_100_100/company-logo_100_100/0/1739381136166/mindsecbrasil_logo?e=1793232000&v=beta&t=9z9kj8Xmy_fSC6XzSj7fK30kB3HLxhe1tU0HQVueFBo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pen Tester</strong><br><small>Mindsec</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476442995/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFNHYkM6Qxejw/company-logo_100_100/B4DZyexaT9I8AY-/0/1772190279667/pagbank_logo?e=1793232000&v=beta&t=z4IfNq9CooibTvh6wAMPZUMPs769LdzvqOOBY_Y2sqg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Segurança da Informação Sr. (blue Team / Csirt)</strong><br><small>PagBank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460067294/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFNHYkM6Qxejw/company-logo_100_100/B4DZyexaT9I8AY-/0/1772190279667/pagbank_logo?e=1793232000&v=beta&t=z4IfNq9CooibTvh6wAMPZUMPs769LdzvqOOBY_Y2sqg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Segurança da Informação Sr. (appsec)</strong><br><small>PagBank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4468799077/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGwMGnuP_J71w/company-logo_100_100/B4DZ2x0H5eGQAQ-/0/1776804724765/pinari_rh_logo?e=1793232000&v=beta&t=o41a4FfbT3h6Cnwi2SgjBttlqJLu0TNaJKBGkpmhG4w" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Cibersegurança</strong><br><small>Pinari RH</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476480340/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHdvjiq_3u9SQ/company-logo_100_100/company-logo_100_100/0/1651181402504?e=1793232000&v=beta&t=liOIl2AJ1HrDF7NdyZ2w_KWvzqShQngEaQybYbMqIM0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Auditor (a) de Cibersegurança Especialista</strong><br><small>Porto</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467650243/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFj0WUKMRORZw/company-logo_100_100/B4DZaB3lVWGcAQ-/0/1745935554246/pwc_brasil_logo?e=1793232000&v=beta&t=0j-vcIMD0X-1mA3Fbn1uDYCq6ooAX-8yE28xyNTHxhY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Consultor Cyber Forensics & Incident Response</strong><br><small>PwC Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476450834/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGO_CAKXyEH2g/company-logo_100_100/B4DZfGdXQHHMAQ-/0/1751381276407/grupo_santander_brasil_logo?e=1793232000&v=beta&t=gBkFxh_EOjOU936d6iSRVASk0s7r8PIvICFiBfeeeWI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Banco de Talentos - Cyber Security Sênior/especialista (blue Team)</strong><br><small>Santander Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449240076/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGO_CAKXyEH2g/company-logo_100_100/B4DZfGdXQHHMAQ-/0/1751381276407/grupo_santander_brasil_logo?e=1793232000&v=beta&t=gBkFxh_EOjOU936d6iSRVASk0s7r8PIvICFiBfeeeWI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Banco de Talentos - Cyber Security Sênior/especialista (red Team)</strong><br><small>Santander Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449241018/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQG-oSfuKQkM8g/company-logo_100_100/B4DZo8OqIKIAAQ-/0/1761947067281/ultracon_logo?e=1793232000&v=beta&t=iUfRjyQBgkB3v7zoM3y9MT9xUR6ps6EtBb7aRfNTxwQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Líder Técnico (gestão de Filas de Pentest)</strong><br><small>UltraCon Consultoria</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476463068/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHa3RF4LTQEOA/company-logo_100_100/B4EZyYl8OaGcAQ-/0/1772086609205/wpp_logo?e=1793232000&v=beta&t=1K6K9VJ-hvzMLcunyP702vwo0P-rkXzg-HSfAMj_mlk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Security Incident Responder</strong><br><small>WPP</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4469923796/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (4 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQESwsS8nY78Lg/company-logo_100_100/B4DaAVFf9CIQAI-/0/1787060158637/semantixai_logo?e=1793232000&v=beta&t=DqJh2QDMAMf52xBEZBWDWBba2fmWqPhhpkxpzJKm_A0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Segurança da Informação Sênior (n2)</strong><br><small>Semantix</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478151020/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQGNvQASzrdL_w/company-logo_100_100/company-logo_100_100/0/1687874736484/bairesdev_logo?e=1793232000&v=beta&t=pOQUzlNUgi3-co4_ySLdLosgF4YQMggpphIEqWmlakA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Application Security Engineer - Remote Work</strong><br><small>BairesDev</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478127458/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">44</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGegAuLcKhWMg/img-crop_100/B4DZrc3ndQIgAM-/0/1764642161116?e=1793232000&v=beta&t=4z1jxcrJFMSstcYN51Eah6I1FfTWNjyq4H6FuaUgbYI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Devsecops / Aws Sênior - Joinville - Currículos em Avaliação</strong><br><small>BuscarVagas - Empregos Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476402391/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">45</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHS2hmptW8nHA/company-logo_100_100/B4DZ0gh4hoKUAQ-/0/1774367246972/mw_instituio_de_pagamentos_logo?e=1793232000&v=beta&t=LctkcAEfWPk5Euq2dvbZhxWhA8W9cCqegOEbkBtRlXI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Oportunidade: Devsecops / Aws Sênior</strong><br><small>MW PAY</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476475246/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
