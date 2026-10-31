@@ -1,0 +1,916 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (12 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQHWqSUIz1FTLg/company-logo_100_100/B56Z1wInHmGsAQ-/0/1775702799132/avalara_brasil_logo?e=1795046400&v=beta&t=cubyGvqov6ej7-qwdKIA7AYXHYMbDMQuq_jDTa4CJQk" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Development Engineer .net/c# - Raas</strong><br><small>Avalara Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484995948/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1795046400&v=beta&t=ePdRKEIUiHR4Mjv0DrHuwOhWx8odjsj10lAt4q5_pJU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Developer (.net/react)</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459016984/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1795046400&v=beta&t=ePdRKEIUiHR4Mjv0DrHuwOhWx8odjsj10lAt4q5_pJU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Developer (react & Node)</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484996524/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGNh_4pInYIIQ/company-logo_100_100/company-logo_100_100/0/1647617951142/ciklum_logo?e=1795046400&v=beta&t=oF3MZTj9fe7ZrlvDAohnH-huHJnNPMTNKyanGDlk8dI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer</strong><br><small>Ciklum</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484930951/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGJh2MocMgWZA/company-logo_100_100/company-logo_100_100/0/1684344564399/jusfy_logo?e=1795046400&v=beta&t=YSplbYqLk_ondPfwoD5eMFch-mApltPwC7CUUln6Xe0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Software Sênior</strong><br><small>Jusfy</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476678336/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1795046400&v=beta&t=YkREz5Tk4-Ry8lUthIMsvGJ1kVTum7oqUJm5F8JluLA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>(1603) Senior Martech Solutions Engineer</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485208547/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHie6I2H2I_ow/company-logo_100_100/company-logo_100_100/0/1732648910168/prmgestao_logo?e=1795046400&v=beta&t=Eq7nUAa9jGAsBcuxEIq-8ixLvBB5SwIQOJr7cnnoS5c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Full Stack Python</strong><br><small>PR&M GESTÃO E DESENVOLVIMENTO</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484773586/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFsvVj2NWZyJA/company-logo_100_100/B56Z4c6u98GgAM-/0/1778601619702/pasiflora_ai_logo?e=1795046400&v=beta&t=wklnSaONYCSI44rPBCYDAhw3RVGbVYHbQWKowHzyC8U" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Image-to-code / Visual Reconstruction Engineer</strong><br><small>Pasiflora AI</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483018111/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGetnGZOz9xfg/company-logo_100_100/B4DZ9byoi3HEAI-/0/1783951428019/quintoandar_com_br_logo?e=1795046400&v=beta&t=tl0fMuDqXJZ2FH8WukgBGrl-iexkTVYd5eYX2OnxPt4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Grupo Quintoandar | Senior Software Engineer</strong><br><small>QuintoAndar</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485209925/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQF5hqw9O5mTMA/company-logo_100_100/company-logo_100_100/0/1630616205692/the_right_balance_logo?e=1795046400&v=beta&t=cSvIAxDH47r2qHJYIgXm8xmPtyjNUsyIq_K73HMknE4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Ai-native Software Engineer</strong><br><small>Right Balance ®</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484493351/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGKFTdmgRWATQ/company-logo_100_100/B4DZsH_iKYKQAQ-/0/1765365654638/runtalent_logo?e=1795046400&v=beta&t=XomiOg1lzHMJD9MoFMYqQhN1enA3U56PchJhIoEpMd4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Full Stack Sênior | React, Next.js, Node.js, Aws e Vtex</strong><br><small>Runtalent</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484973271/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEZQ73DBLnfwg/company-logo_100_100/B4DZ4tXA2qHAAM-/0/1778877468290/stone_co_logo?e=1795046400&v=beta&t=45pdcfzPMcj9sNpOW5GMpL8uosmxYbEGkSIa0N3ciGs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>[distribution/rex] Sênior Software Engineer</strong><br><small>Stone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484774085/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (26 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="missing logo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Web</strong><br><small>Banco de Palestrantes; Amazon KDP; escritório residencial.</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485226430/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQG8J8P3_jCo5w/company-logo_100_100/company-logo_100_100/0/1630519600811/sydle_logo?e=1795046400&v=beta&t=Myb5OMBu7rbY612e5dyiV1kkzFWFUuoofp6hohcKTUI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Front End Developer</strong><br><small>SYDLE</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484766357/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQG8J8P3_jCo5w/company-logo_100_100/company-logo_100_100/0/1630519600811/sydle_logo?e=1795046400&v=beta&t=Myb5OMBu7rbY612e5dyiV1kkzFWFUuoofp6hohcKTUI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Front End Engineer</strong><br><small>SYDLE</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484773139/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE0wyub1rswiA/company-logo_100_100/company-logo_100_100/0/1654720569889/btgpactual_logo?e=1795046400&v=beta&t=GD45qwxR3gWjPgUbnSxCY8b_PXreDO2BQRo_7CFhj6I" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro(a) de Software Junior(full Stack) | It Accounting Clients & Finance Report</strong><br><small>BTG Pactual</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4462892770/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEK62xnkcwj5A/company-logo_100_100/B4DZ8TVonXKYAQ-/0/1782735866552/eletrofrigor_logo?e=1795046400&v=beta&t=pg-SwgHCi8Ht1-DNnALP-3h5KqDt-IpXPFj3mArhbeA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Estagiário(a) de Desenvolvimento de Software</strong><br><small>Eletrofrigor</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484780391/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHIL3HctxNfvg/company-logo_100_100/B4EZokv7VQIUAQ-/0/1761553135376/capgemini_logo?e=1795046400&v=beta&t=BP9cYyvtKQKW2gGnJ6GtKnLmH1y6sZZFM0rTQV4Y_GA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor/ Desenvolvedora Python/ Javascript</strong><br><small>Capgemini</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484762637/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFZH4svu5BTZA/company-logo_100_100/B4EZk_EfNgHgAU-/0/1757699778309/cognizant_logo?e=1795046400&v=beta&t=PJ0OiSGy0QwW6ZCPLoxYbqMreQh-QYFN0ljc8NyhdB4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Php Developer</strong><br><small>Cognizant</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4475497109/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE-28uQ6kKubA/company-logo_100_100/B56ZzSzjoeGQAQ-/0/1773063256957/john_deere_logo?e=1795046400&v=beta&t=Xv8zF7dUnYl6J-Dt9cIANeRQRFGX3jSV6R3cbDuj-hw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Engineer - Indaiatuba/sp</strong><br><small>John Deere</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4475700661/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEZQ73DBLnfwg/company-logo_100_100/B4DZ4tXA2qHAAM-/0/1778877468290/stone_co_logo?e=1795046400&v=beta&t=45pdcfzPMcj9sNpOW5GMpL8uosmxYbEGkSIa0N3ciGs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>[distribution/rex] Software Engineer Pleno</strong><br><small>Stone</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484764484/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGsGR9p4ikS5w/company-logo_100_100/company-logo_100_100/0/1708946550425/tata_consultancy_services_logo?e=1795046400&v=beta&t=OAZLxj48BYWXtKqKZoZesDpJZ10b56HzZ6RRHPAAloo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Mean Stack Developer with Agentic Ai</strong><br><small>Tata Consultancy Services</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485214204/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGC2bj7GUclpA/company-logo_100_100/company-logo_100_100/0/1688398016261/levva_logo?e=1795046400&v=beta&t=v1JdOAmNUJGRJZEDFLw_UmO1ctkMLgcras5gmvqf4ak" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Software Sênior</strong><br><small>levva</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4472617827/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEKMfZjx_RYOQ/company-logo_100_100/B4DZu96Pn_H0AQ-/0/1768417722218/cpqd_logo?e=1795046400&v=beta&t=Uj9jqQJQj-TQwADEy8wzqtsWEEJ_fnFLLnykGwvencU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Banco de Talentos - Tecnologia - Exclusivo para Pessoas com Tea</strong><br><small>CPQD</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4439894623/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;">Sorocaba</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFwOFir_jDfeQ/company-logo_100_100/company-logo_100_100/0/1688251504137/flexintl_logo?e=1795046400&v=beta&t=0shpS2zj3CWom3_CFm3qoAT8KW8n_snJk7IHtvm-ce0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Analista de Desenvolvimento de Software Ii - Full Stack</strong><br><small>Flex</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457496943/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH9oEH9vWAthw/company-logo_100_100/B4DZf0WkqfH8AY-/0/1752151247860/avanade_logo?e=1795046400&v=beta&t=qeGnAVOKtKRh6n1mUtQ-zaMT8oC7Cxqb0aGizetjDcQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Fullstack</strong><br><small>Avanade</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484783264/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQE0wyub1rswiA/company-logo_100_100/company-logo_100_100/0/1654720569889/btgpactual_logo?e=1795046400&v=beta&t=GD45qwxR3gWjPgUbnSxCY8b_PXreDO2BQRo_7CFhj6I" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Software Sênior - Credit Risk</strong><br><small>BTG Pactual</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449047017/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHvelMtkMj5pQ/company-logo_100_100/company-logo_100_100/0/1719952926581/beflyoficial_logo?e=1795046400&v=beta&t=chQcJ4Yt8pddbVO6FohuICheiryEcpRRAjMwhyBDUBo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Banco de Talentos - Tecnologia - Befly</strong><br><small>BeFly</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4391729883/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHm8zx58eJrcg/company-logo_100_100/company-logo_100_100/0/1720024715139/braze_logo?e=1795046400&v=beta&t=6-CN1WCIdZQq6mdpFjyexLH42--5V9jSOYr81-2WQoA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Software Engineer I, Product Partnerships</strong><br><small>Braze</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466533662/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEUwreILeGS7Q/company-logo_100_100/B4DZ5wJQzAG4AM-/0/1779997937122/jobbol_empregos_logo?e=1795046400&v=beta&t=7mReLlrY8TgD_GpG3qzIyinGoL2E_cMl1Zx-FV8gerY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor de Software Pleno</strong><br><small>Jobbol</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484983748/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQFYEoit_kRdLw/company-logo_100_100/B56ZnJa66RJoAQ-/0/1760020901938/mrbeastyoutube_logo?e=1795046400&v=beta&t=Uu3c7eEidBI1qukL8c0LAh6X42qv57qOjSaexoSiYiQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Full Stack Engineer</strong><br><small>MrBeast</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4466248204/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHyq-uNAAkbDw/company-logo_100_100/company-logo_100_100/0/1719836810206/nortal_logo?e=1795046400&v=beta&t=YkREz5Tk4-Ry8lUthIMsvGJ1kVTum7oqUJm5F8JluLA" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>(1603) Senior Martech Solutions Engineer</strong><br><small>Nortal</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485206807/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVRxhl9ugIOA/company-logo_100_100/company-logo_100_100/0/1719830522728/banco_santander_logo?e=1795046400&v=beta&t=A7CLbA54yjXzxEAygfjTzCpnrYYpTED5Mzl5ALGxiQc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>It Analyst Ii (c# + Angular)</strong><br><small>Santander</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4468328680/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVRxhl9ugIOA/company-logo_100_100/company-logo_100_100/0/1719830522728/banco_santander_logo?e=1795046400&v=beta&t=A7CLbA54yjXzxEAygfjTzCpnrYYpTED5Mzl5ALGxiQc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>It Analyst Iii</strong><br><small>Santander</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484768742/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGVRxhl9ugIOA/company-logo_100_100/company-logo_100_100/0/1719830522728/banco_santander_logo?e=1795046400&v=beta&t=A7CLbA54yjXzxEAygfjTzCpnrYYpTED5Mzl5ALGxiQc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>It Analyst Iii (angular)</strong><br><small>Santander</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467921323/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFOnyr6OvM2kw/company-logo_100_100/company-logo_100_100/0/1661205879011/solfacil_logo?e=1795046400&v=beta&t=XJAVt3BLOaV4t1_nEV5DWC1FV94CUFzs7kcSN0K_VxE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro (a) Fullstack | Pleno/sênior</strong><br><small>Solfácil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4436845703/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGxSVy7wcRSsg/company-logo_100_100/B4DZp0QiHxJIAQ-/0/1762887083089?e=1795046400&v=beta&t=rkkcBoTktzxrI1Z7T4ywbcXyQUKJU17M6MV38Asycrw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Sênior Full Stack — .net / React - Pj</strong><br><small>Solutions RH</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484775493/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH7Gs8wiH6ZEw/company-logo_100_100/B4DZt54e9AI8AQ-/0/1767276409054/uol_logo?e=1795046400&v=beta&t=lTIgzHEI4L6s7o1D07HoktjV5pYdKbnjK-He6iScnq0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Software Pl. (full Stack)</strong><br><small>UOL</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457984674/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (6 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Paraná</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQE_IRWZ2qVHpw/company-logo_100_100/company-logo_100_100/0/1631303598129?e=1795046400&v=beta&t=6C5DCoIG23UaTrBIHF4Jt7m57NfkhaSTUECIDpG8MPs" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Full Stack Developer</strong><br><small>ExxonMobil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476944476/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFrSLL_CiAYjA/company-logo_100_100/company-logo_100_100/0/1683661206160/rgk4it_logo?e=1795046400&v=beta&t=Tv6X-fupasOsI9u0FxsgKKsxvn5vSi8KBlaGdTwyGD4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full-stack Sênior</strong><br><small>RGK4IT</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485217058/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH3UlhkhMmyLA/company-logo_100_100/B4DZaCfAcYG4AY-/0/1745945889610/fiergs_logo?e=1795046400&v=beta&t=c9SywREyiJOYi14RcXNgqaEDFtq49iRP5RDdbsPhFQo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>40189 - Analista de Tecnologia da Informação Pleno (fullstack)</strong><br><small>FIERGS</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484998817/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;">Porto Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEO2eMPt_XXbg/company-logo_100_100/company-logo_100_100/0/1696862232579/zanc_logo?e=1795046400&v=beta&t=Fp9kn2bWso3r8xY7XVDkH0Mbl4HkAWtGPjOk3LQt01Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full Stack Nodejs - Porto Alegre - Oportunidade Atual</strong><br><small>ZANC Assessoria Nacional de Cobrança</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483013391/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Santa Catarina</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQErUnp3itZq9w/company-logo_100_100/B4DZb887H9HEAQ-/0/1748000551953/centralailos_logo?e=1795046400&v=beta&t=Sswen21ZblvI9MOdt2e6qTptRg6AdPVrfvhUJCMd_Yg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Arquiteto de Sistemas Iii</strong><br><small>Cooperativa Central Ailos</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4482559825/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">44</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEodS0tsV-9cA/company-logo_100_100/company-logo_100_100/0/1635526473146/mouts_logo?e=1795046400&v=beta&t=7Rp7nbqwJQLSGwnbwUhXnAULBgO52AV0qFrgeq0M_2A" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Fullstack + Ia</strong><br><small>Mouts IT</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4484985626/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
