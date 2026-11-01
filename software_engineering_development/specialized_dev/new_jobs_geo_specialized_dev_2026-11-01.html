@@ -1,0 +1,892 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Hierarchical Report</title>
+            <style>
+                body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 40px; }
+                .report-card { background: #fff; padding: 25px; border-radius: 10px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; }
+                .cont-h { background: #2c3e50; color: #fff; padding: 10px; margin-top: 30px; border-radius: 4px; }
+                .coun-h { margin-left: 20px; color: #2980b9; border-left: 4px solid #2980b9; padding-left: 10px; font-size: 1.2em; }
+                .reg-h { margin-left: 40px; color: #16a085; font-style: normal; font-weight: bold;}
+                .stat-h { margin-left: 60px; color: #d35400; font-weight: bold; }
+                table { width: 90%; margin: 10px 0 20px 80px; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                tr:nth-child(even) { background-color: #f9f9f9; }
+                /* No bloco <style> do seu template */
+                .logo-img {
+                    max-width: 40px;
+                    max-height: 40px;
+                    border-radius: 4px;
+                    object-fit: contain;
+                }   
+                .col-city { width: 15%; text-align: center; }  
+                .col-id { width: 4%; text-align: center; }  
+                .col-logo { width: 6%; text-align: center; }  
+                .col-company { width: 25%; text-align: center; }  
+                .col-title { width: 35%; text-align: center; }  
+                .col-url { width: 10%; text-align: center; }  
+
+                /* Adicione no bloco <style> */
+                details {
+                    background-color: #fff;
+                    margin: 10px 0 10px 40px; /* Alinhado com a margem da região */
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+
+                summary {
+                    background-color: #7f8c8d; /* Cor da sua .reg-h */
+                    color: white;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    list-style: none; /* Remove a setinha padrão em alguns browsers */
+                }
+
+                summary:hover {
+                    background-color: #95a5a6;
+                }
+
+                /* Setinha personalizada antes do título */
+                summary::before {
+                    content: "▶ ";
+                    display: inline-block;
+                    transition: transform 0.2s;
+                }
+
+                details[open] summary::before {
+                    transform: rotate(90deg);
+                }           
+
+                @media print {
+                    details {
+                        display: block !important;
+                    }
+                    details > summary {
+                        display: none !important; /* Esconde o cabeçalho da sanfona na impressão */
+                    }
+                    details[open=false] {
+                        display: block !important;
+                    }
+                    /* Força a abertura visual no motor de renderização do PDF */
+                    details:not([open]) > * {
+                        display: block !important;
+                    }
+                }                     
+            </style>
+        </head>
+        <body>
+            
+            <div class="report-card">
+                <h1>Geographic Distribution Report</h1>
+
+                
+                    <div class="cont-h">Continent: América do Sul</div>
+                    
+                    
+                        <div class="coun-h">Country: Brasil</div>
+                        
+                        <!-- Loop de Região (Aqui criamos a sanfona) -->
+                        
+                            <details open>
+                                <summary>Region:  (12 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: </div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">1</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQEbIYAkAURcYw/company-logo_100_100/company-logo_100_100/0/1650566107463/canonical_logo?e=1795046400&v=beta&t=wgxOPn5LlYbPqKU8sDC2HLIWd20igvIPQ5zZQZLCrF0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Engineering Manager (backend Saas)</strong><br><small>Canonical</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4433370623/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">2</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFszK2MGQUCUA/company-logo_100_100/company-logo_100_100/0/1668687291660?e=1795046400&v=beta&t=GDmiTv-WERO4HtBdTqaAgGHYvlT4LP3UmhzCxjjcYgY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvimento Back-end (java) Sênior (vaga Afirmativa)</strong><br><small>DBC Company</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4457990593/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">3</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFgx3nbCGNusw/company-logo_100_100/B4EZsTHcD5GoAQ-/0/1765552276026/infios_logo?e=1795046400&v=beta&t=-Yyjx6BaRf9l-_8S-jyt9SRkd-TwO3qvMMrM0nX5pWQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Software Engineer</strong><br><small>Infios</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4432147103/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">4</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFgx3nbCGNusw/company-logo_100_100/B4EZsTHcD5GoAQ-/0/1765552276026/infios_logo?e=1795046400&v=beta&t=-Yyjx6BaRf9l-_8S-jyt9SRkd-TwO3qvMMrM0nX5pWQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Engineer</strong><br><small>Infios</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4440783699/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">5</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFm8yg0gGJN1A/company-logo_100_100/company-logo_100_100/0/1697458897774/krakenfx_logo?e=1795046400&v=beta&t=Pivr63uH5ioaWytBtjSw_TY9HG79by4V6K9v1WpQHnM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Head of Exchange Infrastructure</strong><br><small>Kraken</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467564114/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">6</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFm8yg0gGJN1A/company-logo_100_100/company-logo_100_100/0/1697458897774/krakenfx_logo?e=1795046400&v=beta&t=Pivr63uH5ioaWytBtjSw_TY9HG79by4V6K9v1WpQHnM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Software Engineer - React Native - Consumer</strong><br><small>Kraken</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4468012971/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">7</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFm8yg0gGJN1A/company-logo_100_100/company-logo_100_100/0/1697458897774/krakenfx_logo?e=1795046400&v=beta&t=Pivr63uH5ioaWytBtjSw_TY9HG79by4V6K9v1WpQHnM" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Software Engineer - React Native - Consumer - Asian Markets</strong><br><small>Kraken</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476298850/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">8</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4E0BAQGuwANNml02DA/company-logo_100_100/company-logo_100_100/0/1630650735642/vtex_logo?e=1795046400&v=beta&t=OyQrXqYfjvI-bTFId5VG_ZNtl1mqJ0MYy_r_QaQZL_4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Software Engineer, Backend</strong><br><small>VTEX</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/3968525446/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">9</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDyO2Jo8nezQ/company-logo_100_100/B56Z.uDzHyJgAI-/0/1785331659466/zallpy_digital_logo?e=1795046400&v=beta&t=RKQN7motmHPD-8QOnxKoeqmpMJ8fdvGJcaAOPtObFvU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Java Backend Engineer</strong><br><small>Zallpy Digital</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4467811251/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">10</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEPrNNXCXG9_g/img-crop_100/B4EZfA_oolHcAY-/0/1751289597787?e=1795046400&v=beta&t=EdzoljMqeLdK1ZhzqCrxu323e9VDsGbdTCGg5fDMmKc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pessoa Desenvolvedor Back-end Senior (ai Advocate)</strong><br><small>Zup Innovation</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4480488025/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">11</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQFupNOyDYF1sg/company-logo_100_100/company-logo_100_100/0/1631315877254?e=1795046400&v=beta&t=kMJBRA28WbWRSGDiWQ7c4rcEoPOwO-X3FwwPEWABS38" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Backend Software Engineer</strong><br><small>iFood</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477880284/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">12</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQFupNOyDYF1sg/company-logo_100_100/company-logo_100_100/0/1631315877254?e=1795046400&v=beta&t=kMJBRA28WbWRSGDiWQ7c4rcEoPOwO-X3FwwPEWABS38" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Backend Software Engineer (vaga Afirmativa para Mulheres)</strong><br><small>iFood</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477887012/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Centro-Oeste (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Distrito Federal</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">13</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQGpRhkpxp5A9A/company-logo_100_100/company-logo_100_100/0/1630570672166/ernstandyoung_logo?e=1795046400&v=beta&t=VJYBcCGAyavTNhoC9MqYBa3PM5tjR_orI30I_Xs0D6E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Confiabilidade de Sites - Sre - Pleno Pipeline</strong><br><small>EY</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430841592/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">14</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHlOoGzpsB2EA/company-logo_100_100/B4DaE73BLvKAAM-/0/1792005641159/trovale_logo?e=1795046400&v=beta&t=9B0IXIaiIxa-bVwyd6tNvOyRzfBFZrwvMoTNeUrm04c" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Sênior Full Stack</strong><br><small>Trovale Tecnologia</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483943944/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sudeste (27 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Minas Gerais</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">15</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C560BAQFORFBYBIoPHQ/company-logo_100_100/company-logo_100_100/0/1630668285973?e=1795046400&v=beta&t=HXq4aGsPHbLiwtczw9IssYKIVifTdI7UBsGHIksq6Bg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Engineer Ii: Innovus R&d</strong><br><small>Cadence</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4458983660/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">16</td>
+                                                    
+                                                    <td style="text-align: center;">Belo Horizonte</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQE2EnQJeawjAA/company-logo_100_100/company-logo_100_100/0/1657129831483/nubank_logo?e=1795046400&v=beta&t=A0z0iMn8NucgWtqJ3-lpcRWar5iZshdYHFpPIlSmzto" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Software Engineer - Lending Foundations (policy & Data Platform)</strong><br><small>Nubank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4460101974/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: Rio de Janeiro</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">17</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQE2EnQJeawjAA/company-logo_100_100/company-logo_100_100/0/1657129831483/nubank_logo?e=1795046400&v=beta&t=A0z0iMn8NucgWtqJ3-lpcRWar5iZshdYHFpPIlSmzto" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Software Engineer - Lending Foundations (policy & Data Platform)</strong><br><small>Nubank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459895907/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">18</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHTJl0dF22boA/company-logo_100_100/company-logo_100_100/0/1662223622824/innolevels_logo?e=1795046400&v=beta&t=XpCd_-xh7LU-qtsj-lgquKVLRtpfQCJXMhd2aoU-F0Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor .net Core - Rj</strong><br><small>innolevels</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483966224/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div class="stat-h">State: São Paulo</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">19</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEEg8Mn58U4QA/company-logo_100_100/B4DZsNQx_xLYAU-/0/1765454062051/atech_grupoembraer_logo?e=1795046400&v=beta&t=M-BrXB-X_mWY4PNkzlzvR6MesD4odE7yHy1IjWPuYi4" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>2025-049 Especialista de Banco de Dados</strong><br><small>ATECH – NEGÓCIOS EM TECNOLOGIAS S/A</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4461939407/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">20</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFxYk90aqWMqA/company-logo_100_100/company-logo_100_100/0/1727873248436/accenturebrasil_logo?e=1795046400&v=beta&t=Ev06GfFm0jcSFIHSQ8xfjBbrkvzQnFdYEmSJWEtw4jE" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Cobol (mainframe) | Pleno a Sênior</strong><br><small>Accenture Brasil</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4359012007/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">21</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDLy4STCnHbg/company-logo_100_100/B56ZnZxDipI0AQ-/0/1760295142304/amazon_logo?e=1795046400&v=beta&t=IitA494WfHA_k1BtbmD-9HKrrMBS1uhBjqDAOsJXJyo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor de Software, Ies Latech Latam</strong><br><small>Amazon</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459626329/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">22</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDLy4STCnHbg/company-logo_100_100/B56ZnZxDipI0AQ-/0/1760295142304/amazon_logo?e=1795046400&v=beta&t=IitA494WfHA_k1BtbmD-9HKrrMBS1uhBjqDAOsJXJyo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Development Engineer Ii, Latech Fba</strong><br><small>Amazon</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478005039/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">23</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQGDLy4STCnHbg/company-logo_100_100/B56ZnZxDipI0AQ-/0/1760295142304/amazon_logo?e=1795046400&v=beta&t=IitA494WfHA_k1BtbmD-9HKrrMBS1uhBjqDAOsJXJyo" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Software Development Engineer, Finance Technology</strong><br><small>Amazon</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478050436/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">24</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQGunROSOIBalw/company-logo_100_100/company-logo_100_100/0/1630523347649/aurora_energy_research_limited_logo?e=1795046400&v=beta&t=kP3MRnkHN5nZJpAiTM-u_6954FNCcM3zNT8cdIrbwHg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Tech Lead, Senior Software Engineer (power Markets Modeling)</strong><br><small>Aurora Energy Research</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4472814688/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">25</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGTX-wCoqy8RA/company-logo_100_100/company-logo_100_100/0/1664799757547?e=1795046400&v=beta&t=4sirFbPH2iyq4DDROKWYWJatBQTLMYMCw1GvY8vmL9I" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista em Engenharia de Software Fullstack</strong><br><small>Cielo</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483957309/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">26</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEnTJSK5x_v8Q/company-logo_100_100/company-logo_100_100/0/1719837460563/equifax_logo?e=1795046400&v=beta&t=hN5NBLnZ4e7RkvuHEFh9_V7RFppoT8LpddK5XEgoVhQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro(a) de Software Backend - Techlead</strong><br><small>Equifax</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4468041330/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">27</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQE-28uQ6kKubA/company-logo_100_100/B56ZzSzjoeGQAQ-/0/1773063256957/john_deere_logo?e=1795046400&v=beta&t=Xv8zF7dUnYl6J-Dt9cIANeRQRFGX3jSV6R3cbDuj-hw" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Pl Database Reliability Engineer - Indaiatuba/sp</strong><br><small>John Deere</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4449756863/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">28</td>
+                                                    
+                                                    <td style="text-align: center;">Campinas</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHeZyGQWQJb7g/company-logo_100_100/B4EZ89lXBZJEAI-/0/1783444632002/ciandt_logo?e=1795046400&v=beta&t=ePdRKEIUiHR4Mjv0DrHuwOhWx8odjsj10lAt4q5_pJU" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Kotlin/java Developer, Brazil</strong><br><small>CI&T</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4450243832/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">29</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQH9oEH9vWAthw/company-logo_100_100/B4DZf0WkqfH8AY-/0/1752151247860/avanade_logo?e=1795046400&v=beta&t=qeGnAVOKtKRh6n1mUtQ-zaMT8oC7Cxqb0aGizetjDcQ" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor(a) Fullstack Sênior | .net & Angular | English Required</strong><br><small>Avanade</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4485688212/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">30</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1795046400&v=beta&t=VrG5p_AUC-zg8ZjCfvtaKpeO7q0UfcztAyIK8RKUof0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Fullstack Pleno - com Inglês - Híbrido - Barueri/sp</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477836683/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">31</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1795046400&v=beta&t=VrG5p_AUC-zg8ZjCfvtaKpeO7q0UfcztAyIK8RKUof0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Integration & Database Developer - com Inglês - Remoto</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477838579/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">32</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1795046400&v=beta&t=VrG5p_AUC-zg8ZjCfvtaKpeO7q0UfcztAyIK8RKUof0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Azure Cloud Developer - com Inglês - Remoto</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477828958/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">33</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1795046400&v=beta&t=VrG5p_AUC-zg8ZjCfvtaKpeO7q0UfcztAyIK8RKUof0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Senior Fullstack Devleoper ( Angular, Java, Oracle) - com Inglês - Remoto</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477844276/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">34</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFVit2NSNt1Fg/company-logo_100_100/B4EZ6yBRRFKoAM-/0/1781103138079/capco_logo?e=1795046400&v=beta&t=VrG5p_AUC-zg8ZjCfvtaKpeO7q0UfcztAyIK8RKUof0" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Sr Integration Developer - (java e Spring Boot) - com Inglês - Remoto</strong><br><small>Capco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4477839591/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">35</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C510BAQGpRhkpxp5A9A/company-logo_100_100/company-logo_100_100/0/1630570672166/ernstandyoung_logo?e=1795046400&v=beta&t=VJYBcCGAyavTNhoC9MqYBa3PM5tjR_orI30I_Xs0D6E" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenheiro de Confiabilidade de Sites - Sre - Pleno Pipeline</strong><br><small>EY</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4430846476/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">36</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFntqBOVchj4Q/company-logo_100_100/B4DZgyi6h2HsAQ-/0/1753194670665/inhire_software_de_recrutamento_logo?e=1795046400&v=beta&t=a8qKb0uPiiGAGfRUCxUhMSeW4Rbq1zGdFiec26ONBYc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista Fullstack</strong><br><small>InHire</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4475477035/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">37</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGmyPiGIU-69w/company-logo_100_100/B4DZZFc2k4GgAQ-/0/1744921914031/itau_logo?e=1795046400&v=beta&t=rElWKIn70kI-gCQyEyoktEeoq-o9BQ5KpHB2f_sH9t8" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Engenharia de Software Backend Python/go Sr | Comunidade Operações Finanças</strong><br><small>Itaú Unibanco</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478001422/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">38</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=1795046400&v=beta&t=EkeE8XR_tWGgUCopY0YJVlmwoBty0rQx_Nlmts-fzbg" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Cloud Solution Architect (csa) - Cloud & Ai Data</strong><br><small>Microsoft</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4478042762/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">39</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQE2EnQJeawjAA/company-logo_100_100/company-logo_100_100/0/1657129831483/nubank_logo?e=1795046400&v=beta&t=A0z0iMn8NucgWtqJ3-lpcRWar5iZshdYHFpPIlSmzto" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Software Engineer - Lending Foundations (policy & Data Platform)</strong><br><small>Nubank</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4459896951/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">40</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGW4EB1A1aUYQ/company-logo_100_100/B4DZyL2uQ_IUAY-/0/1771872904949/serasaexperian_logo?e=1795046400&v=beta&t=zbylk4C2IHpg2FpodU0pPdaqI2vl7MGJ9LquSIuz1Xc" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Especialista de Desenvolvimento de Software (tech Lead Java)</strong><br><small>Serasa Experian</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4442405796/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">41</td>
+                                                    
+                                                    <td style="text-align: center;">São Paulo</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHtKmx0gsQJlQ/company-logo_100_100/B4DaD.fusfGUAI-/0/1790976126110/webmotors_logo?e=1795046400&v=beta&t=7PrvGkwl-tefOar3pf_6SqkU-BiylvCvAYhDjhdVgHY" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Back-end Pl | .net</strong><br><small>Webmotors</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4476863560/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                            <details >
+                                <summary>Region: Região Sul (2 vagas)</summary>
+                                
+                                <div style="padding: 10px;">
+                                    <!-- AQUI AS VAGAS SÃO AGRUPADAS POR ESTADO DENTRO DA REGIÃO -->
+                                    
+                                        <div class="stat-h">State: Rio Grande do Sul</div>
+                                        
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-id">Id</th>
+                                                    <th class="col-city">City</th>
+                                                    <th class="col-logo">Logo</th>
+                                                    <th class="col-title">Job Title</th>
+                                                    <th class="col-url">Link</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Loop das vagas (linhas da tabela) -->
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">42</td>
+                                                    
+                                                    <td style="text-align: center;"></td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQF0huK6mI8ZuA/company-logo_100_100/company-logo_100_100/0/1726738900394/block_labs_web3_logo?e=1795046400&v=beta&t=fvSpLmjgTcSU8vw9IbElt1aVbCCk5oUNYFNJ2DtezpI" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Staff Software Engineer, Golang</strong><br><small>Block Labs</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4440243593/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td style="text-align: center;">43</td>
+                                                    
+                                                    <td style="text-align: center;">Porto Alegre</td>
+                                                    <td style="text-align: center;">
+                                                        
+                                                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEO2eMPt_XXbg/company-logo_100_100/company-logo_100_100/0/1696862232579/zanc_logo?e=1795046400&v=beta&t=Fp9kn2bWso3r8xY7XVDkH0Mbl4HkAWtGPjOk3LQt01Q" class="logo-img">
+                                                        
+                                                    </td>
+                                                    <td><strong>Desenvolvedor Full Stack Nodejs - Porto Alegre - Canal de Vagas</strong><br><small>ZANC Assessoria Nacional de Cobrança</small></td>
+                                                    <td style="text-align: center;">
+                                                        <a href="https://www.linkedin.com/jobs/view/4483971754/" target="_blank"> <img src="https://img.icons8.com/?size=96&id=13450&format=png" class="logo-img"></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                            </details>
+                        
+                    
+                                
+                            
+                                        
+            </div>
+        </body>
+        </html>
+        
